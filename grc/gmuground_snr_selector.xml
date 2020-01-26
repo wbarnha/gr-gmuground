@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<block>
+  <name>SNR Selector</name>
+  <key>gmuground_snr_selector</key>
+  <category>[gmuground]</category>
+  <import>import gmuground</import>
+  <make>gmuground.snr_selector()</make>
+  <sink>
+    <name>SNR1</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </sink>
+  <sink>
+    <name>SNR2</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </sink>
+  <sink>
+    <name>Sig1</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </sink>
+  <sink>
+    <name>Sig2</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+    <vlen>1</vlen>
+  </source>
+</block>
