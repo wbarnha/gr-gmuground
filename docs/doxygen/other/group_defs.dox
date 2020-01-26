@@ -1,0 +1,7 @@
+/*!
+ * \defgroup block GNU Radio GMUGROUND C++ Signal Processing Blocks
+ * \brief All C++ blocks that can be used from the GMUGROUND GNU Radio
+ *        module are listed here or in the subcategories below.
+ *
+ */
+

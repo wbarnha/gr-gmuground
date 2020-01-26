@@ -1,0 +1,14 @@
+<testsuite errors="1" failures="0" name="unittest.suite.TestSuite" tests="1" time="0.002">
+  <testcase classname="__main__.qa_sqrt" name="test_001_t" time="0.0017">
+    <error type="exceptions.TypeError">in method 'vector_source_f_make', argument 1 of type 'std::vector&lt; float,std::allocator&lt; float &gt; &gt; const &amp;'
+  File "/usr/lib/python2.7/unittest/case.py", line 329, in run
+    testMethod()
+  File "/home/wbarnhart/gr-gmuground/python/qa_sqrt.py", line 37, in test_001_t
+    src = blocks.vector_source_f(src_data)
+  File "/usr/lib/python2.7/dist-packages/gnuradio/blocks/blocks_swig1.py", line 2557, in make
+    return _blocks_swig1.vector_source_f_make(*args, **kwargs)
+    </error>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
