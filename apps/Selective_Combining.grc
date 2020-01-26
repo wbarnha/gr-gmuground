@@ -406,11 +406,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(776, 320)</value>
+      <value>(832, 320)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -620,22 +620,10 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_mpsk_snr_est_cc_0</source_block_id>
-    <sink_block_id>gmuground_snr_selector_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
     <source_block_id>digital_mpsk_snr_est_cc_0_0</source_block_id>
     <sink_block_id>blocks_complex_to_imag_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_mpsk_snr_est_cc_0_0</source_block_id>
-    <sink_block_id>gmuground_snr_selector_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>3</sink_key>
   </connection>
   <connection>
     <source_block_id>gmuground_snr_selector_0</source_block_id>
@@ -650,9 +638,21 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>pad_source_0</source_block_id>
+    <sink_block_id>gmuground_snr_selector_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>2</sink_key>
+  </connection>
+  <connection>
     <source_block_id>pad_source_1</source_block_id>
     <sink_block_id>digital_mpsk_snr_est_cc_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>pad_source_1</source_block_id>
+    <sink_block_id>gmuground_snr_selector_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>3</sink_key>
   </connection>
 </flow_graph>
