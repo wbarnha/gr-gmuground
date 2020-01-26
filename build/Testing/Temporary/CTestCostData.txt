@@ -1,4 +1,0 @@
-qa_sqrt 0 0
-qa_snr_selector 1 0.20642
----
-qa_sqrt
