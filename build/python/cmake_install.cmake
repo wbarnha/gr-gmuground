@@ -41,6 +41,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/gmuground" TYPE FILE FILES
     "/home/wbarnhart/gr-gmuground/python/__init__.py"
     "/home/wbarnhart/gr-gmuground/python/sqrt.py"
+    "/home/wbarnhart/gr-gmuground/python/snr_selector.py"
     )
 endif()
 
@@ -48,8 +49,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages/gmuground" TYPE FILE FILES
     "/home/wbarnhart/gr-gmuground/build/python/__init__.pyc"
     "/home/wbarnhart/gr-gmuground/build/python/sqrt.pyc"
+    "/home/wbarnhart/gr-gmuground/build/python/snr_selector.pyc"
     "/home/wbarnhart/gr-gmuground/build/python/__init__.pyo"
     "/home/wbarnhart/gr-gmuground/build/python/sqrt.pyo"
+    "/home/wbarnhart/gr-gmuground/build/python/snr_selector.pyo"
     )
 endif()
 

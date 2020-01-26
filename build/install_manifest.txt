@@ -2,11 +2,15 @@
 /usr/local/include/gmuground/api.h
 /usr/local/lib/python2.7/dist-packages/gmuground/__init__.py
 /usr/local/lib/python2.7/dist-packages/gmuground/sqrt.py
+/usr/local/lib/python2.7/dist-packages/gmuground/snr_selector.py
 /usr/local/lib/python2.7/dist-packages/gmuground/__init__.pyc
 /usr/local/lib/python2.7/dist-packages/gmuground/sqrt.pyc
+/usr/local/lib/python2.7/dist-packages/gmuground/snr_selector.pyc
 /usr/local/lib/python2.7/dist-packages/gmuground/__init__.pyo
 /usr/local/lib/python2.7/dist-packages/gmuground/sqrt.pyo
+/usr/local/lib/python2.7/dist-packages/gmuground/snr_selector.pyo
 /usr/local/share/gnuradio/grc/blocks/gmuground_sqrt.xml
+/usr/local/share/gnuradio/grc/blocks/gmuground_snr_selector.xml
 /usr/local/share/doc/gr-gmuground/xml/dir_711c1a73f967ae00b5266c5f588c3f46.xml
 /usr/local/share/doc/gr-gmuground/xml/index.xml
 /usr/local/share/doc/gr-gmuground/xml/main__page_8dox.xml

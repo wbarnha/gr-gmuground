@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# Copyright 2020 <+YOU OR YOUR COMPANY+>.
+# Copyright 2020 William Barnhart.
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,10 +32,10 @@ class qa_sqrt (gr_unittest.TestCase):
         self.tb = None
 
     def test_001_t (self):
-        src_data = (4, 2+1j)
-        expected_result = (2.0, (1.455346690225355+0.34356074972251244j))
+        src_data = ([4])
+        expected_result = ([2.0])
         src = blocks.vector_source_f(src_data)
-        sqr = sqrt.sqrt()
+        sqr = sqrt()
         dst = blocks.vector_sink_f()
         self.tb.connect(src, sqr)
         self.tb.connect(sqr, dst)

@@ -5,7 +5,7 @@
 # Title: BER Simulation
 # Author: Example
 # Description: Adjust the noise and constellation... see what happens!
-# Generated: Sun Jan 26 01:39:52 2020
+# Generated: Sun Jan 26 12:37:34 2020
 ##################################################
 
 from distutils.version import StrictVersion

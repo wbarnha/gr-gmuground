@@ -38,6 +38,9 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gnuradio/grc/blocks" TYPE FILE FILES "/home/wbarnhart/gr-gmuground/grc/gmuground_sqrt.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gnuradio/grc/blocks" TYPE FILE FILES
+    "/home/wbarnhart/gr-gmuground/grc/gmuground_sqrt.xml"
+    "/home/wbarnhart/gr-gmuground/grc/gmuground_snr_selector.xml"
+    )
 endif()
 
