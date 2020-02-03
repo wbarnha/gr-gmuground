@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<block>
+  <name>Sample Counter</name>
+  <key>gmuground_sample_count</key>
+  <category>[gmuground]</category>
+  <import>import gmuground</import>
+  <make>gmuground.sample_count()</make>
+  <sink>
+    <name>sig</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </sink>
+  <sink>
+    <name>ctrl</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </source>
+</block>

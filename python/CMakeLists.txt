@@ -32,7 +32,8 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     sqrt.py
-    snr_selector.py DESTINATION ${GR_PYTHON_DIR}/gmuground
+    snr_selector.py
+    sample_count.py DESTINATION ${GR_PYTHON_DIR}/gmuground
 )
 
 ########################################################################
@@ -44,3 +45,5 @@ set(GR_TEST_TARGET_DEPS gnuradio-gmuground)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_sqrt ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_sqrt.py)
 GR_ADD_TEST(qa_snr_selector ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_snr_selector.py)
+GR_ADD_TEST(qa_channel_calibrate ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_channel_calibrate.py)
+GR_ADD_TEST(qa_sample_count ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_sample_count.py)

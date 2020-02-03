@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<block>
+  <name>Channel Calibration</name>
+  <key>gmuground_channel_calibrate</key>
+  <category>[gmuground]</category>
+  <import>import gmuground</import>
+  <make>gmuground.channel_calibrate()</make>
+  <sink>
+    <name>Signal</name>
+    <type>float</type>
+    <vlen>1</vlen>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>int</type>
+    <vlen>1</vlen>
+  </source>
+</block>
+

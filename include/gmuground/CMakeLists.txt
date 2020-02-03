@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
+    channel_calibrate.h
     DESTINATION include/gmuground
 )

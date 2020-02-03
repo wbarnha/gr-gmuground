@@ -18,5 +18,7 @@
 # Boston, MA 02110-1301, USA.
 install(FILES
     gmuground_sqrt.xml
-    gmuground_snr_selector.xml DESTINATION share/gnuradio/grc/blocks
+    gmuground_snr_selector.xml
+    gmuground_channel_calibrate.xml
+    gmuground_sample_count.xml DESTINATION share/gnuradio/grc/blocks
 )
