@@ -24,3 +24,8 @@ make
 sudo make install
 sudo ldconfig
 ```
+
+# Operation
+TBD
+
+More information can be found in the Wiki.
