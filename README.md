@@ -4,7 +4,7 @@
 The following dependencies must be installed:
 
 - [GNU Radio](https://github.com/gnuradio/gnuradio) (>=3.7.11)
-- [gr-satellites](https://github.com/daniestevez/gr-satellites) (maint-3.7)
+- [gr-satellites](https://github.com/wbarnha/gr-satellites) (maint-3.7)
 - [gr-gpredict-doppler](https://github.com/ghostop14/gr-gpredict-doppler) (maint-3.7)
 - [gr-limesdr](https://github.com/myriadrf/gr-limesdr/) (Optional, but our system is intended to interface with LimeSDR)
 - [libfec](https://github.com/quiet/libfec)
