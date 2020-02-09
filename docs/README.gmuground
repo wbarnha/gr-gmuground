@@ -1,11 +1,31 @@
-This is the gmuground-write-a-block package meant as a guide to building
-out-of-tree packages. To use the gmuground blocks, the Python namespaces
-is in 'gmuground', which is imported as:
+# gr-gmuground
 
-    import gmuground
+# Installation
+The following dependencies must be installed:
 
-See the Doxygen documentation for details about the blocks available
-in this package. A quick listing of the details can be found in Python
-after importing by using:
+- [GNU Radio](https://github.com/gnuradio/gnuradio) (>=3.8.0)
+- [gr-satellites](https://github.com/wbarnha/gr-satellites) (maint-3.8)
+- [gr-gpredict-doppler](https://github.com/ghostop14/gr-gpredict-doppler) (maint-3.8)
+- [gr-limesdr](https://github.com/myriadrf/gr-limesdr/) (Optional, but our system is intended to interface with LimeSDR)
+- [libfec](https://github.com/quiet/libfec)
+- [construct](https://construct.readthedocs.io/en/latest/) 
+- [swig](http://www.swig.org/)
+- [requests](https://pypi.org/project/requests/)
 
-    help(gmuground)
+Once all dependencies are installed, run the commands:
+
+```
+git clone https://github.com/wbarnha/gr-gmuground.git
+cd gr-gmuground
+mkdir build
+cd build
+cmake ../
+make
+sudo make install
+sudo ldconfig
+```
+
+# Operation
+TBD
+
+More information can be found in the Wiki.
