@@ -1,0 +1,254 @@
+options:
+  parameters:
+    author: William Barnhart
+    category: gmuground
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Uses two receiving channels for opposite polarizations to produce
+      a signal with greater SNR.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb
+    hier_block_src_path: '.:'
+    id: Selective_Combining
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Selective Signal Combining
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 160]
+    rotation: 0
+    state: enabled
+- name: blocks_abs_xx_0
+  id: blocks_abs_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 320]
+    rotation: 0
+    state: enabled
+- name: blocks_abs_xx_0_0
+  id: blocks_abs_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 352]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_imag_0_0
+  id: blocks_complex_to_imag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 320]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_imag_0_0_0
+  id: blocks_complex_to_imag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 352]
+    rotation: 0
+    state: enabled
+- name: digital_mpsk_snr_est_cc_0
+  id: digital_mpsk_snr_est_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag_nsamples: '10000'
+    type: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 220.0]
+    rotation: 0
+    state: enabled
+- name: digital_mpsk_snr_est_cc_0_0
+  id: digital_mpsk_snr_est_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag_nsamples: '10000'
+    type: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [280, 452]
+    rotation: 0
+    state: enabled
+- name: gmuground_snr_selector_0
+  id: gmuground_snr_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type1: float
+    type2: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 320]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 12]
+    rotation: 0
+    state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [992, 364.0]
+    rotation: 0
+    state: enabled
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: horz
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 300]
+    rotation: 0
+    state: enabled
+- name: pad_source_1
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: vert
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 380]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_abs_xx_0, '0', gmuground_snr_selector_0, '0']
+- [blocks_abs_xx_0_0, '0', gmuground_snr_selector_0, '1']
+- [blocks_complex_to_imag_0_0, '0', blocks_abs_xx_0, '0']
+- [blocks_complex_to_imag_0_0_0, '0', blocks_abs_xx_0_0, '0']
+- [digital_mpsk_snr_est_cc_0, '0', blocks_complex_to_imag_0_0, '0']
+- [digital_mpsk_snr_est_cc_0_0, '0', blocks_complex_to_imag_0_0_0, '0']
+- [gmuground_snr_selector_0, '0', pad_sink_0, '0']
+- [pad_source_0, '0', digital_mpsk_snr_est_cc_0, '0']
+- [pad_source_0, '0', gmuground_snr_selector_0, '2']
+- [pad_source_1, '0', digital_mpsk_snr_est_cc_0_0, '0']
+- [pad_source_1, '0', gmuground_snr_selector_0, '3']
+
+metadata:
+  file_format: 1
