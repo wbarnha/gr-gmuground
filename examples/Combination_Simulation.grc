@@ -219,7 +219,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 720.0]
+    coordinate: [448, 728.0]
     rotation: 0
     state: true
 - name: analog_noise_source_x
@@ -456,7 +456,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 788]
+    coordinate: [672, 892.0]
     rotation: 0
     state: enabled
 - name: fec_ber_bf_0
@@ -972,7 +972,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1136, 124]
+    coordinate: [1144, 124.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_0_0

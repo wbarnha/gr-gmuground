@@ -59,7 +59,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 216]
+    coordinate: [568, 232.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 344.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_1
@@ -77,7 +95,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 360.0]
+    coordinate: [1232, 304.0]
     rotation: 0
     state: enabled
 - name: blocks_divide_xx_0
@@ -98,6 +116,24 @@ blocks:
     coordinate: [808, 144]
     rotation: 0
     state: enabled
+- name: blocks_divide_xx_0_0
+  id: blocks_divide_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 456.0]
+    rotation: 0
+    state: enabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -113,7 +149,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 376.0]
+    coordinate: [1096, 376.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0_0
@@ -131,42 +167,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 304.0]
-    rotation: 0
-    state: enabled
-- name: blocks_sub_xx_0
-  id: blocks_sub_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [616, 368]
-    rotation: 0
-    state: enabled
-- name: const_source_0
-  id: analog_const_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [296, 332]
+    coordinate: [1096, 208.0]
     rotation: 0
     state: enabled
 - name: digital_mpsk_snr_est_cc_0
@@ -202,7 +203,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 404]
+    coordinate: [296, 364.0]
     rotation: 0
     state: enabled
 - name: gmuground_sqrt_0
@@ -219,7 +220,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 192.0]
+    coordinate: [928, 240.0]
     rotation: 0
     state: true
 - name: gmuground_sqrt_0_0
@@ -236,7 +237,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 384.0]
+    coordinate: [928, 440.0]
     rotation: 0
     state: true
 - name: import_0
@@ -267,7 +268,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 372.0]
+    coordinate: [1368, 316.0]
     rotation: 0
     state: enabled
 - name: pad_source_0
@@ -313,16 +314,18 @@ blocks:
 
 connections:
 - [blocks_add_xx_0, '0', blocks_divide_xx_0, '1']
+- [blocks_add_xx_0_0, '0', blocks_divide_xx_0_0, '1']
 - [blocks_add_xx_1, '0', pad_sink_0, '0']
-- [blocks_divide_xx_0, '0', blocks_sub_xx_0, '1']
 - [blocks_divide_xx_0, '0', gmuground_sqrt_0, '0']
+- [blocks_divide_xx_0_0, '0', gmuground_sqrt_0_0, '0']
 - [blocks_multiply_xx_0, '0', blocks_add_xx_1, '1']
 - [blocks_multiply_xx_0_0, '0', blocks_add_xx_1, '0']
-- [blocks_sub_xx_0, '0', gmuground_sqrt_0_0, '0']
-- [const_source_0, '0', blocks_sub_xx_0, '0']
 - [digital_mpsk_snr_est_cc_0, '0', blocks_add_xx_0, '0']
+- [digital_mpsk_snr_est_cc_0, '0', blocks_add_xx_0_0, '1']
 - [digital_mpsk_snr_est_cc_0, '0', blocks_divide_xx_0, '0']
 - [digital_mpsk_snr_est_cc_0_0, '0', blocks_add_xx_0, '1']
+- [digital_mpsk_snr_est_cc_0_0, '0', blocks_add_xx_0_0, '0']
+- [digital_mpsk_snr_est_cc_0_0, '0', blocks_divide_xx_0_0, '0']
 - [gmuground_sqrt_0, '0', blocks_multiply_xx_0_0, '1']
 - [gmuground_sqrt_0_0, '0', blocks_multiply_xx_0, '1']
 - [pad_source_0, '0', blocks_multiply_xx_0_0, '0']

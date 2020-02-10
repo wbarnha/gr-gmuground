@@ -75,7 +75,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [120, 76]
+    coordinate: [176, 68.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0_0
@@ -97,7 +97,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 276]
+    coordinate: [16, 268.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_magphase_0
@@ -113,7 +113,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 368]
+    coordinate: [512, 368.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_magphase_0_0
@@ -200,7 +200,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 80]
+    coordinate: [704, 72.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle_0
@@ -219,7 +219,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 276]
+    coordinate: [336, 308.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle_0_0
@@ -238,7 +238,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 108]
+    coordinate: [400, 108.0]
     rotation: 0
     state: enabled
 - name: blocks_vector_sink_x_0
