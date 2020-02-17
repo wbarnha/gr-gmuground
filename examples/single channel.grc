@@ -56,21 +56,6 @@ blocks:
     coordinate: [184, 20.0]
     rotation: 0
     state: enabled
-- name: Selective_Combining_0
-  id: Selective_Combining
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [864, 400.0]
-    rotation: 0
-    state: true
 - name: bb_gain
   id: parameter
   parameters:
@@ -85,7 +70,45 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 20.0]
+    coordinate: [856, 20.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/wbarnhart/satellite-recordings/ao73.wav
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 132.0]
+    rotation: 0
+    state: disabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 376.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -98,7 +121,44 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 560.0]
+    coordinate: [400, 480.0]
+    rotation: 0
+    state: enabled
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 464.0]
+    rotation: 0
+    state: enabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: /home/wbarnhart/satellite-recordings/suomi_100.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 364.0]
     rotation: 0
     state: enabled
 - name: filter_width
@@ -133,7 +193,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 396.0]
+    coordinate: [1048, 308.0]
     rotation: 0
     state: true
 - name: freq
@@ -167,7 +227,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 20.0]
+    coordinate: [1112, 20.0]
     rotation: 0
     state: enabled
 - name: gpredict_doppler_0
@@ -185,7 +245,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 268.0]
+    coordinate: [120, 316.0]
     rotation: 0
     state: enabled
 - name: gpredict_port
@@ -202,7 +262,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [992, 20.0]
+    coordinate: [984, 20.0]
     rotation: 0
     state: enabled
 - name: if_gain
@@ -233,11 +293,7 @@ blocks:
     calibr_bandw_ch0: 2.5e6
     calibr_bandw_ch1: 2.5e6
     channel_mode: '0'
-    comment: 'Vertical Polarization
-
-      Replace with your own source!
-
-      LimeSDR USB: 0009070105C62E09'
+    comment: Replace with your own source!
     dacVal: '180'
     digital_bandw_ch0: samp_rate
     digital_bandw_ch1: samp_rate
@@ -253,92 +309,14 @@ blocks:
     oversample: '0'
     rf_freq: freq
     samp_rate: samp_rate
-    serial: 0009070105C62E09
+    serial: ''
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [168, 492.0]
+    coordinate: [120, 204.0]
     rotation: 0
     state: disabled
-- name: limesdr_source_0_0
-  id: limesdr_source
-  parameters:
-    affinity: ''
-    alias: ''
-    allow_tcxo_dac: '0'
-    analog_bandw_ch0: 1.5e6
-    analog_bandw_ch1: 1.5e6
-    calibr_bandw_ch0: 2.5e6
-    calibr_bandw_ch1: 2.5e6
-    channel_mode: '0'
-    comment: 'Horizontal Polarization
-
-      Replace with your own source!
-
-      LimeSDR Mini: 1D423F7CD55972'
-    dacVal: '180'
-    digital_bandw_ch0: samp_rate
-    digital_bandw_ch1: samp_rate
-    filename: ''
-    gain_dB_ch0: '1'
-    gain_dB_ch1: '1'
-    lna_path_ch0: '255'
-    lna_path_ch1: '2'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    nco_freq_ch0: '0'
-    nco_freq_ch1: '0'
-    oversample: '0'
-    rf_freq: freq
-    samp_rate: samp_rate
-    serial: 1D423F7CD55972
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [160, 188.0]
-    rotation: 0
-    state: disabled
-- name: limesdr_source_0_1
-  id: limesdr_source
-  parameters:
-    affinity: ''
-    alias: ''
-    allow_tcxo_dac: '0'
-    analog_bandw_ch0: 1.5e6
-    analog_bandw_ch1: 1.5e6
-    calibr_bandw_ch0: 2.5e6
-    calibr_bandw_ch1: 2.5e6
-    channel_mode: '2'
-    comment: 'Vertical Polarization
-
-      Replace with your own source!
-
-      LimeSDR USB: 0009070105C62E09'
-    dacVal: '180'
-    digital_bandw_ch0: samp_rate
-    digital_bandw_ch1: samp_rate
-    filename: ''
-    gain_dB_ch0: '1'
-    gain_dB_ch1: '1'
-    lna_path_ch0: '255'
-    lna_path_ch1: '2'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    nco_freq_ch0: '0'
-    nco_freq_ch1: '0'
-    oversample: '0'
-    rf_freq: freq
-    samp_rate: samp_rate
-    serial: 0009070105C62E09
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [160, 276.0]
-    rotation: 0
-    state: enabled
 - name: offset
   id: parameter
   parameters:
@@ -353,111 +331,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1288, 20.0]
+    coordinate: [1272, 20.0]
     rotation: 0
     state: enabled
-- name: phase_sync_0
-  id: phase_sync
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: Assumes Horizontal lags behind Vertical
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [392, 384.0]
-    rotation: 0
-    state: true
-- name: qtgui_sink_x_0
-  id: qtgui_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    bw: samp_rate
-    comment: ''
-    fc: freq
-    fftsize: '1024'
-    gui_hint: (1,0,1,1)
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '"Horizontal Channel"'
-    plotconst: 'True'
-    plotfreq: 'True'
-    plottime: 'True'
-    plotwaterfall: 'True'
-    rate: '10'
-    showports: 'False'
-    showrf: 'True'
-    type: complex
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [960, 188.0]
-    rotation: 0
-    state: true
-- name: qtgui_sink_x_0_0
-  id: qtgui_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    bw: samp_rate
-    comment: ''
-    fc: '0'
-    fftsize: '1024'
-    gui_hint: (2,0,1,1)
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '"Input"'
-    plotconst: 'True'
-    plotfreq: 'True'
-    plottime: 'True'
-    plotwaterfall: 'True'
-    rate: '10'
-    showports: 'False'
-    showrf: 'True'
-    type: complex
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1144, 268.0]
-    rotation: 0
-    state: true
-- name: qtgui_sink_x_0_0_0
-  id: qtgui_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    bw: samp_rate
-    comment: ''
-    fc: freq
-    fftsize: '1024'
-    gui_hint: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '"Vertical Channel"'
-    plotconst: 'True'
-    plotfreq: 'True'
-    plottime: 'True'
-    plotwaterfall: 'True'
-    rate: '10'
-    showports: 'False'
-    showrf: 'True'
-    type: complex
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [960, 492.0]
-    rotation: 0
-    state: true
 - name: rf_gain
   id: parameter
   parameters:
@@ -477,23 +353,12 @@ blocks:
     state: enabled
 
 connections:
-- [Selective_Combining_0, '0', fmusbwide_0, '0']
-- [Selective_Combining_0, '0', qtgui_sink_x_0_0, '0']
-- [gpredict_doppler_0, freq, qtgui_sink_x_0, freq]
-- [gpredict_doppler_0, freq, qtgui_sink_x_0_0, freq]
-- [gpredict_doppler_0, freq, qtgui_sink_x_0_0_0, freq]
+- [blocks_file_source_0, '0', fmusbwide_0, '0']
+- [blocks_float_to_complex_0, '0', fmusbwide_0, '0']
+- [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_wavfile_source_0, '0', blocks_float_to_complex_0, '0']
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
-- [limesdr_source_0, '0', Selective_Combining_0, '1']
-- [limesdr_source_0, '0', phase_sync_0, '1']
-- [limesdr_source_0, '0', qtgui_sink_x_0_0_0, '0']
-- [limesdr_source_0_0, '0', phase_sync_0, '0']
-- [limesdr_source_0_0, '0', qtgui_sink_x_0, '0']
-- [limesdr_source_0_1, '0', phase_sync_0, '0']
-- [limesdr_source_0_1, '0', qtgui_sink_x_0, '0']
-- [limesdr_source_0_1, '1', Selective_Combining_0, '1']
-- [limesdr_source_0_1, '1', phase_sync_0, '1']
-- [limesdr_source_0_1, '1', qtgui_sink_x_0_0_0, '0']
-- [phase_sync_0, '0', Selective_Combining_0, '0']
+- [limesdr_source_0, '0', fmusbwide_0, '0']
 
 metadata:
   file_format: 1

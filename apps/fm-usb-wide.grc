@@ -8,7 +8,7 @@ options:
     description: ''
     gen_cmake: 'On'
     gen_linking: dynamic
-    generate_options: hb
+    generate_options: hb_qt_gui
     hier_block_src_path: '.:'
     id: fmusbwide
     max_nouts: '0'
@@ -41,7 +41,36 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 12.0]
+    coordinate: [328, 12.0]
+    rotation: 0
+    state: enabled
+- name: mod
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Modulation
+    label0: FM
+    label1: USB
+    label2: USB (Wide)
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '3'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 4.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -53,7 +82,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 12.0]
+    coordinate: [232, 12.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0
@@ -69,7 +98,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 196.0]
+    coordinate: [816, 196.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -91,7 +120,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [480, 276.0]
+    coordinate: [456, 276.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0_0
@@ -113,7 +142,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 500.0]
+    coordinate: [440, 500.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_real_0
@@ -129,7 +158,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 464.0]
+    coordinate: [808, 376.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_real_0_0
@@ -145,7 +174,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 608.0]
+    coordinate: [832, 592.0]
     rotation: 0
     state: enabled
 - name: blocks_float_to_short_0
@@ -162,7 +191,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 196.0]
+    coordinate: [984, 196.0]
     rotation: 0
     state: enabled
 - name: blocks_float_to_short_0_0
@@ -179,7 +208,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 460.0]
+    coordinate: [976, 372.0]
     rotation: 0
     state: enabled
 - name: blocks_float_to_short_0_0_0
@@ -196,7 +225,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 604.0]
+    coordinate: [984, 588.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -214,7 +243,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 360.0]
+    coordinate: [696, 360.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0_0
@@ -235,23 +264,44 @@ blocks:
     coordinate: [720, 576.0]
     rotation: 0
     state: enabled
-- name: blocks_udp_sink_0
-  id: blocks_udp_sink
+- name: blocks_selector_0
+  id: blocks_selector
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    eof: 'True'
-    ipaddr: Localhost
-    port: '7355'
-    psize: '1472'
+    enabled: 'True'
+    input_index: mod
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '3'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'False'
     type: short
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1312, 172.0]
+    coordinate: [1160, 344.0]
+    rotation: 0
+    state: true
+- name: blocks_short_to_float_0
+  id: blocks_short_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1368, 268.0]
     rotation: 0
     state: enabled
 - name: blocks_udp_sink_0_0
@@ -270,26 +320,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1312, 436.0]
-    rotation: 0
-    state: enabled
-- name: blocks_udp_sink_0_0_0
-  id: blocks_udp_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'True'
-    ipaddr: Localhost
-    port: '7355'
-    psize: '1472'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1312, 580.0]
+    coordinate: [1344, 516.0]
     rotation: 0
     state: enabled
 - name: filter_width
@@ -306,7 +337,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 84.0]
+    coordinate: [240, 84.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -404,6 +435,23 @@ blocks:
     coordinate: [8, 140.0]
     rotation: 0
     state: disabled
+- name: gui
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: GUI Hint
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 196.0]
+    rotation: 0
+    state: enabled
 - name: note_0
   id: note
   parameters:
@@ -414,7 +462,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 180.0]
+    coordinate: [512, 228.0]
     rotation: 0
     state: true
 - name: note_0_0
@@ -427,7 +475,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 316.0]
+    coordinate: [360, 316.0]
     rotation: 0
     state: true
 - name: note_0_0_0
@@ -479,7 +527,36 @@ blocks:
     bus_structure: null
     coordinate: [16, 412.0]
     rotation: 0
-    state: true
+    state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'True'
+    type: float
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1344, 108.0]
+    rotation: 0
+    state: enabled
 
 connections:
 - [analog_quadrature_demod_cf_0, '0', blocks_float_to_short_0, '0']
@@ -487,11 +564,14 @@ connections:
 - [analog_sig_source_x_0_0, '0', blocks_multiply_xx_0_0, '0']
 - [blocks_complex_to_real_0, '0', blocks_float_to_short_0_0, '0']
 - [blocks_complex_to_real_0_0, '0', blocks_float_to_short_0_0_0, '0']
-- [blocks_float_to_short_0, '0', blocks_udp_sink_0, '0']
-- [blocks_float_to_short_0_0, '0', blocks_udp_sink_0_0, '0']
-- [blocks_float_to_short_0_0_0, '0', blocks_udp_sink_0_0_0, '0']
+- [blocks_float_to_short_0, '0', blocks_selector_0, '0']
+- [blocks_float_to_short_0_0, '0', blocks_selector_0, '1']
+- [blocks_float_to_short_0_0_0, '0', blocks_selector_0, '2']
 - [blocks_multiply_xx_0, '0', blocks_complex_to_real_0, '0']
 - [blocks_multiply_xx_0_0, '0', blocks_complex_to_real_0_0, '0']
+- [blocks_selector_0, '0', blocks_short_to_float_0, '0']
+- [blocks_selector_0, '0', blocks_udp_sink_0_0, '0']
+- [blocks_short_to_float_0, '0', qtgui_sink_x_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', analog_quadrature_demod_cf_0, '0']
 - [freq_xlating_fir_filter_xxx_0_0, '0', blocks_multiply_xx_0, '1']
 - [freq_xlating_fir_filter_xxx_0_0_0, '0', blocks_multiply_xx_0_0, '1']
