@@ -110,7 +110,7 @@ blocks:
     bus_structure: null
     coordinate: [776, 376.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -142,7 +142,7 @@ blocks:
     bus_structure: null
     coordinate: [568, 464.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_wavfile_source_0
   id: blocks_wavfile_source
   parameters:
@@ -160,7 +160,7 @@ blocks:
     bus_structure: null
     coordinate: [352, 364.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: filter_width
   id: parameter
   parameters:
@@ -186,7 +186,6 @@ blocks:
     comment: ''
     filter_width: '20000'
     freq: freq
-    gui: '0'
     gui_hint: ''
     offset: 50e3
   states:
@@ -316,7 +315,7 @@ blocks:
     bus_structure: null
     coordinate: [120, 204.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: offset
   id: parameter
   parameters:

@@ -426,7 +426,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1144, 268.0]
+    coordinate: [1168, 268.0]
     rotation: 0
     state: true
 - name: qtgui_sink_x_0_0_0

@@ -287,23 +287,29 @@ blocks:
     coordinate: [1160, 344.0]
     rotation: 0
     state: true
-- name: blocks_short_to_float_0
-  id: blocks_short_to_float
+- name: blocks_selector_0_0
+  id: blocks_selector
   parameters:
     affinity: ''
     alias: ''
     comment: ''
+    enabled: 'True'
+    input_index: mod
     maxoutbuf: '0'
     minoutbuf: '0'
-    scale: '1'
+    num_inputs: '3'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'False'
+    type: complex
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1368, 268.0]
+    coordinate: [1152, 200.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: blocks_udp_sink_0_0
   id: blocks_udp_sink
   parameters:
@@ -320,7 +326,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1344, 516.0]
+    coordinate: [1344, 364.0]
     rotation: 0
     state: enabled
 - name: filter_width
@@ -337,7 +343,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 84.0]
+    coordinate: [288, 84.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -354,7 +360,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 228.0]
+    coordinate: [0, 148.0]
     rotation: 0
     state: enabled
 - name: freq_xlating_fir_filter_xxx_0
@@ -417,41 +423,6 @@ blocks:
     coordinate: [416, 628.0]
     rotation: 0
     state: enabled
-- name: gpredict_doppler_0
-  id: gpredict_doppler
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    gpredict_host: Localhost
-    gpredict_port: '4532'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    verbose: 'False'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [8, 140.0]
-    rotation: 0
-    state: disabled
-- name: gui
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: GUI Hint
-    short_id: ''
-    type: ''
-    value: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 196.0]
-    rotation: 0
-    state: enabled
 - name: note_0
   id: note
   parameters:
@@ -505,7 +476,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [120, 228.0]
+    coordinate: [112, 156.0]
     rotation: 0
     state: enabled
 - name: pad_source_0
@@ -535,7 +506,7 @@ blocks:
     alias: ''
     bw: samp_rate
     comment: ''
-    fc: '0'
+    fc: freq
     fftsize: '1024'
     gui_hint: ''
     maxoutbuf: '0'
@@ -548,13 +519,13 @@ blocks:
     rate: '10'
     showports: 'False'
     showrf: 'True'
-    type: float
+    type: complex
     wintype: firdes.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1344, 108.0]
+    coordinate: [1352, 228.0]
     rotation: 0
     state: enabled
 
@@ -568,11 +539,13 @@ connections:
 - [blocks_float_to_short_0_0, '0', blocks_selector_0, '1']
 - [blocks_float_to_short_0_0_0, '0', blocks_selector_0, '2']
 - [blocks_multiply_xx_0, '0', blocks_complex_to_real_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_selector_0_0, '1']
 - [blocks_multiply_xx_0_0, '0', blocks_complex_to_real_0_0, '0']
-- [blocks_selector_0, '0', blocks_short_to_float_0, '0']
+- [blocks_multiply_xx_0_0, '0', blocks_selector_0_0, '2']
 - [blocks_selector_0, '0', blocks_udp_sink_0_0, '0']
-- [blocks_short_to_float_0, '0', qtgui_sink_x_0, '0']
+- [blocks_selector_0_0, '0', qtgui_sink_x_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', analog_quadrature_demod_cf_0, '0']
+- [freq_xlating_fir_filter_xxx_0, '0', blocks_selector_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0_0, '0', blocks_multiply_xx_0, '1']
 - [freq_xlating_fir_filter_xxx_0_0_0, '0', blocks_multiply_xx_0_0, '1']
 - [pad_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
