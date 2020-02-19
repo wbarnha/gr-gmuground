@@ -44,6 +44,27 @@ blocks:
     coordinate: [296, 20.0]
     rotation: 0
     state: enabled
+- name: gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 1,0,1,1
+    label: Gain [dB]
+    min_len: '70'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: '70'
+    value: '30'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 124.0]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
@@ -73,6 +94,22 @@ blocks:
     coordinate: [856, 20.0]
     rotation: 0
     state: enabled
+- name: blocks_complex_to_real_0
+  id: blocks_complex_to_real
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 464.0]
+    rotation: 0
+    state: disabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -108,9 +145,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 376.0]
+    coordinate: [360, 376.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -123,7 +160,7 @@ blocks:
     bus_structure: null
     coordinate: [400, 480.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_null_source_0
   id: blocks_null_source
   parameters:
@@ -140,7 +177,43 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 464.0]
+    coordinate: [240, 408.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 280.0]
+    rotation: 0
+    state: true
+- name: blocks_wavfile_sink_0
+  id: blocks_wavfile_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_sample: '8'
+    comment: ''
+    file: /home/wbarnhart/itasat1.wav
+    nchan: '1'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1136, 444.0]
     rotation: 0
     state: disabled
 - name: blocks_wavfile_source_0
@@ -149,7 +222,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: /home/wbarnhart/satellite-recordings/suomi_100.wav
+    file: /home/wbarnhart/itasat1.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
@@ -158,9 +231,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 364.0]
+    coordinate: [80, 364.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: filter_width
   id: parameter
   parameters:
@@ -193,6 +266,22 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1048, 308.0]
+    rotation: 0
+    state: enabled
+- name: fosphor_glfw_sink_c_0
+  id: fosphor_glfw_sink_c
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    freq_center: doppler_freq
+    freq_span: samp_rate
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 212.0]
     rotation: 0
     state: true
 - name: freq
@@ -244,9 +333,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [120, 316.0]
+    coordinate: [112, 444.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: gpredict_port
   id: parameter
   parameters:
@@ -297,8 +386,8 @@ blocks:
     digital_bandw_ch0: samp_rate
     digital_bandw_ch1: samp_rate
     filename: ''
-    gain_dB_ch0: '1'
-    gain_dB_ch1: '1'
+    gain_dB_ch0: gain
+    gain_dB_ch1: gain
     lna_path_ch0: '255'
     lna_path_ch1: '2'
     maxoutbuf: '0'
@@ -315,7 +404,7 @@ blocks:
     bus_structure: null
     coordinate: [120, 204.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: offset
   id: parameter
   parameters:
@@ -352,12 +441,16 @@ blocks:
     state: enabled
 
 connections:
+- [blocks_complex_to_real_0, '0', blocks_wavfile_sink_0, '0']
 - [blocks_file_source_0, '0', fmusbwide_0, '0']
-- [blocks_float_to_complex_0, '0', fmusbwide_0, '0']
+- [blocks_float_to_complex_0, '0', blocks_throttle_0, '0']
 - [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_throttle_0, '0', blocks_complex_to_real_0, '0']
+- [blocks_throttle_0, '0', fmusbwide_0, '0']
+- [blocks_throttle_0, '0', fosphor_glfw_sink_c_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_float_to_complex_0, '0']
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
-- [limesdr_source_0, '0', fmusbwide_0, '0']
+- [limesdr_source_0, '0', blocks_throttle_0, '0']
 
 metadata:
   file_format: 1

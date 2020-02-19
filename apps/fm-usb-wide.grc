@@ -113,7 +113,7 @@ blocks:
     minoutbuf: '0'
     offset: '0'
     phase: '0'
-    samp_rate: '48000'
+    samp_rate: samp_rate
     type: complex
     waveform: analog.GR_COS_WAVE
   states:
@@ -135,7 +135,7 @@ blocks:
     minoutbuf: '0'
     offset: '0'
     phase: '0'
-    samp_rate: '48000'
+    samp_rate: samp_rate
     type: complex
     waveform: analog.GR_COS_WAVE
   states:

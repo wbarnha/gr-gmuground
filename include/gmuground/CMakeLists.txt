@@ -23,5 +23,5 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/gmuground
+    udp_text_display.h DESTINATION include/gmuground
 )

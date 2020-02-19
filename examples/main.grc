@@ -126,7 +126,6 @@ blocks:
     comment: ''
     filter_width: '20000'
     freq: freq
-    gui: '0'
     gui_hint: ''
     offset: 50e3
   states:
@@ -322,8 +321,8 @@ blocks:
     filename: ''
     gain_dB_ch0: '1'
     gain_dB_ch1: '1'
-    lna_path_ch0: '255'
-    lna_path_ch1: '2'
+    lna_path_ch0: '3'
+    lna_path_ch1: '3'
     maxoutbuf: '0'
     minoutbuf: '0'
     nco_freq_ch0: '0'

@@ -293,7 +293,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 420.0]
+    coordinate: [32, 404.0]
     rotation: 0
     state: enabled
 - name: limesdr_source_0_0

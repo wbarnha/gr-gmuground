@@ -22,5 +22,6 @@ install(FILES
     gmuground_sqrt.block.yml
     gmuground_sqrt.block.yml
     gmuground_snr_selector.block.yml
-    gmuground_sample_count.block.yml DESTINATION share/gnuradio/grc/blocks
+    gmuground_sample_count.block.yml
+    gmuground_udp_text_display.block.yml DESTINATION share/gnuradio/grc/blocks
 )
