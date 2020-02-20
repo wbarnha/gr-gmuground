@@ -169,27 +169,6 @@ blocks:
     coordinate: [224, 12.0]
     rotation: 0
     state: true
-- name: volume
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: Volume
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: '0'
-    step: '0.1'
-    stop: '10'
-    value: '1'
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1192, 60.0]
-    rotation: 0
-    state: true
 - name: analog_random_source_x
   id: analog_random_source_x
   parameters:
@@ -232,6 +211,7 @@ blocks:
     coordinate: [272, 388.0]
     rotation: 0
     state: disabled
+<<<<<<< HEAD
 - name: analog_wfm_rcv_0_0
   id: analog_wfm_rcv
   parameters:
@@ -491,6 +471,8 @@ blocks:
     coordinate: [1192, 188.0]
     rotation: 0
     state: disabled
+=======
+>>>>>>> 63d271765910b7316f7339ab0780300d6b54e1d1
 - name: blocks_multiply_const_vxx_0_1
   id: blocks_multiply_const_vxx
   parameters:
@@ -574,7 +556,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [992, 476.0]
+    coordinate: [992, 452.0]
     rotation: 0
     state: enabled
 - name: digital_constellation_decoder_cb_0_0_0
@@ -590,7 +572,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
+<<<<<<< HEAD
     coordinate: [992, 548.0]
+=======
+    coordinate: [992, 524.0]
+>>>>>>> 63d271765910b7316f7339ab0780300d6b54e1d1
     rotation: 0
     state: enabled
 - name: digital_constellation_modulator_1
@@ -1165,7 +1151,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
+<<<<<<< HEAD
     coordinate: [1400, 632.0]
+=======
+    coordinate: [992, 120.0]
+>>>>>>> 63d271765910b7316f7339ab0780300d6b54e1d1
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0
@@ -1187,6 +1177,7 @@ blocks:
     bus_structure: null
     coordinate: [568, 548.0]
     rotation: 0
+<<<<<<< HEAD
     state: disabled
 - name: rational_resampler_xxx_0_0
   id: rational_resampler_xxx
@@ -1208,6 +1199,9 @@ blocks:
     coordinate: [792, 164.0]
     rotation: 0
     state: disabled
+=======
+    state: true
+>>>>>>> 63d271765910b7316f7339ab0780300d6b54e1d1
 
 connections:
 - [analog_random_source_x, '0', digital_constellation_modulator_1, '0']
@@ -1215,6 +1209,7 @@ connections:
 - [analog_random_source_x, '0', fec_ber_bf_0_0, '0']
 - [analog_random_source_x, '0', fec_ber_bf_0_0_1_0, '0']
 - [analog_sig_source_x_0, '0', rational_resampler_xxx_0, '0']
+<<<<<<< HEAD
 - [analog_wfm_rcv_0_0, '0', blocks_multiply_const_vxx_0_0, '0']
 - [blocks_complex_to_real_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_complex_to_real_0_0, '0', qtgui_time_sink_x_0, '1']
@@ -1227,6 +1222,8 @@ connections:
 - [blocks_file_source_1, '0', fec_ber_bf_0, '1']
 - [blocks_file_source_1, '0', fec_ber_bf_0_0, '1']
 - [blocks_multiply_const_vxx_0_0, '0', audio_sink_0_0, '0']
+=======
+>>>>>>> 63d271765910b7316f7339ab0780300d6b54e1d1
 - [blocks_multiply_const_vxx_0_1, '0', low_pass_filter_0_0, '0']
 - [blocks_multiply_const_vxx_0_1_0, '0', low_pass_filter_0, '0']
 - [blocks_multiply_const_vxx_0_1_1, '0', blocks_complex_to_real_0_0_0_0, '0']
@@ -1244,16 +1241,20 @@ connections:
 - [limesdr_source_0, '1', blocks_multiply_const_vxx_0_1_0, '0']
 - [low_pass_filter_0, '0', blocks_complex_to_real_0, '0']
 - [low_pass_filter_0, '0', digital_constellation_decoder_cb_0, '0']
+<<<<<<< HEAD
 - [low_pass_filter_0, '0', phase_sync_0, '0']
 - [low_pass_filter_0, '0', rational_resampler_xxx_0_0, '0']
 - [low_pass_filter_0_0, '0', blocks_complex_to_real_0_0, '0']
+=======
+- [low_pass_filter_0, '0', phase_sync_0, '1']
+- [low_pass_filter_0, '0', qtgui_time_sink_x_0, '0']
+>>>>>>> 63d271765910b7316f7339ab0780300d6b54e1d1
 - [low_pass_filter_0_0, '0', digital_constellation_decoder_cb_0_0, '0']
 - [low_pass_filter_0_0, '0', phase_sync_0, '1']
 - [phase_sync_0, '0', blocks_complex_to_real_0_0_0, '0']
 - [phase_sync_0, '0', digital_constellation_decoder_cb_0_0_0, '0']
 - [rational_resampler_xxx_0, '0', limesdr_sink_0_0, '0']
 - [rational_resampler_xxx_0, '0', qtgui_freq_sink_x_0, '0']
-- [rational_resampler_xxx_0_0, '0', analog_wfm_rcv_0_0, '0']
 
 metadata:
   file_format: 1

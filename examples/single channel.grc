@@ -147,7 +147,7 @@ blocks:
     bus_structure: null
     coordinate: [360, 376.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -160,7 +160,7 @@ blocks:
     bus_structure: null
     coordinate: [400, 480.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_null_source_0
   id: blocks_null_source
   parameters:
@@ -179,7 +179,7 @@ blocks:
     bus_structure: null
     coordinate: [240, 408.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_throttle_0
   id: blocks_throttle
   parameters:
@@ -233,7 +233,7 @@ blocks:
     bus_structure: null
     coordinate: [80, 364.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: filter_width
   id: parameter
   parameters:
@@ -335,7 +335,7 @@ blocks:
     bus_structure: null
     coordinate: [112, 444.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: gpredict_port
   id: parameter
   parameters:
@@ -402,9 +402,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [120, 204.0]
+    coordinate: [256, 268.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: offset
   id: parameter
   parameters:
