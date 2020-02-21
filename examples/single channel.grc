@@ -69,7 +69,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 2.4e6
+    value: 2e6
   states:
     bus_sink: false
     bus_source: false
@@ -110,6 +110,22 @@ blocks:
     coordinate: [912, 464.0]
     rotation: 0
     state: disabled
+- name: blocks_complex_to_real_0_0
+  id: blocks_complex_to_real
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 376.0]
+    rotation: 0
+    state: disabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -145,7 +161,24 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 376.0]
+    coordinate: [368, 360.0]
+    rotation: 0
+    state: disabled
+- name: blocks_float_to_short_0_0
+  id: blocks_float_to_short
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '32767'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [784, 372.0]
     rotation: 0
     state: disabled
 - name: blocks_message_debug_0
@@ -177,10 +210,29 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 408.0]
+    coordinate: [240, 392.0]
     rotation: 0
     state: disabled
-- name: blocks_throttle_0
+- name: blocks_throttle_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: '48000'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 372.0]
+    rotation: 0
+    state: disabled
+- name: blocks_throttle_0_0_0
   id: blocks_throttle
   parameters:
     affinity: ''
@@ -196,9 +248,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 280.0]
+    coordinate: [608, 268.0]
     rotation: 0
-    state: true
+    state: enabled
+- name: blocks_udp_sink_0_0
+  id: blocks_udp_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    eof: 'True'
+    ipaddr: Localhost
+    port: '7355'
+    psize: '1472'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 348.0]
+    rotation: 0
+    state: disabled
 - name: blocks_wavfile_sink_0
   id: blocks_wavfile_sink
   parameters:
@@ -206,7 +277,7 @@ blocks:
     alias: ''
     bits_per_sample: '8'
     comment: ''
-    file: /home/wbarnhart/itasat1.wav
+    file: /home/wbarnhart/test.wav
     nchan: '1'
     samp_rate: '48000'
   states:
@@ -222,7 +293,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: /home/wbarnhart/itasat1.wav
+    file: /home/wbarnhart/satellite-recordings/itasat1.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
@@ -231,7 +302,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 364.0]
+    coordinate: [80, 348.0]
     rotation: 0
     state: disabled
 - name: filter_width
@@ -265,7 +336,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 308.0]
+    coordinate: [936, 276.0]
     rotation: 0
     state: enabled
 - name: fosphor_glfw_sink_c_0
@@ -274,7 +345,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    freq_center: doppler_freq
+    freq_center: freq
     freq_span: samp_rate
     wintype: firdes.WIN_BLACKMAN_hARRIS
   states:
@@ -318,6 +389,20 @@ blocks:
     coordinate: [1112, 20.0]
     rotation: 0
     state: enabled
+- name: gpredict_MsgPairToVar_0
+  id: gpredict_MsgPairToVar
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    target: freq
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 188.0]
+    rotation: 0
+    state: true
 - name: gpredict_doppler_0
   id: gpredict_doppler
   parameters:
@@ -402,7 +487,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 268.0]
+    coordinate: [280, 252.0]
     rotation: 0
     state: enabled
 - name: offset
@@ -422,6 +507,35 @@ blocks:
     coordinate: [1272, 20.0]
     rotation: 0
     state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 460.0]
+    rotation: 0
+    state: disabled
 - name: rf_gain
   id: parameter
   parameters:
@@ -442,15 +556,21 @@ blocks:
 
 connections:
 - [blocks_complex_to_real_0, '0', blocks_wavfile_sink_0, '0']
+- [blocks_complex_to_real_0_0, '0', blocks_float_to_short_0_0, '0']
 - [blocks_file_source_0, '0', fmusbwide_0, '0']
-- [blocks_float_to_complex_0, '0', blocks_throttle_0, '0']
+- [blocks_float_to_complex_0, '0', blocks_complex_to_real_0_0, '0']
+- [blocks_float_to_complex_0, '0', fmusbwide_0, '0']
+- [blocks_float_to_complex_0, '0', fosphor_glfw_sink_c_0, '0']
+- [blocks_float_to_complex_0, '0', qtgui_sink_x_0, '0']
+- [blocks_float_to_short_0_0, '0', blocks_throttle_0_0, '0']
 - [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
-- [blocks_throttle_0, '0', blocks_complex_to_real_0, '0']
-- [blocks_throttle_0, '0', fmusbwide_0, '0']
-- [blocks_throttle_0, '0', fosphor_glfw_sink_c_0, '0']
+- [blocks_throttle_0_0, '0', blocks_udp_sink_0_0, '0']
+- [blocks_throttle_0_0_0, '0', fmusbwide_0, '0']
+- [blocks_throttle_0_0_0, '0', fosphor_glfw_sink_c_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_float_to_complex_0, '0']
+- [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
-- [limesdr_source_0, '0', blocks_throttle_0, '0']
+- [limesdr_source_0, '0', blocks_throttle_0_0_0, '0']
 
 metadata:
   file_format: 1

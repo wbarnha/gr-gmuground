@@ -93,16 +93,16 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: /home/wbarnhart/itasat1.wav
+    file: /home/wbarnhart/satellite-recordings/itasat1.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
-    repeat: 'False'
+    repeat: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [56, 172.0]
+    coordinate: [96, 172.0]
     rotation: 0
     state: true
 

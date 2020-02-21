@@ -53,27 +53,21 @@ blocks:
     coordinate: [312, 4]
     rotation: 0
     state: enabled
-- name: frequency
-  id: variable_qtgui_range
+- name: delay
+  id: variable_qtgui_entry
   parameters:
     comment: ''
     gui_hint: ''
-    label: Frequency
-    min_len: '10'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: '1'
-    step: '100'
-    stop: '1000'
-    value: '100'
-    widget: counter_slider
+    label: ''
+    type: int
+    value: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 4]
+    coordinate: [608, 4.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: frequency
   id: variable
   parameters:
@@ -86,6 +80,21 @@ blocks:
     coordinate: [184, 12]
     rotation: 0
     state: disabled
+- name: frequency
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    type: real
+    value: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 4.0]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
@@ -136,7 +145,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 108]
+    coordinate: [144, 100.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0_0
@@ -150,7 +159,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
-    phase: '0'
+    phase: 3.1415/4
     samp_rate: samp_rate
     type: complex
     waveform: analog.GR_COS_WAVE
@@ -158,7 +167,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 300.0]
+    coordinate: [8, 300.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0
@@ -299,7 +308,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    delay: '50'
+    delay: delay
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
@@ -309,7 +318,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 340]
+    coordinate: [272, 340.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle_0_0
@@ -410,7 +419,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 24.0]
+    coordinate: [712, 56.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0

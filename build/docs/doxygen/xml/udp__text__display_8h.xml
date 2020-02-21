@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="udp__text__display_8h" kind="file" language="C++">
+    <compoundname>udp_text_display.h</compoundname>
+    <includes refid="api_8h" local="no">gmuground/api.h</includes>
+    <includes local="no">gnuradio/sync_block.h</includes>
+    <includedby refid="udp__text__display__impl_8h" local="no">udp_text_display_impl.h</includedby>
+    <incdepgraph>
+      <node id="15">
+        <label>gnuradio/sync_block.h</label>
+      </node>
+      <node id="14">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="13">
+        <label>gmuground/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>udp_text_display.h</label>
+        <link refid="udp__text__display_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="17">
+        <label>udp_text_display_impl.h</label>
+        <link refid="udp__text__display__impl_8h"/>
+      </node>
+      <node id="16">
+        <label>udp_text_display.h</label>
+        <link refid="udp__text__display_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1gmuground_1_1udp__text__display" prot="public">gr::gmuground::udp_text_display</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1gmuground">gr::gmuground</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/wbarnhart/gr-gmuground/include/gmuground/udp_text_display.h"/>
+  </compounddef>
+</doxygen>

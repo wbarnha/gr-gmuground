@@ -356,6 +356,22 @@ blocks:
     coordinate: [432, 320]
     rotation: 0
     state: enabled
+- name: blocks_pack_k_bits_bb_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 148.0]
+    rotation: 0
+    state: enabled
 - name: blocks_throttle
   id: blocks_throttle
   parameters:
@@ -465,7 +481,7 @@ blocks:
     affinity: ''
     alias: ''
     berlimit: '-7.0'
-    berminerrors: samples
+    berminerrors: '100'
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -483,7 +499,7 @@ blocks:
     affinity: ''
     alias: ''
     berlimit: '-7.0'
-    berminerrors: samples
+    berminerrors: '100'
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -1184,7 +1200,8 @@ connections:
 - [blocks_add_xx_0, '0', Selective_Combining_0, '1']
 - [blocks_add_xx_0, '0', digital_constellation_decoder_cb_0_0, '0']
 - [blocks_add_xx_0, '0', qtgui_const_sink_x_0_0, '0']
-- [blocks_throttle, '0', fec_ber_bf_0, '1']
+- [blocks_pack_k_bits_bb_0, '0', fec_ber_bf_0, '1']
+- [blocks_throttle, '0', blocks_pack_k_bits_bb_0, '0']
 - [blocks_throttle, '0', fec_ber_bf_0_0, '1']
 - [blocks_throttle, '0', fec_ber_bf_0_0_0, '1']
 - [blocks_throttle, '0', fec_ber_bf_0_0_0_0, '1']

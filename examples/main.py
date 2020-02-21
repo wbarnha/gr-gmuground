@@ -89,7 +89,7 @@ class main(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 2.4e6
+        self.samp_rate = samp_rate = 2e6
         self.gain = gain = 30
         self.doppler_freq = doppler_freq = freq
 
@@ -125,9 +125,10 @@ class main(gr.top_block, Qt.QWidget):
 
         self.limesdr_source_0.calibrate(2.5e6, 0)
         self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
+        self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_freq)
         self.fosphor_glfw_sink_c_0 = fosphor.glfw_sink_c()
         self.fosphor_glfw_sink_c_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
-        self.fosphor_glfw_sink_c_0.set_frequency_range(doppler_freq, samp_rate)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(freq, samp_rate)
         self.fmusbwide_0 = fmusbwide(
             filter_width=20000,
             freq=freq,
@@ -135,7 +136,7 @@ class main(gr.top_block, Qt.QWidget):
         )
 
         self.top_grid_layout.addWidget(self.fmusbwide_0)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
+        self.blocks_throttle_0_0_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_message_debug_0 = blocks.message_debug()
 
 
@@ -144,9 +145,10 @@ class main(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
-        self.connect((self.blocks_throttle_0, 0), (self.fmusbwide_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.fosphor_glfw_sink_c_0, 0))
-        self.connect((self.limesdr_source_0, 0), (self.blocks_throttle_0, 0))
+        self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
+        self.connect((self.blocks_throttle_0_0_0, 0), (self.fmusbwide_0, 0))
+        self.connect((self.blocks_throttle_0_0_0, 0), (self.fosphor_glfw_sink_c_0, 0))
+        self.connect((self.limesdr_source_0, 0), (self.blocks_throttle_0_0_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "main")
@@ -172,6 +174,7 @@ class main(gr.top_block, Qt.QWidget):
         self.freq = freq
         self.set_doppler_freq(self.freq)
         self.fmusbwide_0.set_freq(self.freq)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq, self.samp_rate)
         self.limesdr_source_0.set_center_freq(self.freq, 0)
 
     def get_freq_corr(self):
@@ -209,8 +212,8 @@ class main(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.fosphor_glfw_sink_c_0.set_frequency_range(self.doppler_freq, self.samp_rate)
+        self.blocks_throttle_0_0_0.set_sample_rate(self.samp_rate)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq, self.samp_rate)
         self.limesdr_source_0.set_digital_filter(self.samp_rate, 0)
         self.limesdr_source_0.set_digital_filter(self.samp_rate, 1)
 
@@ -227,7 +230,6 @@ class main(gr.top_block, Qt.QWidget):
 
     def set_doppler_freq(self, doppler_freq):
         self.doppler_freq = doppler_freq
-        self.fosphor_glfw_sink_c_0.set_frequency_range(self.doppler_freq, self.samp_rate)
 
 
 def argument_parser():

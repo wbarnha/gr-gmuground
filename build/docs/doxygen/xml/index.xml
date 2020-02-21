@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classshow__text__window" kind="class"><name>show_text_window</name>
+    <member refid="classshow__text__window_1aea5ace31a87f1551e61f907b47220132" kind="variable"><name>ui</name></member>
+    <member refid="classshow__text__window_1a7924e8bfdbb17e9673c52612e2901bb0" kind="function"><name>show_text_window</name></member>
+    <member refid="classshow__text__window_1ade034a09118eef54dd029d99f47fa4dc" kind="function"><name>~show_text_window</name></member>
+    <member refid="classshow__text__window_1a88f8d72080903ff503e6ca3d878c9f42" kind="function"><name>set_text</name></member>
+    <member refid="classshow__text__window_1a2a7a9d568be69dd30413045969749a7c" kind="slot"><name>text2File</name></member>
+    <member refid="classshow__text__window_1a9f39dc3b53e4c0b991bd0d7d33c3f94c" kind="slot"><name>clearText</name></member>
+  </compound>
+  <compound refid="classgr_1_1gmuground_1_1udp__text__display" kind="class"><name>gr::gmuground::udp_text_display</name>
+    <member refid="classgr_1_1gmuground_1_1udp__text__display_1a84a1bc5eab95e11fdc1d86d5082715c4" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1gmuground_1_1udp__text__display_1ad8ff1a0d9688935c154bfd0df88fe305" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1gmuground_1_1udp__text__display__impl" kind="class"><name>gr::gmuground::udp_text_display_impl</name>
+    <member refid="classgr_1_1gmuground_1_1udp__text__display__impl_1adfdad1c2887acbe210d70b73fa48a0c4" kind="function"><name>udp_text_display_impl</name></member>
+    <member refid="classgr_1_1gmuground_1_1udp__text__display__impl_1a971ebfc8de07a7a8027a5efb92698752" kind="function"><name>~udp_text_display_impl</name></member>
+    <member refid="classgr_1_1gmuground_1_1udp__text__display__impl_1ac8221df6fb7f653106dafb2ea97ef9c0" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="namespacegr" kind="namespace"><name>gr</name>
+  </compound>
+  <compound refid="namespacegr_1_1gmuground" kind="namespace"><name>gr::gmuground</name>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="namespaceUi" kind="namespace"><name>Ui</name>
+  </compound>
+  <compound refid="api_8h" kind="file"><name>api.h</name>
+    <member refid="api_8h_1a5c3c88f795c249f38953312cba14f126" kind="define"><name>GMUGROUND_API</name></member>
+  </compound>
+  <compound refid="group__defs_8dox" kind="file"><name>group_defs.dox</name>
+  </compound>
+  <compound refid="main__page_8dox" kind="file"><name>main_page.dox</name>
+  </compound>
+  <compound refid="show__text__window_8h" kind="file"><name>show_text_window.h</name>
+  </compound>
+  <compound refid="udp__text__display_8h" kind="file"><name>udp_text_display.h</name>
+  </compound>
+  <compound refid="udp__text__display__impl_8h" kind="file"><name>udp_text_display_impl.h</name>
+  </compound>
+  <compound refid="group__block" kind="group"><name>block</name>
+  </compound>
+  <compound refid="dir_711c1a73f967ae00b5266c5f588c3f46" kind="dir"><name>gmuground</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>include</name>
+  </compound>
+  <compound refid="dir_97aefd0d527b934f1d99a682da8fe6a9" kind="dir"><name>lib</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>
