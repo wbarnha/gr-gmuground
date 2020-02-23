@@ -164,7 +164,7 @@ blocks:
     bus_structure: null
     coordinate: [352, 340.0]
     rotation: 0
-    state: true
+    state: bypassed
 - name: blocks_delay_0_0_0
   id: blocks_delay
   parameters:
