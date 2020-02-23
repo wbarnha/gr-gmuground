@@ -73,11 +73,11 @@ blocks:
     label: Combining Technique
     label0: Maximal
     label1: Selective
-    label2: Equal
-    label3: ''
+    label2: Selective (BPSK Only)
+    label3: Equal
     label4: ''
     labels: '[]'
-    num_opts: '3'
+    num_opts: '4'
     option1: '1'
     option2: '2'
     option3: '3'
@@ -190,6 +190,23 @@ blocks:
     coordinate: [664, 344.0]
     rotation: 0
     state: true
+- name: Selective_Combining_BPSK_0
+  id: Selective_Combining_BPSK
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filter_alpha: 1e-3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag_samps: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 424.0]
+    rotation: 0
+    state: true
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -205,7 +222,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [760, 424.0]
+    coordinate: [736, 576.0]
     rotation: 0
     state: true
 - name: blocks_complex_to_real_0_0
@@ -221,7 +238,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 568.0]
+    coordinate: [560, 656.0]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -229,7 +246,9 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: Empirical-based estimation for channel synchronization
+    comment: 'Empirical-based estimation
+
+      for channel synchronization'
     delay: int(samp_rate*146e6*269.1093e-6/freq)
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -240,7 +259,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 452.0]
+    coordinate: [512, 452.0]
     rotation: 0
     state: true
 - name: blocks_float_to_short_0_0_0
@@ -257,7 +276,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 564.0]
+    coordinate: [728, 652.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -283,7 +302,7 @@ blocks:
     input_index: com
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_inputs: '3'
+    num_inputs: '4'
     num_outputs: '1'
     output_index: '0'
     showports: 'True'
@@ -293,7 +312,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 328.0]
+    coordinate: [976, 376.0]
     rotation: 0
     state: true
 - name: blocks_selector_1
@@ -376,7 +395,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 564.0]
+    coordinate: [888, 652.0]
     rotation: 0
     state: enabled
 - name: blocks_udp_sink_0
@@ -414,7 +433,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1080, 540.0]
+    coordinate: [1080, 628.0]
     rotation: 0
     state: enabled
 - name: blocks_udp_source_0
@@ -435,7 +454,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [192, 540.0]
+    coordinate: [192, 628.0]
     rotation: 0
     state: true
 - name: freq
@@ -545,10 +564,12 @@ blocks:
 connections:
 - [Maximal_Combining_0, '0', blocks_selector_0, '0']
 - [Selective_Combining_0, '0', blocks_selector_0, '1']
-- [blocks_add_xx_0, '0', blocks_selector_0, '2']
+- [Selective_Combining_BPSK_0, '0', blocks_selector_0, '2']
+- [blocks_add_xx_0, '0', blocks_selector_0, '3']
 - [blocks_complex_to_real_0_0, '0', blocks_float_to_short_0_0_0, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']
+- [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
 - [blocks_float_to_short_0_0_0, '0', blocks_throttle_0, '0']
 - [blocks_selector_0, '0', blocks_tcp_server_sink_0, '0']
@@ -556,6 +577,7 @@ connections:
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', Maximal_Combining_0, '0']
 - [blocks_selector_1_0, '0', Selective_Combining_0, '0']
+- [blocks_selector_1_0, '0', Selective_Combining_BPSK_0, '0']
 - [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
 - [blocks_throttle_0, '0', blocks_udp_sink_0_0, '0']
 - [blocks_udp_source_0, '0', blocks_complex_to_real_0_0, '0']

@@ -182,9 +182,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 600.0]
+    coordinate: [416, 632.0]
     rotation: 0
-    state: true
+    state: enabled
+- name: Selective_Combining_BPSK_0
+  id: Selective_Combining_BPSK
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filter_alpha: 1e-3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag_samps: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 712.0]
+    rotation: 0
+    state: disabled
 - name: analog_noise_source_x
   id: analog_noise_source_x
   parameters:
@@ -1109,15 +1126,19 @@ connections:
 - [Maximal_Combining_0, '0', qtgui_const_sink_x_0_0_0, '0']
 - [Selective_Combining_0, '0', digital_constellation_decoder_cb_0_0_0_0, '0']
 - [Selective_Combining_0, '0', qtgui_const_sink_x_0_0_0_0, '0']
+- [Selective_Combining_BPSK_0, '0', digital_constellation_decoder_cb_0_0_0_0, '0']
+- [Selective_Combining_BPSK_0, '0', qtgui_const_sink_x_0_0_0_0, '0']
 - [analog_noise_source_x, '0', blocks_add_xx_0, '1']
 - [analog_noise_source_x_0, '0', blocks_add_xx, '1']
 - [analog_random_source_x, '0', blocks_throttle, '0']
 - [blocks_add_xx, '0', Maximal_Combining_0, '0']
 - [blocks_add_xx, '0', Selective_Combining_0, '0']
+- [blocks_add_xx, '0', Selective_Combining_BPSK_0, '0']
 - [blocks_add_xx, '0', digital_constellation_decoder_cb_0, '0']
 - [blocks_add_xx, '0', qtgui_const_sink_x_0, '0']
 - [blocks_add_xx_0, '0', Maximal_Combining_0, '1']
 - [blocks_add_xx_0, '0', Selective_Combining_0, '1']
+- [blocks_add_xx_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_add_xx_0, '0', digital_constellation_decoder_cb_0_0, '0']
 - [blocks_add_xx_0, '0', qtgui_const_sink_x_0_0, '0']
 - [blocks_pack_k_bits_bb_0, '0', fec_ber_bf_0, '0']
