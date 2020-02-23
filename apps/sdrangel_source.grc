@@ -32,6 +32,39 @@ options:
     state: enabled
 
 blocks:
+- name: channel
+  id: variable_qtgui_chooser
+  parameters:
+    comment: 'Delayed Channel refers to the
+
+      channel corresponding to an
+
+      antenna with a longer coaxial line'
+    gui_hint: ''
+    label: Delayed Channel
+    label0: Vertical
+    label1: Horizontal
+    label2: Equal
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '2'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 12.0]
+    rotation: 0
+    state: enabled
 - name: com
   id: variable_qtgui_chooser
   parameters:
@@ -94,6 +127,35 @@ blocks:
     coordinate: [184, 12.0]
     rotation: 0
     state: enabled
+- name: sat
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Demo Satellite
+    label0: Vertical
+    label1: Horizontal
+    label2: Equal
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '2'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 12.0]
+    rotation: 0
+    state: enabled
 - name: Maximal_Combining_0
   id: Maximal_Combining
   parameters:
@@ -108,7 +170,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 312.0]
+    coordinate: [664, 264.0]
     rotation: 0
     state: enabled
 - name: Selective_Combining_0
@@ -125,7 +187,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 420.0]
+    coordinate: [664, 344.0]
     rotation: 0
     state: true
 - name: blocks_add_xx_0
@@ -143,35 +205,31 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 544.0]
+    coordinate: [760, 424.0]
     rotation: 0
     state: true
-- name: blocks_delay_0_0
-  id: blocks_delay
+- name: blocks_complex_to_real_0_0
+  id: blocks_complex_to_real
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    delay: int(samp_rate*146e6*269.1093e-6/freq)
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_ports: '1'
-    type: complex
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 340.0]
+    coordinate: [560, 568.0]
     rotation: 0
-    state: bypassed
+    state: enabled
 - name: blocks_delay_0_0_0
   id: blocks_delay
   parameters:
     affinity: ''
     alias: ''
-    comment: "Bypass this block for the channel that \nhas the delay due to longer\
-      \ coaxial"
+    comment: Empirical-based estimation for channel synchronization
     delay: int(samp_rate*146e6*269.1093e-6/freq)
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -182,20 +240,37 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 420.0]
+    coordinate: [520, 452.0]
     rotation: 0
     state: true
+- name: blocks_float_to_short_0_0_0
+  id: blocks_float_to_short
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '32767'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 564.0]
+    rotation: 0
+    state: enabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: Must be included for graceful exiting
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 200.0]
+    coordinate: [264, 184.0]
     rotation: 0
     state: true
 - name: blocks_selector_0
@@ -218,7 +293,53 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 384.0]
+    coordinate: [920, 328.0]
+    rotation: 0
+    state: true
+- name: blocks_selector_1
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: channel
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 420.0]
+    rotation: 0
+    state: true
+- name: blocks_selector_1_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: channel
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 308.0]
     rotation: 0
     state: true
 - name: blocks_tcp_server_sink_0
@@ -228,7 +349,7 @@ blocks:
     alias: ''
     comment: ''
     ipaddr: 127.0.0.1
-    noblock: 'False'
+    noblock: 'True'
     port: '9090'
     type: complex
     vlen: '1'
@@ -236,7 +357,85 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 412.0]
+    coordinate: [1192, 420.0]
+    rotation: 0
+    state: disabled
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: '48000'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 564.0]
+    rotation: 0
+    state: enabled
+- name: blocks_udp_sink_0
+  id: blocks_udp_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    eof: 'True'
+    ipaddr: 127.0.0.1
+    port: '9090'
+    psize: '1472'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1184, 284.0]
+    rotation: 0
+    state: true
+- name: blocks_udp_sink_0_0
+  id: blocks_udp_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    eof: 'True'
+    ipaddr: Localhost
+    port: '7355'
+    psize: '1472'
+    type: short
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1080, 540.0]
+    rotation: 0
+    state: enabled
+- name: blocks_udp_source_0
+  id: blocks_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: From SDRAngel
+    eof: 'True'
+    ipaddr: 127.0.0.1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    port: '7356'
+    psize: '1472'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 540.0]
     rotation: 0
     state: true
 - name: freq
@@ -267,7 +466,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [376, 148.0]
+    coordinate: [264, 148.0]
     rotation: 0
     state: true
 - name: gpredict_doppler_0
@@ -285,7 +484,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 148.0]
+    coordinate: [40, 148.0]
     rotation: 0
     state: enabled
 - name: gpredict_port
@@ -339,7 +538,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 348.0]
+    coordinate: [72, 388.0]
     rotation: 0
     state: enabled
 
@@ -347,17 +546,25 @@ connections:
 - [Maximal_Combining_0, '0', blocks_selector_0, '0']
 - [Selective_Combining_0, '0', blocks_selector_0, '1']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
-- [blocks_delay_0_0, '0', Maximal_Combining_0, '0']
-- [blocks_delay_0_0, '0', Selective_Combining_0, '0']
-- [blocks_delay_0_0, '0', blocks_add_xx_0, '0']
+- [blocks_complex_to_real_0_0, '0', blocks_float_to_short_0_0_0, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
+- [blocks_float_to_short_0_0_0, '0', blocks_throttle_0, '0']
 - [blocks_selector_0, '0', blocks_tcp_server_sink_0, '0']
+- [blocks_selector_0, '0', blocks_udp_sink_0, '0']
+- [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
+- [blocks_selector_1_0, '0', Maximal_Combining_0, '0']
+- [blocks_selector_1_0, '0', Selective_Combining_0, '0']
+- [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
+- [blocks_throttle_0, '0', blocks_udp_sink_0_0, '0']
+- [blocks_udp_source_0, '0', blocks_complex_to_real_0_0, '0']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
-- [limesdr_source_0_1, '0', blocks_delay_0_0, '0']
-- [limesdr_source_0_1, '1', blocks_delay_0_0_0, '0']
+- [limesdr_source_0_1, '0', blocks_selector_1, '0']
+- [limesdr_source_0_1, '0', blocks_selector_1_0, '1']
+- [limesdr_source_0_1, '1', blocks_selector_1, '1']
+- [limesdr_source_0_1, '1', blocks_selector_1_0, '0']
 
 metadata:
   file_format: 1
