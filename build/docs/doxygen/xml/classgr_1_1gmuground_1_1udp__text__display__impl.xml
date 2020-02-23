@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classgr_1_1gmuground_1_1udp__text__display__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::gmuground::udp_text_display_impl</compoundname>
+    <basecompoundref refid="classgr_1_1gmuground_1_1udp__text__display" prot="public" virt="non-virtual">gr::gmuground::udp_text_display</basecompoundref>
+    <includes refid="udp__text__display__impl_8h" local="no">udp_text_display_impl.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1gmuground_1_1udp__text__display__impl_1adfdad1c2887acbe210d70b73fa48a0c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::gmuground::udp_text_display_impl::udp_text_display_impl</definition>
+        <argsstring>()</argsstring>
+        <name>udp_text_display_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/udp_text_display_impl.h" line="692" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1gmuground_1_1udp__text__display__impl_1a971ebfc8de07a7a8027a5efb92698752" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::gmuground::udp_text_display_impl::~udp_text_display_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~udp_text_display_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/udp_text_display_impl.h" line="693" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1gmuground_1_1udp__text__display__impl_1ac8221df6fb7f653106dafb2ea97ef9c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::gmuground::udp_text_display_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/udp_text_display_impl.h" line="696" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="11">
+        <label>gr::sync_block</label>
+      </node>
+      <node id="9">
+        <label>gr::gmuground::udp_text_display_impl</label>
+        <link refid="classgr_1_1gmuground_1_1udp__text__display__impl"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>gr::gmuground::udp_text_display</label>
+        <link refid="classgr_1_1gmuground_1_1udp__text__display"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="14">
+        <label>gr::sync_block</label>
+      </node>
+      <node id="12">
+        <label>gr::gmuground::udp_text_display_impl</label>
+        <link refid="classgr_1_1gmuground_1_1udp__text__display__impl"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>gr::gmuground::udp_text_display</label>
+        <link refid="classgr_1_1gmuground_1_1udp__text__display"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/wbarnhart/gr-gmuground/lib/udp_text_display_impl.h" line="687" column="1" bodyfile="/home/wbarnhart/gr-gmuground/lib/udp_text_display_impl.h" bodystart="686" bodyend="701"/>
+    <listofallmembers>
+      <member refid="classgr_1_1gmuground_1_1udp__text__display_1ad8ff1a0d9688935c154bfd0df88fe305" prot="public" virt="non-virtual"><scope>gr::gmuground::udp_text_display_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1gmuground_1_1udp__text__display_1a84a1bc5eab95e11fdc1d86d5082715c4" prot="public" virt="non-virtual"><scope>gr::gmuground::udp_text_display_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1gmuground_1_1udp__text__display__impl_1adfdad1c2887acbe210d70b73fa48a0c4" prot="public" virt="non-virtual"><scope>gr::gmuground::udp_text_display_impl</scope><name>udp_text_display_impl</name></member>
+      <member refid="classgr_1_1gmuground_1_1udp__text__display__impl_1ac8221df6fb7f653106dafb2ea97ef9c0" prot="public" virt="non-virtual"><scope>gr::gmuground::udp_text_display_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1gmuground_1_1udp__text__display__impl_1a971ebfc8de07a7a8027a5efb92698752" prot="public" virt="non-virtual"><scope>gr::gmuground::udp_text_display_impl</scope><name>~udp_text_display_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

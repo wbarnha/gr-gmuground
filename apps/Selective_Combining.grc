@@ -45,42 +45,8 @@ blocks:
     coordinate: [8, 160]
     rotation: 0
     state: enabled
-- name: blocks_abs_xx_0
-  id: blocks_abs_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [640, 320]
-    rotation: 0
-    state: enabled
-- name: blocks_abs_xx_0_0
-  id: blocks_abs_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [640, 352]
-    rotation: 0
-    state: enabled
-- name: blocks_complex_to_imag_0_0
-  id: blocks_complex_to_imag
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
   parameters:
     affinity: ''
     alias: ''
@@ -92,11 +58,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 320]
+    coordinate: [640, 328.0]
     rotation: 0
-    state: enabled
-- name: blocks_complex_to_imag_0_0_0
-  id: blocks_complex_to_imag
+    state: true
+- name: blocks_complex_to_mag_0_0
+  id: blocks_complex_to_mag
   parameters:
     affinity: ''
     alias: ''
@@ -108,25 +74,57 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 352]
+    coordinate: [632, 464.0]
     rotation: 0
-    state: enabled
+    state: true
+- name: blocks_multiply_conjugate_cc_0
+  id: blocks_multiply_conjugate_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 312.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_conjugate_cc_0_0
+  id: blocks_multiply_conjugate_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 448.0]
+    rotation: 0
+    state: true
 - name: digital_mpsk_snr_est_cc_0
   id: digital_mpsk_snr_est_cc
   parameters:
     affinity: ''
     alias: ''
-    alpha: '0.001'
+    alpha: filter_alpha
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    tag_nsamples: '10000'
-    type: '0'
+    tag_nsamples: tag_samps
+    type: '3'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 220.0]
+    coordinate: [432, 308.0]
     rotation: 0
     state: enabled
 - name: digital_mpsk_snr_est_cc_0_0
@@ -134,19 +132,36 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    alpha: '0.001'
+    alpha: filter_alpha
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    tag_nsamples: '10000'
-    type: '0'
+    tag_nsamples: tag_samps
+    type: '3'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 452]
+    coordinate: [416, 444.0]
     rotation: 0
     state: enabled
+- name: filter_alpha
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: SNR Filter Alpha
+    short_id: ''
+    type: eng_float
+    value: 1e-3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 68.0]
+    rotation: 0
+    state: true
 - name: gmuground_snr_selector_0
   id: gmuground_snr_selector
   parameters:
@@ -162,7 +177,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 320]
+    coordinate: [880, 320.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -193,7 +208,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [992, 364.0]
+    coordinate: [1064, 364.0]
     rotation: 0
     state: enabled
 - name: pad_source_0
@@ -213,7 +228,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 300]
+    coordinate: [96, 372.0]
     rotation: 0
     state: enabled
 - name: pad_source_1
@@ -233,21 +248,40 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 380]
+    coordinate: [96, 412.0]
     rotation: 0
     state: enabled
+- name: tag_samps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Samples between tags
+    short_id: ''
+    type: intx
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 68.0]
+    rotation: 0
+    state: true
 
 connections:
-- [blocks_abs_xx_0, '0', gmuground_snr_selector_0, '0']
-- [blocks_abs_xx_0_0, '0', gmuground_snr_selector_0, '1']
-- [blocks_complex_to_imag_0_0, '0', blocks_abs_xx_0, '0']
-- [blocks_complex_to_imag_0_0_0, '0', blocks_abs_xx_0_0, '0']
-- [digital_mpsk_snr_est_cc_0, '0', blocks_complex_to_imag_0_0, '0']
-- [digital_mpsk_snr_est_cc_0_0, '0', blocks_complex_to_imag_0_0_0, '0']
+- [blocks_complex_to_mag_0, '0', gmuground_snr_selector_0, '1']
+- [blocks_complex_to_mag_0_0, '0', gmuground_snr_selector_0, '0']
+- [blocks_multiply_conjugate_cc_0, '0', digital_mpsk_snr_est_cc_0, '0']
+- [blocks_multiply_conjugate_cc_0_0, '0', digital_mpsk_snr_est_cc_0_0, '0']
+- [digital_mpsk_snr_est_cc_0, '0', blocks_complex_to_mag_0, '0']
+- [digital_mpsk_snr_est_cc_0_0, '0', blocks_complex_to_mag_0_0, '0']
 - [gmuground_snr_selector_0, '0', pad_sink_0, '0']
-- [pad_source_0, '0', digital_mpsk_snr_est_cc_0, '0']
+- [pad_source_0, '0', blocks_multiply_conjugate_cc_0, '0']
+- [pad_source_0, '0', blocks_multiply_conjugate_cc_0, '1']
 - [pad_source_0, '0', gmuground_snr_selector_0, '2']
-- [pad_source_1, '0', digital_mpsk_snr_est_cc_0_0, '0']
+- [pad_source_1, '0', blocks_multiply_conjugate_cc_0_0, '0']
+- [pad_source_1, '0', blocks_multiply_conjugate_cc_0_0, '1']
 - [pad_source_1, '0', gmuground_snr_selector_0, '3']
 
 metadata:

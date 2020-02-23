@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classshow__text__window" kind="class" language="C++" prot="public">
+    <compoundname>show_text_window</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QWidget</basecompoundref>
+    <includes refid="show__text__window_8h" local="no">show_text_window.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classshow__text__window_1aea5ace31a87f1551e61f907b47220132" prot="private" static="no" mutable="no">
+        <type>Ui::show_text_window *</type>
+        <definition>Ui::show_text_window* show_text_window::ui</definition>
+        <argsstring></argsstring>
+        <name>ui</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="39" column="1" bodyfile="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classshow__text__window_1a7924e8bfdbb17e9673c52612e2901bb0" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>show_text_window::show_text_window</definition>
+        <argsstring>(QWidget *parent=0)</argsstring>
+        <name>show_text_window</name>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="34" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classshow__text__window_1ade034a09118eef54dd029d99f47fa4dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>show_text_window::~show_text_window</definition>
+        <argsstring>()</argsstring>
+        <name>~show_text_window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="35" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classshow__text__window_1a88f8d72080903ff503e6ca3d878c9f42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void show_text_window::set_text</definition>
+        <argsstring>(const char *c, int count)</argsstring>
+        <name>set_text</name>
+        <param>
+          <type>const char *</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="36" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classshow__text__window_1a2a7a9d568be69dd30413045969749a7c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void show_text_window::text2File</definition>
+        <argsstring>()</argsstring>
+        <name>text2File</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="slot" id="classshow__text__window_1a9f39dc3b53e4c0b991bd0d7d33c3f94c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void show_text_window::clearText</definition>
+        <argsstring>()</argsstring>
+        <name>clearText</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="42" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>QWidget</label>
+      </node>
+      <node id="0">
+        <label>show_text_window</label>
+        <link refid="classshow__text__window"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>QWidget</label>
+      </node>
+      <node id="2">
+        <label>show_text_window</label>
+        <link refid="classshow__text__window"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" line="30" column="1" bodyfile="/home/wbarnhart/gr-gmuground/lib/show_text_window.h" bodystart="29" bodyend="43"/>
+    <listofallmembers>
+      <member refid="classshow__text__window_1a9f39dc3b53e4c0b991bd0d7d33c3f94c" prot="private" virt="non-virtual"><scope>show_text_window</scope><name>clearText</name></member>
+      <member refid="classshow__text__window_1a88f8d72080903ff503e6ca3d878c9f42" prot="public" virt="non-virtual"><scope>show_text_window</scope><name>set_text</name></member>
+      <member refid="classshow__text__window_1a7924e8bfdbb17e9673c52612e2901bb0" prot="public" virt="non-virtual"><scope>show_text_window</scope><name>show_text_window</name></member>
+      <member refid="classshow__text__window_1a2a7a9d568be69dd30413045969749a7c" prot="private" virt="non-virtual"><scope>show_text_window</scope><name>text2File</name></member>
+      <member refid="classshow__text__window_1aea5ace31a87f1551e61f907b47220132" prot="private" virt="non-virtual"><scope>show_text_window</scope><name>ui</name></member>
+      <member refid="classshow__text__window_1ade034a09118eef54dd029d99f47fa4dc" prot="public" virt="non-virtual"><scope>show_text_window</scope><name>~show_text_window</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

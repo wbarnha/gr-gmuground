@@ -36,7 +36,7 @@ class snr_selector(gr.sync_block):
 
 
     def work(self, input_items, output_items):
-        if input_items[0][0] <= input_items[1][0]:
+        if input_items[0][0] >= input_items[1][0]:
             output_items[0][:] = input_items[2]
         else:
             output_items[0][:] = input_items[3]

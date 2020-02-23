@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="show__text__window_8h" kind="file" language="C++">
+    <compoundname>show_text_window.h</compoundname>
+    <includes local="no">QWidget</includes>
+    <incdepgraph>
+      <node id="9">
+        <label>show_text_window.h</label>
+        <link refid="show__text__window_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>QWidget</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classshow__text__window" prot="public">show_text_window</innerclass>
+    <innernamespace refid="namespaceUi">Ui</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/wbarnhart/gr-gmuground/lib/show_text_window.h"/>
+  </compounddef>
+</doxygen>

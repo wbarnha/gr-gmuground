@@ -62,7 +62,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 124.0]
+    coordinate: [720, 124.0]
     rotation: 0
     state: true
 - name: samp_rate
@@ -124,6 +124,24 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [592, 376.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_sink_0
+  id: blocks_file_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/wbarnhart/ao73
+    type: complex
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 132.0]
     rotation: 0
     state: disabled
 - name: blocks_file_source_0
@@ -191,7 +209,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 480.0]
+    coordinate: [48, 224.0]
     rotation: 0
     state: enabled
 - name: blocks_null_source_0
@@ -400,7 +418,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 188.0]
+    coordinate: [224, 84.0]
     rotation: 0
     state: true
 - name: gpredict_doppler_0
@@ -418,7 +436,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [112, 444.0]
+    coordinate: [16, 140.0]
     rotation: 0
     state: enabled
 - name: gpredict_port
@@ -480,7 +498,7 @@ blocks:
     nco_freq_ch0: '0'
     nco_freq_ch1: '0'
     oversample: '0'
-    rf_freq: freq
+    rf_freq: freq-50e3
     samp_rate: samp_rate
     serial: ''
   states:
@@ -565,6 +583,7 @@ connections:
 - [blocks_float_to_short_0_0, '0', blocks_throttle_0_0, '0']
 - [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
 - [blocks_throttle_0_0, '0', blocks_udp_sink_0_0, '0']
+- [blocks_throttle_0_0_0, '0', blocks_file_sink_0, '0']
 - [blocks_throttle_0_0_0, '0', fmusbwide_0, '0']
 - [blocks_throttle_0_0_0, '0', fosphor_glfw_sink_c_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_float_to_complex_0, '0']

@@ -59,7 +59,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 232.0]
+    coordinate: [448, 224.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0_0
@@ -77,7 +77,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 344.0]
+    coordinate: [448, 336.0]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_1
@@ -95,7 +95,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1232, 304.0]
+    coordinate: [968, 336.0]
     rotation: 0
     state: enabled
 - name: blocks_divide_xx_0
@@ -113,7 +113,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 144]
+    coordinate: [552, 144.0]
     rotation: 0
     state: enabled
 - name: blocks_divide_xx_0_0
@@ -131,7 +131,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 456.0]
+    coordinate: [552, 448.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -149,7 +149,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 376.0]
+    coordinate: [824, 400.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0_0
@@ -167,7 +167,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 208.0]
+    coordinate: [824, 240.0]
     rotation: 0
     state: enabled
 - name: digital_mpsk_snr_est_cc_0
@@ -175,17 +175,17 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    alpha: 1e-2
+    alpha: filter_alpha
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    tag_nsamples: '100000'
+    tag_nsamples: tag_samps
     type: '3'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 124]
+    coordinate: [168, 124.0]
     rotation: 0
     state: enabled
 - name: digital_mpsk_snr_est_cc_0_0
@@ -193,19 +193,36 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    alpha: 1e-2
+    alpha: filter_alpha
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    tag_nsamples: '100000'
+    tag_nsamples: tag_samps
     type: '3'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 364.0]
+    coordinate: [176, 364.0]
     rotation: 0
     state: enabled
+- name: filter_alpha
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: SNR Filter Alpha
+    short_id: ''
+    type: eng_float
+    value: 1e-3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 20.0]
+    rotation: 0
+    state: true
 - name: gmuground_sqrt_0
   id: gmuground_sqrt
   parameters:
@@ -220,7 +237,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 240.0]
+    coordinate: [688, 272.0]
     rotation: 0
     state: true
 - name: gmuground_sqrt_0_0
@@ -237,7 +254,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 440.0]
+    coordinate: [664, 464.0]
     rotation: 0
     state: true
 - name: import_0
@@ -268,7 +285,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1368, 316.0]
+    coordinate: [1048, 348.0]
     rotation: 0
     state: enabled
 - name: pad_source_0
@@ -311,6 +328,23 @@ blocks:
     coordinate: [0, 260]
     rotation: 0
     state: enabled
+- name: tag_samps
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Samples between tags
+    short_id: ''
+    type: intx
+    value: '1000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 20.0]
+    rotation: 0
+    state: true
 
 connections:
 - [blocks_add_xx_0, '0', blocks_divide_xx_0, '1']

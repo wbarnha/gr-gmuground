@@ -86,22 +86,22 @@ class ber_simulation(gr.top_block, Qt.QWidget):
         self.variable_qtgui_label_0 = variable_qtgui_label_0 = {0: 'BPSK', 1: 'QPSK', 2: '8-PSK'}[const_type] + " - Change const_type for different constellation types!"
         self.samples = samples = 10000000
         self.samp_rate = samp_rate = 100e3
-        self.offset = offset = 6*math.pi/20
+        self.offset = offset = 5*math.pi/20
         self.freq = freq = 1e3
         self.const = const = (digital.constellation_bpsk(), digital.constellation_qpsk(), digital.constellation_8psk())
-        self.EbN0 = EbN0 = 5
+        self.EbN0 = EbN0 = 1
 
         ##################################################
         # Blocks
         ##################################################
-        self._offset_range = Range(0, math.pi/2.0, math.pi/20, 6*math.pi/20, 10)
+        self._offset_range = Range(0, math.pi/2.0, math.pi/20, 5*math.pi/20, 10)
         self._offset_win = RangeWidget(self._offset_range, self.set_offset, 'Offset', "counter_slider", float)
         self.top_grid_layout.addWidget(self._offset_win, 5, 1, 1, 1)
         for r in range(5, 6):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._EbN0_range = Range(-20, 20, 1, 5, 50)
+        self._EbN0_range = Range(-10, 20, 1, 1, 50)
         self._EbN0_win = RangeWidget(self._EbN0_range, self.set_EbN0, 'Eb / N0 (dB)', "counter_slider", float)
         self.top_grid_layout.addWidget(self._EbN0_win, 5, 0, 1, 1)
         for r in range(5, 6):
@@ -130,11 +130,11 @@ class ber_simulation(gr.top_block, Qt.QWidget):
 
         labels = ['BER', '', '', '', '',
             '', '', '', '', '']
-        units = ['x10^-6', '', '', '', '',
+        units = ['', '', '', '', '',
             '', '', '', '', '']
         colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
             ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1e6, 1, 1, 1, 1,
+        factor = [1, 1, 1, 1, 1,
             1, 1, 1, 1, 1]
 
         for i in range(1):
@@ -166,11 +166,11 @@ class ber_simulation(gr.top_block, Qt.QWidget):
 
         labels = ['BER', '', '', '', '',
             '', '', '', '', '']
-        units = ['x10^-6', '', '', '', '',
+        units = ['', '', '', '', '',
             '', '', '', '', '']
         colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
             ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1e6, 1, 1, 1, 1,
+        factor = [1, 1, 1, 1, 1,
             1, 1, 1, 1, 1]
 
         for i in range(1):
@@ -202,11 +202,11 @@ class ber_simulation(gr.top_block, Qt.QWidget):
 
         labels = ['BER', '', '', '', '',
             '', '', '', '', '']
-        units = ['x10^-6', '', '', '', '',
+        units = ['', '', '', '', '',
             '', '', '', '', '']
         colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
             ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1e6, 1, 1, 1, 1,
+        factor = [1, 1, 1, 1, 1,
             1, 1, 1, 1, 1]
 
         for i in range(1):
@@ -238,11 +238,11 @@ class ber_simulation(gr.top_block, Qt.QWidget):
 
         labels = ['BER', '', '', '', '',
             '', '', '', '', '']
-        units = ['x10^-6', '', '', '', '',
+        units = ['', '', '', '', '',
             '', '', '', '', '']
         colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
             ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1e6, 1, 1, 1, 1,
+        factor = [1, 1, 1, 1, 1,
             1, 1, 1, 1, 1]
 
         for i in range(1):
@@ -459,8 +459,14 @@ class ber_simulation(gr.top_block, Qt.QWidget):
         self.analog_random_source_x = blocks.vector_source_b(list(map(int, numpy.random.randint(0, const[const_type].arity(), samples))), False)
         self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 1.0 / math.sqrt(2.0 * const[const_type].bits_per_symbol() * 10**(math.cos(math.pi/2-offset)*math.cos(math.pi/2-offset)*EbN0/10)), -42)
         self.analog_noise_source_x = analog.noise_source_c(analog.GR_GAUSSIAN, 1.0 / math.sqrt(2.0 * const[const_type].bits_per_symbol() * 10**(math.cos(offset)*math.cos(offset)*EbN0/10)), -42)
-        self.Selective_Combining_0 = Selective_Combining()
-        self.Maximal_Combining_0 = Maximal_Combining()
+        self.Selective_Combining_0 = Selective_Combining(
+            filter_alpha=1e-3,
+            tag_samps=1000,
+        )
+        self.Maximal_Combining_0 = Maximal_Combining(
+            filter_alpha=1e-3,
+            tag_samps=1000,
+        )
 
 
 
@@ -471,10 +477,9 @@ class ber_simulation(gr.top_block, Qt.QWidget):
         self.connect((self.Maximal_Combining_0, 0), (self.qtgui_const_sink_x_0_0_0, 0))
         self.connect((self.Selective_Combining_0, 0), (self.digital_constellation_decoder_cb_0_0_0_0, 0))
         self.connect((self.Selective_Combining_0, 0), (self.qtgui_const_sink_x_0_0_0_0, 0))
-        self.connect((self.analog_noise_source_x, 0), (self.blocks_add_xx, 1))
-        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 1))
+        self.connect((self.analog_noise_source_x, 0), (self.blocks_add_xx_0, 1))
+        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx, 1))
         self.connect((self.analog_random_source_x, 0), (self.blocks_throttle, 0))
-        self.connect((self.analog_random_source_x, 0), (self.digital_chunks_to_symbols_xx, 0))
         self.connect((self.blocks_add_xx, 0), (self.Maximal_Combining_0, 0))
         self.connect((self.blocks_add_xx, 0), (self.Selective_Combining_0, 0))
         self.connect((self.blocks_add_xx, 0), (self.digital_constellation_decoder_cb_0, 0))
@@ -483,14 +488,15 @@ class ber_simulation(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_add_xx_0, 0), (self.Selective_Combining_0, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.digital_constellation_decoder_cb_0_0, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.qtgui_const_sink_x_0_0, 0))
-        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.fec_ber_bf_0, 1))
+        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.fec_ber_bf_0, 0))
+        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.fec_ber_bf_0_0, 1))
+        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.fec_ber_bf_0_0_0, 1))
+        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.fec_ber_bf_0_0_0_0, 1))
         self.connect((self.blocks_throttle, 0), (self.blocks_pack_k_bits_bb_0, 0))
-        self.connect((self.blocks_throttle, 0), (self.fec_ber_bf_0_0, 1))
-        self.connect((self.blocks_throttle, 0), (self.fec_ber_bf_0_0_0, 1))
-        self.connect((self.blocks_throttle, 0), (self.fec_ber_bf_0_0_0_0, 1))
+        self.connect((self.blocks_throttle, 0), (self.digital_chunks_to_symbols_xx, 0))
         self.connect((self.digital_chunks_to_symbols_xx, 0), (self.blocks_add_xx, 0))
         self.connect((self.digital_chunks_to_symbols_xx, 0), (self.blocks_add_xx_0, 0))
-        self.connect((self.digital_constellation_decoder_cb_0, 0), (self.fec_ber_bf_0, 0))
+        self.connect((self.digital_constellation_decoder_cb_0, 0), (self.fec_ber_bf_0, 1))
         self.connect((self.digital_constellation_decoder_cb_0_0, 0), (self.fec_ber_bf_0_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0_0_0, 0), (self.fec_ber_bf_0_0_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0_0_0_0, 0), (self.fec_ber_bf_0_0_0_0, 0))
