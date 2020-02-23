@@ -384,7 +384,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
+    comment: To SDRAngel
     eof: 'True'
     ipaddr: 127.0.0.1
     port: '9090'
