@@ -1,0 +1,167 @@
+options:
+  parameters:
+    author: William Barnhart
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: sdrangel_sink
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: SDRAngel Sink
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: 2e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+- name: sat
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Demo Satellite
+    label0: 3CAT-2
+    label1: AO-73
+    label2: Equal
+    label3: ''
+    label4: ''
+    labels: '["3CAT-2","AO-73","FloripaSat 1","ITASAT 1","JY1SAT (JO-97)","NAYIF-1
+      (EO-88)","UKUBE-1"]'
+    num_opts: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0,1,2,3,4,5,6]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 12.0]
+    rotation: 0
+    state: enabled
+- name: sat_type
+  id: variable
+  parameters:
+    comment: ''
+    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1-Sat'',5:''Nayif-1'',6:''UKube-1''}'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 12.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_real_0_0
+  id: blocks_complex_to_real
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 176.0]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_1
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 176.0]
+    rotation: 0
+    state: true
+- name: blocks_udp_source_0
+  id: blocks_udp_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: From SDRAngel
+    eof: 'True'
+    ipaddr: 127.0.0.1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    port: '7356'
+    psize: '1472'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [56, 148.0]
+    rotation: 0
+    state: enabled
+- name: satellites_satellite_decoder_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: name
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/1KUNS-PF.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: sat_type[sat]
+    norad: '99999'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 156.0]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_complex_to_real_0_0, '0', satellites_satellite_decoder_0, '0']
+- [blocks_udp_source_0, '0', blocks_complex_to_real_0_0, '0']
+- [satellites_satellite_decoder_0, out, blocks_message_debug_1, print]
+
+metadata:
+  file_format: 1

@@ -17,11 +17,10 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
     gmuground_sqrt.block.yml
     gmuground_sqrt.block.yml
     gmuground_snr_selector.block.yml
     gmuground_sample_count.block.yml
-    gmuground_udp_text_display.block.yml DESTINATION share/gnuradio/grc/blocks
+    DESTINATION share/gnuradio/grc/blocks
 )

@@ -165,7 +165,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [544, 536.0]
+    coordinate: [520, 536.0]
     rotation: 0
     state: enabled
 - name: Selective_Combining_0
