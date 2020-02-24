@@ -13,7 +13,7 @@ The following dependencies must be installed:
 
 For CW decoding, the following must be installed:
 
-- [gr-satnogs (2.0+)](https://gitlab.com/librespacefoundation/satnogs/gr-satnogs)
+- [gr-satnogs](https://gitlab.com/librespacefoundation/satnogs/gr-satnogs) (2.0+)
 and related dependencies.
 
 Once all dependencies are installed, run the commands:
