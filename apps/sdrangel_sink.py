@@ -72,7 +72,7 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
         ##################################################
         self.sat_type = sat_type = {0:'3CAT-2',1:'AO-73',2:'FloripaSat 1',3:'ITASAT 1',4:'JY1-Sat',5:'Nayif-1',6:'UKube-1'}
         self.sat = sat = 0
-        self.samp_rate = samp_rate = 2e6
+        self.samp_rate = samp_rate = 48e3
 
         ##################################################
         # Blocks
@@ -95,6 +95,7 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
         self.top_grid_layout.addWidget(self._sat_tool_bar)
         self.satellites_satellite_decoder_0 = satellites.core.gr_satellites_flowgraph(name = sat_type[sat], samp_rate = samp_rate, grc_block = True, iq = False)
         self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_gr_complex*1, '127.0.0.1', 7356, 1472, True)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_message_debug_1 = blocks.message_debug()
         self.blocks_complex_to_real_0_0 = blocks.complex_to_real(1)
 
@@ -105,7 +106,8 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.blocks_message_debug_1, 'print'))
         self.connect((self.blocks_complex_to_real_0_0, 0), (self.satellites_satellite_decoder_0, 0))
-        self.connect((self.blocks_udp_source_0, 0), (self.blocks_complex_to_real_0_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_complex_to_real_0_0, 0))
+        self.connect((self.blocks_udp_source_0, 0), (self.blocks_throttle_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "sdrangel_sink")
@@ -130,6 +132,7 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
 
 
