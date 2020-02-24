@@ -46,7 +46,7 @@ blocks:
     bus_structure: null
     coordinate: [440, 124.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: channel
   id: variable_qtgui_chooser
   parameters:
@@ -77,7 +77,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 12.0]
+    coordinate: [976, 12.0]
     rotation: 0
     state: enabled
 - name: com
@@ -139,9 +139,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 212.0]
+    coordinate: [384, 212.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: gain
   id: variable_qtgui_range
   parameters:
@@ -208,7 +208,7 @@ blocks:
     option2: '2'
     option3: '3'
     option4: '4'
-    options: '[0, 1, 2,3,4,5,6]'
+    options: '[0,1,2,3,4,5,6]'
     orient: Qt.QVBoxLayout
     type: int
     value: '0'
@@ -220,6 +220,19 @@ blocks:
     coordinate: [800, 12.0]
     rotation: 0
     state: enabled
+- name: sat_type
+  id: variable
+  parameters:
+    comment: ''
+    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1SAT
+      (JO-97)'',5:''NAYIF-1 (EO-88)'',6:''UKUBE-1''}'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 12.0]
+    rotation: 0
+    state: true
 - name: trans_width
   id: variable_qtgui_range
   parameters:
@@ -357,9 +370,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 688.0]
+    coordinate: [736, 688.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_delay_0_0_0
   id: blocks_delay
   parameters:
@@ -381,23 +394,6 @@ blocks:
     coordinate: [408, 452.0]
     rotation: 0
     state: enabled
-- name: blocks_float_to_short_0_0_0
-  id: blocks_float_to_short
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    scale: '32767'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [736, 684.0]
-    rotation: 0
-    state: disabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -411,6 +407,19 @@ blocks:
     coordinate: [264, 184.0]
     rotation: 0
     state: disabled
+- name: blocks_message_debug_1
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1280, 688.0]
+    rotation: 0
+    state: true
 - name: blocks_selector_0
   id: blocks_selector
   parameters:
@@ -480,43 +489,6 @@ blocks:
     coordinate: [232, 308.0]
     rotation: 0
     state: true
-- name: blocks_tcp_server_sink_0
-  id: blocks_tcp_server_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    ipaddr: 127.0.0.1
-    noblock: 'True'
-    port: '9090'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1200, 372.0]
-    rotation: 0
-    state: disabled
-- name: blocks_throttle_0
-  id: blocks_throttle
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    ignoretag: 'True'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: '48000'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [896, 684.0]
-    rotation: 0
-    state: disabled
 - name: blocks_udp_sink_0
   id: blocks_udp_sink
   parameters:
@@ -536,25 +508,6 @@ blocks:
     coordinate: [1232, 260.0]
     rotation: 0
     state: enabled
-- name: blocks_udp_sink_0_0
-  id: blocks_udp_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'True'
-    ipaddr: Localhost
-    port: '7355'
-    psize: '1472'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1088, 660.0]
-    rotation: 0
-    state: disabled
 - name: blocks_udp_source_0
   id: blocks_udp_source
   parameters:
@@ -573,9 +526,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 660.0]
+    coordinate: [536, 660.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: fosphor_glfw_sink_c_0
   id: fosphor_glfw_sink_c
   parameters:
@@ -589,7 +542,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1216, 476.0]
+    coordinate: [1232, 396.0]
     rotation: 0
     state: true
 - name: freq
@@ -608,7 +561,7 @@ blocks:
     bus_structure: null
     coordinate: [392, 12.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: gpredict_MsgPairToVar_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -719,6 +672,27 @@ blocks:
     coordinate: [904, 524.0]
     rotation: 0
     state: enabled
+- name: satellites_satellite_decoder_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: name
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/1KUNS-PF.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: sat_type[sat]
+    norad: '99999'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 668.0]
+    rotation: 0
+    state: true
 
 connections:
 - [Maximal_Combining_0, '0', blocks_selector_0, '3']
@@ -726,13 +700,11 @@ connections:
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
 - [analog_wfm_rcv_0_0, '0', audio_sink_0_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
-- [blocks_complex_to_real_0_0, '0', blocks_float_to_short_0_0_0, '0']
+- [blocks_complex_to_real_0_0, '0', satellites_satellite_decoder_0, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
-- [blocks_float_to_short_0_0_0, '0', blocks_throttle_0, '0']
-- [blocks_selector_0, '0', blocks_tcp_server_sink_0, '0']
 - [blocks_selector_0, '0', blocks_udp_sink_0, '0']
 - [blocks_selector_0, '0', fosphor_glfw_sink_c_0, '0']
 - [blocks_selector_0, '0', low_pass_filter_0, '0']
@@ -741,7 +713,6 @@ connections:
 - [blocks_selector_1_0, '0', Selective_Combining_0, '0']
 - [blocks_selector_1_0, '0', Selective_Combining_BPSK_0, '0']
 - [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
-- [blocks_throttle_0, '0', blocks_udp_sink_0_0, '0']
 - [blocks_udp_source_0, '0', blocks_complex_to_real_0_0, '0']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
@@ -750,6 +721,7 @@ connections:
 - [limesdr_source_0_1, '1', blocks_selector_1, '0']
 - [limesdr_source_0_1, '1', blocks_selector_1_0, '1']
 - [low_pass_filter_0, '0', analog_wfm_rcv_0_0, '0']
+- [satellites_satellite_decoder_0, out, blocks_message_debug_1, print]
 
 metadata:
   file_format: 1

@@ -145,28 +145,6 @@ blocks:
     coordinate: [440, 500.0]
     rotation: 0
     state: enabled
-- name: analog_sig_source_x_0_1
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '1'
-    comment: ''
-    freq: freq
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    phase: '0'
-    samp_rate: samp_rate
-    type: complex
-    waveform: analog.GR_COS_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [16, 516.0]
-    rotation: 0
-    state: disabled
 - name: blocks_complex_to_real_0
   id: blocks_complex_to_real
   parameters:
@@ -197,57 +175,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [832, 592.0]
-    rotation: 0
-    state: enabled
-- name: blocks_float_to_short_0
-  id: blocks_float_to_short
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    scale: '32767'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [984, 196.0]
-    rotation: 0
-    state: enabled
-- name: blocks_float_to_short_0_0
-  id: blocks_float_to_short
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    scale: '32767'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [976, 372.0]
-    rotation: 0
-    state: enabled
-- name: blocks_float_to_short_0_0_0
-  id: blocks_float_to_short
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    scale: '32767'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [984, 588.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -286,24 +213,6 @@ blocks:
     coordinate: [720, 576.0]
     rotation: 0
     state: enabled
-- name: blocks_multiply_xx_1
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [216, 288.0]
-    rotation: 0
-    state: disabled
 - name: blocks_selector_0
   id: blocks_selector
   parameters:
@@ -318,13 +227,13 @@ blocks:
     num_outputs: '1'
     output_index: '0'
     showports: 'False'
-    type: short
+    type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1160, 344.0]
+    coordinate: [1008, 344.0]
     rotation: 0
     state: true
 - name: blocks_selector_0_0
@@ -347,7 +256,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 200.0]
+    coordinate: [1008, 200.0]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -360,32 +269,13 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     samples_per_second: '48000'
-    type: short
+    type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1368, 388.0]
-    rotation: 0
-    state: enabled
-- name: blocks_udp_sink_0_0
-  id: blocks_udp_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'True'
-    ipaddr: Localhost
-    port: '7355'
-    psize: '1472'
-    type: short
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1208, 516.0]
+    coordinate: [1200, 388.0]
     rotation: 0
     state: enabled
 - name: filter_width
@@ -538,6 +428,24 @@ blocks:
     coordinate: [112, 156.0]
     rotation: 0
     state: enabled
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: out
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1376, 388.0]
+    rotation: 0
+    state: true
 - name: pad_source_0
   id: pad_source
   parameters:
@@ -555,29 +463,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 412.0]
+    coordinate: [48, 412.0]
     rotation: 0
     state: enabled
-- name: pad_source_0_0
-  id: pad_source
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    label: in
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_streams: '1'
-    optional: 'False'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [16, 284.0]
-    rotation: 0
-    state: disabled
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -604,30 +492,23 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1352, 228.0]
+    coordinate: [1200, 228.0]
     rotation: 0
     state: enabled
 
 connections:
-- [analog_quadrature_demod_cf_0, '0', blocks_float_to_short_0, '0']
+- [analog_quadrature_demod_cf_0, '0', blocks_selector_0, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [analog_sig_source_x_0_0, '0', blocks_multiply_xx_0_0, '0']
-- [analog_sig_source_x_0_1, '0', blocks_multiply_xx_1, '1']
-- [blocks_complex_to_real_0, '0', blocks_float_to_short_0_0, '0']
-- [blocks_complex_to_real_0_0, '0', blocks_float_to_short_0_0_0, '0']
-- [blocks_float_to_short_0, '0', blocks_selector_0, '0']
-- [blocks_float_to_short_0_0, '0', blocks_selector_0, '1']
-- [blocks_float_to_short_0_0_0, '0', blocks_selector_0, '2']
+- [blocks_complex_to_real_0, '0', blocks_selector_0, '1']
+- [blocks_complex_to_real_0_0, '0', blocks_selector_0, '2']
 - [blocks_multiply_xx_0, '0', blocks_complex_to_real_0, '0']
 - [blocks_multiply_xx_0, '0', blocks_selector_0_0, '1']
 - [blocks_multiply_xx_0_0, '0', blocks_complex_to_real_0_0, '0']
 - [blocks_multiply_xx_0_0, '0', blocks_selector_0_0, '2']
-- [blocks_multiply_xx_1, '0', freq_xlating_fir_filter_xxx_0, '0']
-- [blocks_multiply_xx_1, '0', freq_xlating_fir_filter_xxx_0_0, '0']
-- [blocks_multiply_xx_1, '0', freq_xlating_fir_filter_xxx_0_0_0, '0']
 - [blocks_selector_0, '0', blocks_throttle_0, '0']
 - [blocks_selector_0_0, '0', qtgui_sink_x_0, '0']
-- [blocks_throttle_0, '0', blocks_udp_sink_0_0, '0']
+- [blocks_throttle_0, '0', pad_sink_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', analog_quadrature_demod_cf_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_selector_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0_0, '0', blocks_multiply_xx_0, '1']
@@ -635,7 +516,6 @@ connections:
 - [pad_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [pad_source_0, '0', freq_xlating_fir_filter_xxx_0_0, '0']
 - [pad_source_0, '0', freq_xlating_fir_filter_xxx_0_0_0, '0']
-- [pad_source_0_0, '0', blocks_multiply_xx_1, '0']
 
 metadata:
   file_format: 1
