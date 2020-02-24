@@ -12,6 +12,11 @@ The following dependencies must be installed:
 - [swig](http://www.swig.org/)
 - [requests](https://pypi.org/project/requests/)
 
+For CW decoding, the following must be installed:
+
+- [gr-satnogs](https://gitlab.com/librespacefoundation/satnogs/gr-satnogs/-/tree/v1.5.1) (1.5.1)
+and related dependencies.
+
 Once all dependencies are installed, run the commands:
 
 ```
