@@ -4,7 +4,7 @@
 The following dependencies must be installed:
 
 - [GNU Radio](https://github.com/gnuradio/gnuradio) (>=3.8.0)
-- [gr-satellites](https://github.com/wbarnha/gr-satellites) (maint-3.8)
+- [gr-satellites](https://github.com/daniestevez/gr-satellites) (next)
 - [gr-gpredict-doppler](https://github.com/ghostop14/gr-gpredict-doppler) (maint-3.8)
 - [libfec](https://github.com/quiet/libfec)
 - [construct](https://construct.readthedocs.io/en/latest/) 
