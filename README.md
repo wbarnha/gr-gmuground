@@ -12,7 +12,8 @@ The following dependencies must be installed:
 - [requests](https://pypi.org/project/requests/)
 
 For CW decoding, the following must be installed:
--[gr-satnogs](https://gitlab.com/librespacefoundation/satnogs/gr-satnogs)
+
+- [gr-satnogs (2.0+)](https://gitlab.com/librespacefoundation/satnogs/gr-satnogs)
 and related dependencies.
 
 Once all dependencies are installed, run the commands:
