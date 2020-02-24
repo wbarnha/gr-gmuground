@@ -164,7 +164,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 500.0]
+    coordinate: [16, 516.0]
     rotation: 0
     state: disabled
 - name: blocks_complex_to_real_0
