@@ -1,5 +1,5 @@
 # gr-gmuground
-Note that work on this branch has been abandoned due to the deprecation of Python 2 and bugs related to GNU Radio 3.7.
+Please note that work on this branch has been abandoned due to the deprecation of Python 2 and bugs related to GNU Radio 3.7.
 
 # Installation
 The following dependencies must be installed:
