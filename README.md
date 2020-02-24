@@ -21,7 +21,6 @@ Once all dependencies are installed, run the commands:
 ```
 git clone https://github.com/wbarnha/gr-gmuground.git
 cd gr-gmuground
-git checkout maint-3.8
 mkdir build
 cd build
 cmake ../
