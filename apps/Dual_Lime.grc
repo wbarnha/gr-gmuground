@@ -212,8 +212,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1SAT
-      (JO-97)'',5:''NAYIF-1 (EO-88)'',6:''UKUBE-1''}'
+    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1-Sat'',5:''Nayif-1'',6:''UKube-1''}'
   states:
     bus_sink: false
     bus_source: false
@@ -617,7 +616,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 676.0]
+    coordinate: [832, 676.0]
     rotation: 0
     state: true
 - name: virtual_sink_0
