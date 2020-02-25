@@ -44,7 +44,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 124.0]
+    coordinate: [488, 116.0]
     rotation: 0
     state: disabled
 - name: channel
@@ -139,7 +139,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 212.0]
+    coordinate: [392, 212.0]
     rotation: 0
     state: disabled
 - name: gain
@@ -160,9 +160,30 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 12.0]
+    coordinate: [184, 12.0]
     rotation: 0
     state: true
+- name: offset
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Frequency Offset (MHz)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '-1'
+    step: 1e-2
+    stop: '1'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 12.0]
+    rotation: 0
+    state: enabled
 - name: samp_rate
   id: variable_qtgui_entry
   parameters:
@@ -175,7 +196,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [488, 212.0]
+    coordinate: [504, 212.0]
     rotation: 0
     state: disabled
 - name: sat
@@ -255,7 +276,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 508.0]
+    coordinate: [672, 488.0]
     rotation: 0
     state: enabled
 - name: Selective_Combining_0
@@ -272,7 +293,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 296.0]
+    coordinate: [664, 264.0]
     rotation: 0
     state: true
 - name: Selective_Combining_BPSK_0
@@ -289,7 +310,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [672, 368.0]
+    coordinate: [656, 344.0]
     rotation: 0
     state: true
 - name: blocks_add_xx_0
@@ -307,7 +328,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 440.0]
+    coordinate: [736, 416.0]
     rotation: 0
     state: true
 - name: blocks_delay_0_0_0
@@ -475,7 +496,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 12.0]
+    coordinate: [1296, 12.0]
     rotation: 0
     state: enabled
 - name: freq_offset
@@ -571,7 +592,7 @@ blocks:
     nco_freq_ch0: '0'
     nco_freq_ch1: '0'
     oversample: '0'
-    rf_freq: freq-freq_offset
+    rf_freq: freq-freq_offset+offset*1e6
     samp_rate: samp_rate
     serial: 0009070105C62E09
   states:
