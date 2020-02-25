@@ -30,7 +30,6 @@ from PyQt5 import Qt
 from PyQt5.QtCore import QObject, pyqtSlot
 from Selective_Combining import Selective_Combining  # grc-generated hier_block
 from Selective_Combining_BPSK import Selective_Combining_BPSK  # grc-generated hier_block
-from fmusbwide import fmusbwide  # grc-generated hier_block
 from gnuradio import blocks
 from gnuradio import fosphor
 from gnuradio.fft import window
@@ -41,7 +40,6 @@ from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
 from gnuradio.qtgui import Range, RangeWidget
-import gpredict
 import limesdr
 import satellites.core
 from gnuradio import qtgui
@@ -161,7 +159,7 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         self._trans_width_range = Range(10e3, 500e3, 500, 100e3, 200)
         self._trans_width_win = RangeWidget(self._trans_width_range, self.set_trans_width, 'Transition width', "counter_slider", float)
         self.top_grid_layout.addWidget(self._trans_width_win)
-        self.satellites_satellite_decoder_0 = satellites.core.gr_satellites_flowgraph(name = '1KUNS-PF', samp_rate = samp_rate, grc_block = True, iq = False)
+        self.satellites_satellite_decoder_0 = satellites.core.gr_satellites_flowgraph(file = '/usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml', samp_rate = samp_rate, grc_block = True, iq = False)
         # Create the options list
         self._sat_options = [0,1,2,3,4,5,6]
         # Create the labels list
@@ -205,18 +203,9 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         self.limesdr_source_0_1.calibrate(2.5e6, 0)
 
         self.limesdr_source_0_1.calibrate(2.5e6, 1)
-        self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
-        self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_freq)
         self.fosphor_glfw_sink_c_0 = fosphor.glfw_sink_c()
         self.fosphor_glfw_sink_c_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
         self.fosphor_glfw_sink_c_0.set_frequency_range(freq+offset, samp_rate)
-        self.fmusbwide_0 = fmusbwide(
-            filter_width=20000,
-            freq=0,
-            offset=freq_offset,
-        )
-
-        self.top_grid_layout.addWidget(self.fmusbwide_0)
         self._cut_freq_range = Range(1e3, samp_rate/2, 1e3, 100e3, 200)
         self._cut_freq_win = RangeWidget(self._cut_freq_range, self.set_cut_freq, 'Cutoff frequency', "counter_slider", float)
         self.top_grid_layout.addWidget(self._cut_freq_win)
@@ -227,8 +216,10 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         self.blocks_selector_0 = blocks.selector(gr.sizeof_gr_complex*1,com,0)
         self.blocks_selector_0.set_enabled(True)
         self.blocks_message_debug_1 = blocks.message_debug()
-        self.blocks_message_debug_0 = blocks.message_debug()
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/wbarnhart/itasattest', False)
+        self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, int(samp_rate*146e6*269.1093e-6/freq))
+        self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
         self.Selective_Combining_BPSK_0 = Selective_Combining_BPSK(
             filter_alpha=1e-3,
@@ -248,25 +239,24 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
-        self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.blocks_message_debug_1, 'print'))
         self.connect((self.Maximal_Combining_0, 0), (self.blocks_selector_0, 3))
         self.connect((self.Selective_Combining_0, 0), (self.blocks_selector_0, 0))
         self.connect((self.Selective_Combining_BPSK_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 2))
+        self.connect((self.blocks_complex_to_real_0, 0), (self.satellites_satellite_decoder_0, 0))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Maximal_Combining_0, 1))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Selective_Combining_0, 1))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Selective_Combining_BPSK_0, 1))
         self.connect((self.blocks_delay_0_0_0, 0), (self.blocks_add_xx_0, 1))
-        self.connect((self.blocks_selector_0, 0), (self.fmusbwide_0, 0))
+        self.connect((self.blocks_selector_0, 0), (self.blocks_complex_to_real_0, 0))
+        self.connect((self.blocks_selector_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.fosphor_glfw_sink_c_0, 0))
         self.connect((self.blocks_selector_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.Maximal_Combining_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.Selective_Combining_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.Selective_Combining_BPSK_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_add_xx_0, 0))
-        self.connect((self.fmusbwide_0, 0), (self.satellites_satellite_decoder_0, 0))
         self.connect((self.limesdr_source_0_1, 1), (self.blocks_selector_1, 0))
         self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1, 1))
         self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1_0, 0))
@@ -291,7 +281,6 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
 
     def set_freq_offset(self, freq_offset):
         self.freq_offset = freq_offset
-        self.fmusbwide_0.set_offset(self.freq_offset)
         self.limesdr_source_0_1.set_center_freq(self.freq-self.freq_offset+self.offset*1e6, 0)
 
     def get_gpredict_port(self):
@@ -389,6 +378,8 @@ def argument_parser():
 def main(top_block_cls=sdrangel_source, options=None):
     if options is None:
         options = argument_parser().parse_args()
+    if gr.enable_realtime_scheduling() != gr.RT_OK:
+        print("Error: failed to enable real-time scheduling.")
 
     if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
         style = gr.prefs().get_string('qtgui', 'style', 'raster')

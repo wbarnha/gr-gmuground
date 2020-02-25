@@ -335,7 +335,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 688.0]
+    coordinate: [944, 528.0]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -382,7 +382,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1280, 688.0]
+    coordinate: [1376, 528.0]
     rotation: 0
     state: true
 - name: blocks_selector_0
@@ -631,7 +631,39 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 668.0]
+    coordinate: [1128, 508.0]
+    rotation: 0
+    state: true
+- name: satnogs_cw_decoder_0
+  id: satnogs_cw_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    antenna: '""'
+    bfo_freq: 1e3
+    bw: '0.0'
+    comment: ''
+    decoded_data_file_path: '"/tmp/.satnogs/data/data"'
+    dev_args: '""'
+    doppler_correction_per_sec: '20'
+    enable_iq_dump: '0'
+    file_path: '"test.wav"'
+    gain: '0.0'
+    iq_file_path: '"/tmp/iq.dat"'
+    lo_offset: 100e3
+    rigctl_port: '4532'
+    rx_freq: 100e6
+    samp_rate_rx: '0.0'
+    soapy_rx_device: '"driver=invalid"'
+    udp_IP: '"127.0.0.1"'
+    udp_port: '16887'
+    waterfall_file_path: '"/tmp/waterfall.dat"'
+    wpm: '20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 588.0]
     rotation: 0
     state: true
 
@@ -653,6 +685,7 @@ connections:
 - [blocks_selector_1_0, '0', Selective_Combining_BPSK_0, '0']
 - [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
 - [blocks_udp_source_0, '0', blocks_complex_to_real_0_0, '0']
+- [blocks_udp_source_0, '0', satnogs_cw_decoder_0, '0']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [limesdr_source_0_1, '0', blocks_selector_1, '1']
