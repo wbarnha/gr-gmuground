@@ -209,7 +209,7 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_freq)
         self.fosphor_glfw_sink_c_0 = fosphor.glfw_sink_c()
         self.fosphor_glfw_sink_c_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
-        self.fosphor_glfw_sink_c_0.set_frequency_range(freq, samp_rate)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(freq+offset, samp_rate)
         self.fmusbwide_0 = fmusbwide(
             filter_width=20000,
             freq=0,
@@ -267,8 +267,8 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_selector_1_0, 0), (self.Selective_Combining_BPSK_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.fmusbwide_0, 0), (self.satellites_satellite_decoder_0, 0))
-        self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1, 1))
         self.connect((self.limesdr_source_0_1, 1), (self.blocks_selector_1, 0))
+        self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1, 1))
         self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.limesdr_source_0_1, 1), (self.blocks_selector_1_0, 1))
 
@@ -283,7 +283,7 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
         self.blocks_delay_0_0_0.set_dly(int(self.samp_rate*146e6*269.1093e-6/self.freq))
-        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq, self.samp_rate)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq+self.offset, self.samp_rate)
         self.limesdr_source_0_1.set_center_freq(self.freq-self.freq_offset+self.offset*1e6, 0)
 
     def get_freq_offset(self):
@@ -306,7 +306,7 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.blocks_delay_0_0_0.set_dly(int(self.samp_rate*146e6*269.1093e-6/self.freq))
-        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq, self.samp_rate)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq+self.offset, self.samp_rate)
         self.limesdr_source_0_1.set_digital_filter(self.samp_rate, 0)
         self.limesdr_source_0_1.set_digital_filter(self.samp_rate, 1)
 
@@ -334,6 +334,7 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
 
     def set_offset(self, offset):
         self.offset = offset
+        self.fosphor_glfw_sink_c_0.set_frequency_range(self.freq+self.offset, self.samp_rate)
         self.limesdr_source_0_1.set_center_freq(self.freq-self.freq_offset+self.offset*1e6, 0)
 
     def get_gain(self):

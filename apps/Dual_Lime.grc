@@ -472,7 +472,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    freq_center: freq
+    freq_center: freq+offset
     freq_span: samp_rate
     wintype: firdes.WIN_BLACKMAN_hARRIS
   states:
@@ -602,6 +602,35 @@ blocks:
     coordinate: [8, 388.0]
     rotation: 0
     state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1208, 452.0]
+    rotation: 0
+    state: disabled
 - name: samp_rate
   id: parameter
   parameters:
@@ -677,6 +706,7 @@ connections:
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
 - [blocks_selector_0, '0', fosphor_glfw_sink_c_0, '0']
+- [blocks_selector_0, '0', qtgui_sink_x_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', Maximal_Combining_0, '0']
