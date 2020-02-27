@@ -36,7 +36,7 @@ blocks:
   id: variable_qtgui_entry
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: (0,0,1,1)
     label: RX Freq [MHz]
     type: real
     value: '97.1'
@@ -44,7 +44,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 484.0]
+    coordinate: [48, 476.0]
     rotation: 0
     state: true
 - name: channel
@@ -55,7 +55,7 @@ blocks:
       channel corresponding to an
 
       antenna with a longer coaxial line'
-    gui_hint: (2,1,1,1)
+    gui_hint: (4,0,1,1)
     label: Delayed Channel
     label0: Vertical
     label1: Horizontal
@@ -77,14 +77,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 12.0]
+    coordinate: [48, 1020.0]
     rotation: 0
     state: enabled
 - name: com
   id: variable_qtgui_chooser
   parameters:
     comment: ''
-    gui_hint: (0,1,1,1)
+    gui_hint: (1,0,1,1)
     label: Combining Technique
     label0: Selective
     label1: Selective (BPSK Only)
@@ -106,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 12.0]
+    coordinate: [48, 556.0]
     rotation: 0
     state: enabled
 - name: cut_freq
@@ -134,7 +134,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 146e6
+    value: freq
   states:
     bus_sink: false
     bus_source: false
@@ -153,12 +153,24 @@ blocks:
     bus_structure: null
     coordinate: [800, 188.0]
     rotation: 0
+    state: enabled
+- name: freq_shift
+  id: variable
+  parameters:
+    comment: ''
+    value: doppler_freq-freq
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 124.0]
+    rotation: 0
     state: true
 - name: gain
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: (3,1,1,1)
+    gui_hint: (2,0,1,1)
     label: Gain [dB]
     min_len: '70'
     orient: Qt.Horizontal
@@ -172,14 +184,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 12.0]
+    coordinate: [48, 772.0]
     rotation: 0
     state: true
 - name: iq_name
   id: variable_qtgui_entry
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: (6,0,1,1)
     label: File Path
     type: string
     value: '"/home/wbarnhart/test"'
@@ -187,9 +199,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 796.0]
+    coordinate: [680, 836.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: offset
   id: variable_qtgui_range
   parameters:
@@ -215,7 +227,7 @@ blocks:
   id: variable_qtgui_chooser
   parameters:
     comment: ''
-    gui_hint: (1,1,1,1)
+    gui_hint: (3,0,1,1)
     label: Demo Satellite
     label0: 3CAT-2
     label1: AO-73
@@ -238,7 +250,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 12.0]
+    coordinate: [48, 908.0]
     rotation: 0
     state: enabled
 - name: sat_type
@@ -254,39 +266,27 @@ blocks:
     rotation: 0
     state: true
 - name: save
-  id: variable_qtgui_push_button
+  id: variable_qtgui_check_box
   parameters:
     comment: ''
-    gui_hint: (4,1,1,1)
-    label: Saving
-    pressed: '1'
-    released: '0'
-    type: int
-    value: '0'
+    'false': 'False'
+    gui_hint: (7,0,1,1)
+    label: Save Data
+    'true': 'True'
+    type: bool
+    value: 'False'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 732.0]
+    coordinate: [520, 756.0]
     rotation: 0
-    state: disabled
-- name: select_freq
-  id: variable
-  parameters:
-    comment: ''
-    value: 97.1e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [800, 124.0]
-    rotation: 0
-    state: true
+    state: enabled
 - name: sig_save
   id: variable_qtgui_chooser
   parameters:
     comment: ''
-    gui_hint: (4,1,1,1)
+    gui_hint: (5,0,1,1)
     label: Channel to Save
     label0: Combined Signal
     label1: Ch. 1
@@ -308,9 +308,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [112, 660.0]
+    coordinate: [360, 692.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: trans_width
   id: variable_qtgui_range
   parameters:
@@ -453,9 +453,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 876.0]
+    coordinate: [696, 900.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -571,9 +571,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 848.0]
+    coordinate: [520, 872.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: controls
   id: qtgui_tab_widget
   parameters:
@@ -608,26 +608,7 @@ blocks:
     coordinate: [1296, 132.0]
     rotation: 0
     state: disabled
-- name: fosphor_qt_sink_c_0
-  id: fosphor_qt_sink_c
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    freq_center: freq+(doppler_freq-freq)
-    freq_span: samp_rate
-    gui_hint: (0,0,2,1)
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1176, 316.0]
-    rotation: 0
-    state: disabled
-- name: fosphor_qt_sink_c_0_0
+- name: fosphor_qt_sink_c_0_0_0
   id: fosphor_qt_sink_c
   parameters:
     affinity: ''
@@ -635,7 +616,7 @@ blocks:
     comment: ''
     freq_center: freq
     freq_span: samp_rate
-    gui_hint: (0,0,2,1)
+    gui_hint: (0,1,7,3)
     maxoutbuf: '0'
     minoutbuf: '0'
     wintype: firdes.WIN_BLACKMAN_hARRIS
@@ -643,7 +624,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1088, 236.0]
+    coordinate: [904, 1044.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -694,7 +675,7 @@ blocks:
     coordinate: [264, 148.0]
     rotation: 0
     state: disabled
-- name: gpredict_MsgPairToVar_0_0
+- name: gpredict_MsgPairToVar_0_0_0
   id: gpredict_MsgPairToVar
   parameters:
     affinity: ''
@@ -705,7 +686,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1320, 244.0]
+    coordinate: [1160, 1052.0]
     rotation: 0
     state: enabled
 - name: gpredict_VarToMsg_0
@@ -722,9 +703,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 972.0]
+    coordinate: [280, 1004.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: gpredict_doppler_0
   id: gpredict_doppler
   parameters:
@@ -785,7 +766,7 @@ blocks:
     nco_freq_ch0: '0'
     nco_freq_ch1: '0'
     oversample: '0'
-    rf_freq: freq
+    rf_freq: freq+freq_shift
     samp_rate: samp_rate
     serial: 0009070105C62E09
   states:
@@ -832,33 +813,38 @@ blocks:
     coordinate: [40, 388.0]
     rotation: 0
     state: disabled
-- name: qtgui_sink_x_0
-  id: qtgui_sink_x
+- name: main_disp
+  id: qtgui_tab_widget
   parameters:
-    affinity: ''
     alias: ''
-    bw: samp_rate
     comment: ''
-    fc: '0'
-    fftsize: '1024'
     gui_hint: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '""'
-    plotconst: 'True'
-    plotfreq: 'True'
-    plottime: 'True'
-    plotwaterfall: 'True'
-    rate: '10'
-    showports: 'False'
-    showrf: 'False'
-    type: complex
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    label0: Waterfall
+    label1: Telemetry
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Tab 2
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '2'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 436.0]
+    coordinate: [1240, 820.0]
     rotation: 0
     state: disabled
 - name: samp_rate
@@ -928,7 +914,21 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 684.0]
+    coordinate: [896, 700.0]
+    rotation: 0
+    state: disabled
+- name: show_text_0
+  id: show_text
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1272, 920.0]
     rotation: 0
     state: disabled
 - name: virtual_sink_0
@@ -941,7 +941,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1288, 388.0]
+    coordinate: [1192, 388.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_1
@@ -993,9 +993,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [112, 836.0]
+    coordinate: [360, 868.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: virtual_source_1_0
   id: virtual_source
   parameters:
@@ -1006,9 +1006,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [112, 876.0]
+    coordinate: [360, 900.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: virtual_source_1_0_0
   id: virtual_source
   parameters:
@@ -1019,9 +1019,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [112, 916.0]
+    coordinate: [360, 948.0]
     rotation: 0
-    state: disabled
+    state: enabled
 
 connections:
 - [Maximal_Combining_0, '0', blocks_selector_0, '3']
@@ -1034,9 +1034,6 @@ connections:
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
 - [blocks_delay_0_0_0, '0', virtual_sink_1_0, '0']
-- [blocks_selector_0, '0', fosphor_qt_sink_c_0, '0']
-- [blocks_selector_0, '0', fosphor_qt_sink_c_0_0, '0']
-- [blocks_selector_0, '0', qtgui_sink_x_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', Maximal_Combining_0, '0']
@@ -1045,8 +1042,7 @@ connections:
 - [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
 - [blocks_selector_1_0, '0', virtual_sink_1, '0']
 - [blocks_selector_2, '0', blocks_file_sink_0, '0']
-- [fosphor_qt_sink_c_0, freq, gpredict_MsgPairToVar_0_0, inpair]
-- [fosphor_qt_sink_c_0_0, freq, gpredict_MsgPairToVar_0_0, inpair]
+- [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [gpredict_VarToMsg_0, msgout, blocks_selector_2, en]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
@@ -1060,6 +1056,7 @@ connections:
 - [limesdr_source_0_1, '1', blocks_selector_1_0, '1']
 - [satellites_satellite_decoder_0, out, blocks_message_debug_1, print]
 - [virtual_source_0, '0', blocks_complex_to_real_0, '0']
+- [virtual_source_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
