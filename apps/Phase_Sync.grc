@@ -135,14 +135,14 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    reserve_items: '1024'
+    reserve_items: '1'
     type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 408.0]
+    coordinate: [768, 368.0]
     rotation: 0
     state: true
 - name: pad_sink_0

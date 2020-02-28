@@ -139,7 +139,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 196.0]
+    coordinate: [400, 196.0]
     rotation: 0
     state: true
 - name: freq
@@ -199,7 +199,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 836.0]
+    coordinate: [752, 956.0]
     rotation: 0
     state: enabled
 - name: offset
@@ -279,7 +279,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 756.0]
+    coordinate: [592, 892.0]
     rotation: 0
     state: enabled
 - name: sig_save
@@ -308,7 +308,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 692.0]
+    coordinate: [416, 828.0]
     rotation: 0
     state: enabled
 - name: trans_width
@@ -365,7 +365,7 @@ blocks:
     bus_structure: null
     coordinate: [688, 264.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: Selective_Combining_BPSK_0
   id: Selective_Combining_BPSK
   parameters:
@@ -382,7 +382,7 @@ blocks:
     bus_structure: null
     coordinate: [680, 344.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -400,7 +400,7 @@ blocks:
     bus_structure: null
     coordinate: [784, 424.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_complex_to_real_0
   id: blocks_complex_to_real
   parameters:
@@ -414,7 +414,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 624.0]
+    coordinate: [768, 664.0]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -437,7 +437,7 @@ blocks:
     bus_structure: null
     coordinate: [480, 452.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_file_sink_0
   id: blocks_file_sink
   parameters:
@@ -453,7 +453,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 900.0]
+    coordinate: [768, 1036.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -479,9 +479,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1288, 624.0]
+    coordinate: [1384, 600.0]
     rotation: 0
     state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1208, 504.0]
+    rotation: 0
+    state: enabled
 - name: blocks_selector_0
   id: blocks_selector
   parameters:
@@ -504,7 +521,7 @@ blocks:
     bus_structure: null
     coordinate: [960, 328.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_selector_1
   id: blocks_selector
   parameters:
@@ -527,7 +544,7 @@ blocks:
     bus_structure: null
     coordinate: [312, 420.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_selector_1_0
   id: blocks_selector
   parameters:
@@ -550,7 +567,7 @@ blocks:
     bus_structure: null
     coordinate: [312, 308.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_selector_2
   id: blocks_selector
   parameters:
@@ -571,7 +588,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 872.0]
+    coordinate: [592, 1008.0]
     rotation: 0
     state: enabled
 - name: controls
@@ -624,7 +641,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 1044.0]
+    coordinate: [872, 740.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -644,23 +661,6 @@ blocks:
     coordinate: [1296, 12.0]
     rotation: 0
     state: disabled
-- name: freq_offset
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: Frequency Offset
-    short_id: ''
-    type: eng_float
-    value: 50e3
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1152, 84.0]
-    rotation: 0
-    state: true
 - name: gpredict_MsgPairToVar_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -686,7 +686,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1160, 1052.0]
+    coordinate: [1096, 748.0]
     rotation: 0
     state: enabled
 - name: gpredict_VarToMsg_0
@@ -703,7 +703,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 1004.0]
+    coordinate: [336, 1132.0]
     rotation: 0
     state: enabled
 - name: gpredict_doppler_0
@@ -775,7 +775,7 @@ blocks:
     bus_structure: null
     coordinate: [40, 308.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: limesdr_source_0_1
   id: limesdr_source
   parameters:
@@ -813,6 +813,30 @@ blocks:
     coordinate: [40, 388.0]
     rotation: 0
     state: disabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: 50e3
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: 10e3
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 660.0]
+    rotation: 0
+    state: enabled
 - name: main_disp
   id: qtgui_tab_widget
   parameters:
@@ -844,9 +868,43 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1240, 820.0]
+    coordinate: [1360, 908.0]
     rotation: 0
     state: disabled
+- name: offset
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Frequency Offset
+    short_id: ''
+    type: eng_float
+    value: 50e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1152, 84.0]
+    rotation: 0
+    state: true
+- name: parameter_0
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1128, 196.0]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: parameter
   parameters:
@@ -856,7 +914,7 @@ blocks:
     label: Sample Rate
     short_id: ''
     type: eng_float
-    value: 750e3
+    value: 600e3
   states:
     bus_sink: false
     bus_source: false
@@ -864,6 +922,23 @@ blocks:
     coordinate: [504, 108.0]
     rotation: 0
     state: true
+- name: satellites_print_timestamp_0
+  id: satellites_print_timestamp
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    count: 'True'
+    fmt: '%Y-%m-%d %H:%M:%S'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1152, 652.0]
+    rotation: 0
+    state: enabled
 - name: satellites_satellite_decoder_0
   id: satellites_satellite_decoder
   parameters:
@@ -877,12 +952,12 @@ blocks:
     minoutbuf: '0'
     name: 1KUNS-PF
     norad: '99999'
-    samp_rate: samp_rate
+    samp_rate: 48e3
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1064, 604.0]
+    coordinate: [928, 644.0]
     rotation: 0
     state: true
 - name: satnogs_cw_decoder_0
@@ -914,7 +989,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 700.0]
+    coordinate: [1016, 836.0]
     rotation: 0
     state: disabled
 - name: show_text_0
@@ -928,7 +1003,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1272, 920.0]
+    coordinate: [1384, 1016.0]
     rotation: 0
     state: disabled
 - name: virtual_sink_0
@@ -969,7 +1044,7 @@ blocks:
     bus_structure: null
     coordinate: [688, 564.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: virtual_source_0
   id: virtual_source
   parameters:
@@ -980,7 +1055,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 708.0]
+    coordinate: [272, 708.0]
     rotation: 0
     state: enabled
 - name: virtual_source_1
@@ -993,7 +1068,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 868.0]
+    coordinate: [416, 1004.0]
     rotation: 0
     state: enabled
 - name: virtual_source_1_0
@@ -1006,7 +1081,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 900.0]
+    coordinate: [416, 1052.0]
     rotation: 0
     state: enabled
 - name: virtual_source_1_0_0
@@ -1019,7 +1094,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 948.0]
+    coordinate: [416, 1084.0]
     rotation: 0
     state: enabled
 
@@ -1034,6 +1109,7 @@ connections:
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
 - [blocks_delay_0_0_0, '0', virtual_sink_1_0, '0']
+- [blocks_selector_0, '0', blocks_null_sink_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', Maximal_Combining_0, '0']
@@ -1054,9 +1130,11 @@ connections:
 - [limesdr_source_0_1, '0', blocks_selector_1_0, '0']
 - [limesdr_source_0_1, '1', blocks_selector_1, '0']
 - [limesdr_source_0_1, '1', blocks_selector_1_0, '1']
-- [satellites_satellite_decoder_0, out, blocks_message_debug_1, print]
-- [virtual_source_0, '0', blocks_complex_to_real_0, '0']
-- [virtual_source_0, '0', fosphor_qt_sink_c_0_0_0, '0']
+- [low_pass_filter_0, '0', blocks_complex_to_real_0, '0']
+- [low_pass_filter_0, '0', fosphor_qt_sink_c_0_0_0, '0']
+- [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
+- [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
+- [virtual_source_0, '0', low_pass_filter_0, '0']
 - [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
