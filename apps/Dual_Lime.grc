@@ -443,7 +443,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    append: 'False'
+    append: 'True'
     comment: ''
     file: /home/wbarnhart/test
     type: complex
@@ -641,7 +641,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 740.0]
+    coordinate: [600, 756.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -686,7 +686,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1096, 748.0]
+    coordinate: [824, 764.0]
     rotation: 0
     state: enabled
 - name: gpredict_VarToMsg_0
@@ -834,7 +834,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 660.0]
+    coordinate: [600, 612.0]
     rotation: 0
     state: enabled
 - name: main_disp
@@ -992,20 +992,6 @@ blocks:
     coordinate: [1016, 836.0]
     rotation: 0
     state: disabled
-- name: show_text_0
-  id: show_text
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    gui_hint: ''
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1384, 1016.0]
-    rotation: 0
-    state: disabled
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1081,7 +1067,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 1052.0]
+    coordinate: [416, 1044.0]
     rotation: 0
     state: enabled
 - name: virtual_source_1_0_0
@@ -1131,9 +1117,9 @@ connections:
 - [limesdr_source_0_1, '1', blocks_selector_1, '0']
 - [limesdr_source_0_1, '1', blocks_selector_1_0, '1']
 - [low_pass_filter_0, '0', blocks_complex_to_real_0, '0']
-- [low_pass_filter_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
+- [virtual_source_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [virtual_source_0, '0', low_pass_filter_0, '0']
 - [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
