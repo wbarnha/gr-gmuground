@@ -98,4 +98,11 @@ sudo ldconfig
 cd
 cd gr-fosphor/lib/fosphor
 make LDFLAGS=-L/opt/intel/opencl-1.2-4.5.0.8/lib64
-cd
+
+cd ~/gr-gmuground
+mkdir build
+cd build
+cmake ../
+make -j3
+sudo make install
+sudo ldconfig
