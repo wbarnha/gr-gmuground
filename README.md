@@ -7,6 +7,7 @@ The following dependencies must be installed:
 - [gr-satellites](https://github.com/daniestevez/gr-satellites) (next)
 - [gr-gpredict-doppler](https://github.com/ghostop14/gr-gpredict-doppler) (maint-3.8)
 - [gr-fosphor](https://github.com/osmocom/gr-fosphor) (beta)
+- [gr-display](https://github.com/wbarnha/gr-display)
 - [libfec](https://github.com/quiet/libfec)
 - [construct](https://construct.readthedocs.io/en/latest/) 
 - [swig](http://www.swig.org/)
