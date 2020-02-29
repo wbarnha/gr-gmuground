@@ -187,21 +187,6 @@ blocks:
     coordinate: [48, 772.0]
     rotation: 0
     state: true
-- name: iq_name
-  id: variable_qtgui_entry
-  parameters:
-    comment: ''
-    gui_hint: (6,0,1,1)
-    label: File Path
-    type: string
-    value: '"/home/wbarnhart/test"'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [752, 956.0]
-    rotation: 0
-    state: enabled
 - name: offset
   id: variable_qtgui_range
   parameters:
@@ -269,12 +254,12 @@ blocks:
   id: variable_qtgui_check_box
   parameters:
     comment: ''
-    'false': 'False'
+    'false': '0'
     gui_hint: (5,1,1,1)
     label: Save Data
-    'true': 'True'
-    type: bool
-    value: 'False'
+    'true': '1'
+    type: int
+    value: '0'
   states:
     bus_sink: false
     bus_source: false
@@ -342,6 +327,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [320, 540.0]
+    rotation: 0
+    state: disabled
+- name: variable_qtgui_push_button_0
+  id: variable_qtgui_push_button
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    pressed: '1'
+    released: '0'
+    type: int
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 1208.0]
     rotation: 0
     state: disabled
 - name: Maximal_Combining_0
@@ -469,24 +471,50 @@ blocks:
     coordinate: [496, 340.0]
     rotation: 0
     state: enabled
-- name: blocks_file_sink_0
-  id: blocks_file_sink
+- name: blocks_file_source_0
+  id: blocks_file_source
   parameters:
     affinity: ''
     alias: ''
-    append: 'True'
+    begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/wbarnhart/test
+    file: /home/wbarnhart/presync/145mhzch1
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
     type: complex
-    unbuffered: 'False'
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 1036.0]
+    coordinate: [904, 20.0]
     rotation: 0
-    state: enabled
+    state: true
+- name: blocks_file_source_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: ''
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/wbarnhart/presync/145mhzch2
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 132.0]
+    rotation: 0
+    state: true
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -588,7 +616,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    enabled: 'False'
+    enabled: 'True'
     input_index: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -639,6 +667,33 @@ blocks:
     coordinate: [1296, 132.0]
     rotation: 0
     state: disabled
+- name: filerepeater_AdvFileSink_0
+  id: filerepeater_AdvFileSink
+  parameters:
+    affinity: ''
+    alias: ''
+    autostartFreqChange: 'False'
+    basedir: /home/wbarnhart/
+    basefile: gr_record
+    bits_per_sample: '8'
+    comment: ''
+    honorFreqChange: 'False'
+    honorFreqTags: 'False'
+    maxSize: '0'
+    maxTimeSec: '0'
+    radioCenterFreq: freq
+    recordOnStart: 'False'
+    sampleRate: samp_rate
+    type: complex
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 1076.0]
+    rotation: 0
+    state: true
 - name: fosphor_qt_sink_c_0_0_0
   id: fosphor_qt_sink_c
   parameters:
@@ -711,13 +766,13 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    msgname: save
+    msgname: ''
     target: save
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [336, 1132.0]
+    coordinate: [416, 1180.0]
     rotation: 0
     state: enabled
 - name: gpredict_doppler_0
@@ -755,6 +810,19 @@ blocks:
     coordinate: [504, 12.0]
     rotation: 0
     state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import datetime
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 12.0]
+    rotation: 0
+    state: true
 - name: limesdr_source_0_0
   id: limesdr_source
   parameters:
@@ -789,7 +857,7 @@ blocks:
     bus_structure: null
     coordinate: [40, 308.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: limesdr_source_0_1
   id: limesdr_source
   parameters:
@@ -1114,12 +1182,17 @@ connections:
 - [blocks_delay_0_0_0_0, '0', Selective_Combining_BPSK_0, '0']
 - [blocks_delay_0_0_0_0, '0', blocks_add_xx_0, '0']
 - [blocks_delay_0_0_0_0, '0', virtual_sink_1, '0']
+- [blocks_file_source_0, '0', blocks_selector_1, '1']
+- [blocks_file_source_0, '0', blocks_selector_1_0, '0']
+- [blocks_file_source_0_0, '0', blocks_selector_1, '0']
+- [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
-- [blocks_selector_2, '0', blocks_file_sink_0, '0']
+- [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [gpredict_VarToMsg_0, msgout, blocks_selector_2, en]
+- [gpredict_VarToMsg_0, msgout, filerepeater_AdvFileSink_0, recordstate]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [limesdr_source_0_0, '0', blocks_selector_1, '1']
