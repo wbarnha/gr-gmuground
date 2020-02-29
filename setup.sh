@@ -10,7 +10,7 @@ sudo make install
 sudo ldconfig
 cd
 
-sudo apt install -y \
+sudo apt install  
       libboost-dev \
       libboost-date-time-dev \
       libboost-filesystem-dev \
@@ -37,6 +37,17 @@ sudo apt install -y \
       opencl-headers
 
 pip3 install requests construct
+
+git clone https://github.com/myriadrf/gr-limesdr
+cd gr-limesdr
+git checkout gr-3.8
+mkdir build
+cd build
+cmake ..
+make -j3
+sudo make install
+sudo ldconfig
+cd
 
 git clone https://gitlab.com/librespacefoundation/satnogs/gr-satnogs.git
 cd gr-satnogs
