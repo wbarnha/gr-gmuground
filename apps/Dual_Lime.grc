@@ -109,27 +109,6 @@ blocks:
     coordinate: [48, 556.0]
     rotation: 0
     state: enabled
-- name: cut_freq
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: Cutoff frequency
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: 1e3
-    step: 1e3
-    stop: samp_rate/2
-    value: 100e3
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [448, 540.0]
-    rotation: 0
-    state: disabled
 - name: doppler_freq
   id: variable
   parameters:
@@ -308,27 +287,6 @@ blocks:
     coordinate: [688, 124.0]
     rotation: 0
     state: true
-- name: trans_width
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: Transition width
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: 10e3
-    step: '500'
-    stop: 500e3
-    value: 100e3
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [320, 540.0]
-    rotation: 0
-    state: disabled
 - name: variable_qtgui_push_button_0
   id: variable_qtgui_push_button
   parameters:
@@ -397,6 +355,28 @@ blocks:
     coordinate: [680, 344.0]
     rotation: 0
     state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: '1500'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 580.0]
+    rotation: 0
+    state: enabled
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -428,7 +408,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 664.0]
+    coordinate: [808, 656.0]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -490,7 +470,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 20.0]
+    coordinate: [48, 260.0]
     rotation: 0
     state: true
 - name: blocks_file_source_0_0
@@ -512,7 +492,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 132.0]
+    coordinate: [48, 364.0]
     rotation: 0
     state: true
 - name: blocks_message_debug_0
@@ -538,9 +518,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1384, 600.0]
+    coordinate: [1424, 592.0]
     rotation: 0
     state: true
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 672.0]
+    rotation: 0
+    state: enabled
 - name: blocks_selector_0
   id: blocks_selector
   parameters:
@@ -710,7 +708,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [600, 756.0]
+    coordinate: [1144, 444.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -730,6 +728,26 @@ blocks:
     coordinate: [1296, 12.0]
     rotation: 0
     state: disabled
+- name: freq_xlating_fir_filter_xxx_0
+  id: freq_xlating_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: freq-doppler_freq+offset
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    taps: firdes.low_pass(1, samp_rate, 1500, 500)
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [408, 708.0]
+    rotation: 0
+    state: enabled
 - name: gpredict_MsgPairToVar_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -755,7 +773,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 764.0]
+    coordinate: [1368, 452.0]
     rotation: 0
     state: enabled
 - name: gpredict_VarToMsg_0
@@ -916,9 +934,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [600, 612.0]
+    coordinate: [632, 740.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: main_disp
   id: qtgui_tab_widget
   parameters:
@@ -1018,7 +1036,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 652.0]
+    coordinate: [1192, 644.0]
     rotation: 0
     state: enabled
 - name: satellites_satellite_decoder_0
@@ -1039,7 +1057,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 644.0]
+    coordinate: [968, 636.0]
     rotation: 0
     state: true
 - name: satnogs_cw_decoder_0
@@ -1123,7 +1141,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [272, 708.0]
+    coordinate: [232, 716.0]
     rotation: 0
     state: enabled
 - name: virtual_source_1
@@ -1170,6 +1188,7 @@ connections:
 - [Maximal_Combining_0, '0', blocks_selector_0, '3']
 - [Selective_Combining_0, '0', blocks_selector_0, '0']
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
 - [blocks_complex_to_real_0, '0', satellites_satellite_decoder_0, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
@@ -1186,11 +1205,14 @@ connections:
 - [blocks_file_source_0, '0', blocks_selector_1_0, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
+- [blocks_multiply_xx_0, '0', blocks_complex_to_real_0, '0']
+- [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
 - [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
+- [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
 - [gpredict_VarToMsg_0, msgout, blocks_selector_2, en]
 - [gpredict_VarToMsg_0, msgout, filerepeater_AdvFileSink_0, recordstate]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
@@ -1206,7 +1228,7 @@ connections:
 - [low_pass_filter_0, '0', blocks_complex_to_real_0, '0']
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
-- [virtual_source_0, '0', fosphor_qt_sink_c_0_0_0, '0']
+- [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [virtual_source_0, '0', low_pass_filter_0, '0']
 - [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']

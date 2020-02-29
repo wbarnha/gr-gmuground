@@ -121,3 +121,14 @@ cmake ../
 make -j3
 sudo make install
 sudo ldconfig
+cd
+
+git clone https://github.com/ghostop14/gr-filerepeater
+cd gr-filerepeater
+mkdir build
+cd build
+cmake ..
+make -j3
+sudo make install
+sudo ldconfig
+cd

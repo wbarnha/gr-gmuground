@@ -35,6 +35,7 @@ from gnuradio.fft import window
 from Selective_Combining import Selective_Combining  # grc-generated hier_block
 from Selective_Combining_BPSK import Selective_Combining_BPSK  # grc-generated hier_block
 from gnuradio import blocks
+import pmt
 from gnuradio import filter
 from gnuradio.filter import firdes
 from gnuradio import gr
@@ -42,8 +43,9 @@ import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio.qtgui import Range, RangeWidget
+import datetime
+import filerepeater
 import gpredict
-import limesdr
 import satellites
 import satellites.core
 from gnuradio import qtgui
@@ -97,10 +99,9 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.doppler_freq = doppler_freq = freq
         self.time_delay = time_delay = 158e-12*(freq-145e6)+111e-6
         self.sig_save = sig_save = 2
-        self.save = save = False
+        self.save = save = 0
         self.sat_type = sat_type = {0:'3CAT-2',1:'AO-73',2:'FloripaSat 1',3:'ITASAT 1',4:'JY1-Sat',5:'Nayif-1',6:'UKube-1'}
         self.sat = sat = 0
-        self.iq_name = iq_name = "/home/wbarnhart/test"
         self.gain = gain = 30
         self.freq_shift = freq_shift = doppler_freq-freq
         self.com = com = 0
@@ -109,13 +110,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
-        self._gain_range = Range(0, 60, 1, 30, 70)
-        self._gain_win = RangeWidget(self._gain_range, self.set_gain, 'Gain [dB]', "counter_slider", int)
-        self.top_grid_layout.addWidget(self._gain_win, 2, 0, 1, 2)
-        for r in range(2, 3):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 2):
-            self.top_grid_layout.setColumnStretch(c, 1)
         # Create the options list
         self._com_options = (0, 1, 2, 3, )
         # Create the labels list
@@ -195,7 +189,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         _save_check_box = Qt.QCheckBox('Save Data')
-        self._save_choices = {True: True, False: False}
+        self._save_choices = {True: 1, False: 0}
         self._save_choices_inv = dict((v,k) for k,v in self._save_choices.items())
         self._save_callback = lambda i: Qt.QMetaObject.invokeMethod(_save_check_box, "setChecked", Qt.Q_ARG("bool", self._save_choices_inv[i]))
         self._save_callback(self.save)
@@ -236,48 +230,17 @@ class dual_lime(gr.top_block, Qt.QWidget):
                 10e3,
                 firdes.WIN_HAMMING,
                 6.76))
-        self.limesdr_source_0_0 = limesdr.source('0009061C02CF232D', 2, '')
-
-
-        self.limesdr_source_0_0.set_sample_rate(samp_rate)
-
-
-        self.limesdr_source_0_0.set_center_freq(freq+freq_shift, 0)
-
-        self.limesdr_source_0_0.set_bandwidth(1.5e6, 0)
-
-        self.limesdr_source_0_0.set_bandwidth(1.5e6, 1)
-
-        self.limesdr_source_0_0.set_digital_filter(samp_rate/10, 0)
-
-        self.limesdr_source_0_0.set_digital_filter(samp_rate/10, 1)
-
-        self.limesdr_source_0_0.set_gain(gain, 0)
-
-        self.limesdr_source_0_0.set_gain(gain, 1)
-
-        self.limesdr_source_0_0.set_antenna(2, 0)
-
-        self.limesdr_source_0_0.set_antenna(2, 1)
-
-        self.limesdr_source_0_0.calibrate(2.5e6, 0)
-
-        self.limesdr_source_0_0.calibrate(2.5e6, 1)
-        self._iq_name_tool_bar = Qt.QToolBar(self)
-        self._iq_name_tool_bar.addWidget(Qt.QLabel('File Path' + ": "))
-        self._iq_name_line_edit = Qt.QLineEdit(str(self.iq_name))
-        self._iq_name_tool_bar.addWidget(self._iq_name_line_edit)
-        self._iq_name_line_edit.returnPressed.connect(
-            lambda: self.set_iq_name(str(str(self._iq_name_line_edit.text()))))
-        self.top_grid_layout.addWidget(self._iq_name_tool_bar, 6, 0, 1, 1)
-        for r in range(6, 7):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
         self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
-        self.gpredict_VarToMsg_0 = gpredict.VarToMsgPair('save')
+        self.gpredict_VarToMsg_0 = gpredict.VarToMsgPair('')
         self.gpredict_MsgPairToVar_0_0_0 = gpredict.MsgPairToVar(self.set_freq)
         self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_doppler_freq)
+        self._gain_range = Range(0, 60, 1, 30, 70)
+        self._gain_win = RangeWidget(self._gain_range, self.set_gain, 'Gain [dB]', "counter_slider", int)
+        self.top_grid_layout.addWidget(self._gain_win, 2, 0, 1, 2)
+        for r in range(2, 3):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.fosphor_qt_sink_c_0_0_0 = fosphor.qt_sink_c()
         self.fosphor_qt_sink_c_0_0_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(freq, samp_rate)
@@ -287,6 +250,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(2, 6):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/wbarnhart/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
         self._carrier_tool_bar = Qt.QToolBar(self)
         self._carrier_tool_bar.addWidget(Qt.QLabel('RX Freq [MHz]' + ": "))
         self._carrier_line_edit = Qt.QLineEdit(str(self.carrier))
@@ -299,7 +263,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.blocks_selector_2 = blocks.selector(gr.sizeof_gr_complex*1,0,0)
-        self.blocks_selector_2.set_enabled(False)
+        self.blocks_selector_2.set_enabled(True)
         self.blocks_selector_1_0 = blocks.selector(gr.sizeof_gr_complex*1,channel,0)
         self.blocks_selector_1_0.set_enabled(True)
         self.blocks_selector_1 = blocks.selector(gr.sizeof_gr_complex*1,channel,0)
@@ -308,8 +272,10 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_selector_0.set_enabled(True)
         self.blocks_message_debug_1 = blocks.message_debug()
         self.blocks_message_debug_0 = blocks.message_debug()
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/wbarnhart/test', True)
-        self.blocks_file_sink_0.set_unbuffered(False)
+        self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch2', True, 0, 0)
+        self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch1', True, 0, 0)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_delay_0_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, abs(int(samp_rate*146e6*time_delay/freq))*int((samp_rate*146e6*time_delay/freq)<0))
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0))
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
@@ -334,6 +300,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
         self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.blocks_selector_2, 'en'))
+        self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.blocks_message_debug_1, 'print_pdu'))
@@ -353,16 +320,16 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.Selective_Combining_BPSK_0, 0))
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_selector_2, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_selector_1, 1))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_selector_1_0, 0))
+        self.connect((self.blocks_file_source_0_0, 0), (self.blocks_selector_1, 0))
+        self.connect((self.blocks_file_source_0_0, 0), (self.blocks_selector_1_0, 1))
         self.connect((self.blocks_selector_0, 0), (self.blocks_selector_2, 2))
         self.connect((self.blocks_selector_0, 0), (self.fosphor_qt_sink_c_0_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.low_pass_filter_0, 0))
         self.connect((self.blocks_selector_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_delay_0_0_0_0, 0))
-        self.connect((self.blocks_selector_2, 0), (self.blocks_file_sink_0, 0))
-        self.connect((self.limesdr_source_0_0, 0), (self.blocks_selector_1, 1))
-        self.connect((self.limesdr_source_0_0, 1), (self.blocks_selector_1, 0))
-        self.connect((self.limesdr_source_0_0, 0), (self.blocks_selector_1_0, 0))
-        self.connect((self.limesdr_source_0_0, 1), (self.blocks_selector_1_0, 1))
+        self.connect((self.blocks_selector_2, 0), (self.filerepeater_AdvFileSink_0, 0))
         self.connect((self.low_pass_filter_0, 0), (self.blocks_complex_to_real_0, 0))
 
     def closeEvent(self, event):
@@ -396,8 +363,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0.set_dly(int(self.samp_rate*146e6*self.time_delay/self.freq)*int((self.samp_rate*146e6*self.time_delay/self.freq)>0))
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.limesdr_source_0_0.set_digital_filter(self.samp_rate/10, 0)
-        self.limesdr_source_0_0.set_digital_filter(self.samp_rate/10, 1)
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 50e3, 10e3, firdes.WIN_HAMMING, 6.76))
 
     def get_carrier(self):
@@ -418,8 +383,8 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.set_time_delay(158e-12*(self.freq-145e6)+111e-6)
         self.blocks_delay_0_0_0.set_dly(int(self.samp_rate*146e6*self.time_delay/self.freq)*int((self.samp_rate*146e6*self.time_delay/self.freq)>0))
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
+        self.filerepeater_AdvFileSink_0.setCenterFrequency(self.freq)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.limesdr_source_0_0.set_center_freq(self.freq+self.freq_shift, 0)
 
     def get_doppler_freq(self):
         return self.doppler_freq
@@ -464,27 +429,17 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.sat = sat
         self._sat_callback(self.sat)
 
-    def get_iq_name(self):
-        return self.iq_name
-
-    def set_iq_name(self, iq_name):
-        self.iq_name = iq_name
-        Qt.QMetaObject.invokeMethod(self._iq_name_line_edit, "setText", Qt.Q_ARG("QString", str(self.iq_name)))
-
     def get_gain(self):
         return self.gain
 
     def set_gain(self, gain):
         self.gain = gain
-        self.limesdr_source_0_0.set_gain(self.gain, 0)
-        self.limesdr_source_0_0.set_gain(self.gain, 1)
 
     def get_freq_shift(self):
         return self.freq_shift
 
     def set_freq_shift(self, freq_shift):
         self.freq_shift = freq_shift
-        self.limesdr_source_0_0.set_center_freq(self.freq+self.freq_shift, 0)
 
     def get_com(self):
         return self.com
