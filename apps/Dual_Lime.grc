@@ -170,7 +170,7 @@ blocks:
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: (2,0,1,1)
+    gui_hint: (2,0,1,2)
     label: Gain [dB]
     min_len: '70'
     orient: Qt.Horizontal
@@ -270,7 +270,7 @@ blocks:
   parameters:
     comment: ''
     'false': 'False'
-    gui_hint: (7,0,1,1)
+    gui_hint: (5,1,1,1)
     label: Save Data
     'true': 'True'
     type: bool
@@ -437,7 +437,7 @@ blocks:
     comment: 'Empirical-based estimation
 
       for channel synchronization'
-    delay: int(samp_rate*146e6*time_delay/freq)*int((freq>=145e6))
+    delay: int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0)
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
@@ -447,7 +447,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [480, 452.0]
+    coordinate: [496, 452.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0_0_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: abs(int(samp_rate*146e6*time_delay/freq))*int((samp_rate*146e6*time_delay/freq)<0)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 340.0]
     rotation: 0
     state: enabled
 - name: blocks_file_sink_0
@@ -478,7 +497,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [264, 184.0]
+    coordinate: [240, 184.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_1
@@ -494,23 +513,6 @@ blocks:
     coordinate: [1384, 600.0]
     rotation: 0
     state: true
-- name: blocks_null_sink_0
-  id: blocks_null_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    bus_structure_sink: '[[0,],]'
-    comment: ''
-    num_inputs: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1208, 504.0]
-    rotation: 0
-    state: enabled
 - name: blocks_selector_0
   id: blocks_selector
   parameters:
@@ -554,7 +556,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 420.0]
+    coordinate: [304, 420.0]
     rotation: 0
     state: enabled
 - name: blocks_selector_1_0
@@ -577,7 +579,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 308.0]
+    coordinate: [304, 308.0]
     rotation: 0
     state: enabled
 - name: blocks_selector_2
@@ -645,7 +647,7 @@ blocks:
     comment: ''
     freq_center: freq
     freq_span: samp_rate
-    gui_hint: (0,1,7,3)
+    gui_hint: (0,2,7,4)
     maxoutbuf: '0'
     minoutbuf: '0'
     wintype: firdes.WIN_BLACKMAN_hARRIS
@@ -684,7 +686,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [264, 148.0]
+    coordinate: [240, 148.0]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0_0_0
@@ -733,7 +735,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 148.0]
+    coordinate: [32, 148.0]
     rotation: 0
     state: enabled
 - name: gpredict_port
@@ -780,7 +782,7 @@ blocks:
     oversample: '0'
     rf_freq: freq+freq_shift
     samp_rate: samp_rate
-    serial: 0009070105C62E09
+    serial: 0009061C02CF232D
   states:
     bus_sink: false
     bus_source: false
@@ -1027,7 +1029,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [544, 236.0]
+    coordinate: [680, 212.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_1_0
@@ -1040,7 +1042,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 564.0]
+    coordinate: [704, 564.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0
@@ -1107,14 +1109,14 @@ connections:
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
 - [blocks_delay_0_0_0, '0', blocks_add_xx_0, '1']
 - [blocks_delay_0_0_0, '0', virtual_sink_1_0, '0']
-- [blocks_selector_0, '0', blocks_null_sink_0, '0']
+- [blocks_delay_0_0_0_0, '0', Maximal_Combining_0, '0']
+- [blocks_delay_0_0_0_0, '0', Selective_Combining_0, '0']
+- [blocks_delay_0_0_0_0, '0', Selective_Combining_BPSK_0, '0']
+- [blocks_delay_0_0_0_0, '0', blocks_add_xx_0, '0']
+- [blocks_delay_0_0_0_0, '0', virtual_sink_1, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
-- [blocks_selector_1_0, '0', Maximal_Combining_0, '0']
-- [blocks_selector_1_0, '0', Selective_Combining_0, '0']
-- [blocks_selector_1_0, '0', Selective_Combining_BPSK_0, '0']
-- [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
-- [blocks_selector_1_0, '0', virtual_sink_1, '0']
+- [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
 - [blocks_selector_2, '0', blocks_file_sink_0, '0']
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [gpredict_VarToMsg_0, msgout, blocks_selector_2, en]

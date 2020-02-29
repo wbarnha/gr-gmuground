@@ -31,7 +31,10 @@ sudo apt install -y \
       libjsoncpp-dev \
       libpng++-dev \
       libvorbis-dev \
-      git 
+      git \
+      ocl-icd-opencl-dev \
+      opencl-clhpp-headers \
+      opencl-headers
 
 pip3 install requests construct
 
@@ -89,6 +92,7 @@ cd
 
 git clone git://git.osmocom.org/gr-fosphor
 cd gr-fosphor
+git checkout beta
 mkdir build
 cd build
 cmake ..
