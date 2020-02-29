@@ -103,7 +103,7 @@ cd
 
 git clone git://git.osmocom.org/gr-fosphor
 cd gr-fosphor
-git checkout beta
+git checkout -b test 6f3a8de592e181e9ac2e76800e50df427827ba5b
 mkdir build
 cd build
 cmake ..
