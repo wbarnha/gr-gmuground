@@ -34,7 +34,8 @@ GR_PYTHON_INSTALL(
     __init__.py
     sqrt.py
     snr_selector.py
-    sample_count.py DESTINATION ${GR_PYTHON_DIR}/gmuground
+    sample_count.py
+    ValToVar.py DESTINATION ${GR_PYTHON_DIR}/gmuground
 )
 
 ########################################################################

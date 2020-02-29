@@ -1,7 +1,7 @@
 #!/bin/bash
 #For setting up dependencies for gr-gmuground
 
-cd
+cd ~/
 git clone https://github.com/quiet/libfec
 cd libfec
 ./configure

@@ -44,6 +44,18 @@ blocks:
     coordinate: [360, 12.0]
     rotation: 0
     state: disabled
+- name: adapt
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 12.0]
+    rotation: 0
+    state: true
 - name: delay
   id: variable_qtgui_entry
   parameters:
@@ -71,23 +83,6 @@ blocks:
     coordinate: [176, 12.0]
     rotation: 0
     state: enabled
-- name: adapt
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [432, 36.0]
-    rotation: 0
-    state: true
 - name: blocks_complex_to_magphase_0
   id: blocks_complex_to_magphase
   parameters:
@@ -216,19 +211,6 @@ blocks:
     coordinate: [1064, 264.0]
     rotation: 0
     state: enabled
-- name: blocks_ctrlport_monitor_0
-  id: blocks_ctrlport_monitor
-  parameters:
-    alias: ''
-    comment: ''
-    en: 'True'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [0, 412.0]
-    rotation: 0
-    state: enabled
 - name: blocks_delay_0
   id: blocks_delay
   parameters:
@@ -245,7 +227,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [600, 300.0]
+    coordinate: [624, 172.0]
     rotation: 0
     state: disabled
 - name: blocks_delay_0_0
@@ -254,7 +236,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    delay: '220'
+    delay: '1000'
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
@@ -264,9 +246,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 220.0]
+    coordinate: [608, 220.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_delay_0_0_0
   id: blocks_delay
   parameters:
@@ -286,27 +268,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [528, 468.0]
-    rotation: 0
-    state: enabled
-- name: blocks_delay_0_0_0_0
-  id: blocks_delay
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: 'Adaptive delay
-
-      for channel synchronization'
-    delay: int(adapt)
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_ports: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [968, 404.0]
     rotation: 0
     state: enabled
 - name: blocks_file_source_0
@@ -403,7 +364,7 @@ blocks:
     coordinate: [1008, 568.0]
     rotation: 0
     state: true
-- name: blocks_vector_sink_x_0_1
+- name: blocks_vector_sink_x_0_0_0
   id: blocks_vector_sink_x
   parameters:
     affinity: ''
@@ -416,7 +377,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1192, 712.0]
+    coordinate: [1200, 720.0]
     rotation: 0
     state: true
 - name: freq_xlating_fir_filter_xxx_0_0
@@ -439,6 +400,21 @@ blocks:
     coordinate: [216, 428.0]
     rotation: 0
     state: disabled
+- name: gmuground_ValToVar_0
+  id: gmuground_ValToVar
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    target: adapt
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1304, 644.0]
+    rotation: 0
+    state: true
 - name: gpredict_MsgPairToVar_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -453,6 +429,19 @@ blocks:
     coordinate: [280, 516.0]
     rotation: 0
     state: disabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math, cmath, numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 12.0]
+    rotation: 0
+    state: enabled
 - name: low_pass_filter_0
   id: low_pass_filter
   parameters:
@@ -660,19 +649,6 @@ blocks:
     coordinate: [56, 492.0]
     rotation: 0
     state: disabled
-- name: virtual_sink_0
-  id: virtual_sink
-  parameters:
-    alias: ''
-    comment: ''
-    stream_id: adaptor
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1184, 644.0]
-    rotation: 0
-    state: true
 
 connections:
 - [blocks_complex_to_magphase_0, '0', blocks_vector_sink_x_0_0, '0']
@@ -686,15 +662,14 @@ connections:
 - [blocks_complex_to_real_0_0_0_0_0, '0', qtgui_time_sink_x_0, '4']
 - [blocks_complex_to_real_0_0_0_0_0_0, '0', qtgui_time_sink_x_0, '5']
 - [blocks_delay_0, '0', blocks_complex_to_real_0_0, '0']
-- [blocks_delay_0_0, '0', blocks_complex_to_real_0_0, '0']
+- [blocks_delay_0_0, '0', blocks_complex_to_real_0_0_0_0_0_0, '0']
 - [blocks_delay_0_0_0, '0', blocks_complex_to_real_0_0, '0']
 - [blocks_delay_0_0_0, '0', phase_sync_0, '0']
-- [blocks_delay_0_0_0_0, '0', blocks_complex_to_real_0_0_0_0_0_0, '0']
 - [blocks_file_source_0, '0', low_pass_filter_0, '0']
 - [blocks_file_source_0_0, '0', freq_xlating_fir_filter_xxx_0_0, '0']
 - [blocks_file_source_0_0, '0', low_pass_filter_0_0, '0']
-- [blocks_sub_xx_0, '0', blocks_vector_sink_x_0_1, '0']
-- [blocks_sub_xx_0, '0', virtual_sink_0, '0']
+- [blocks_sub_xx_0, '0', blocks_vector_sink_x_0_0_0, '0']
+- [blocks_sub_xx_0, '0', gmuground_ValToVar_0, '0']
 - [freq_xlating_fir_filter_xxx_0_0, '0', blocks_delay_0, '0']
 - [low_pass_filter_0, '0', blocks_complex_to_magphase_0, '0']
 - [low_pass_filter_0, '0', blocks_complex_to_real_0, '0']
@@ -705,7 +680,6 @@ connections:
 - [low_pass_filter_0_0, '0', blocks_delay_0, '0']
 - [low_pass_filter_0_0, '0', blocks_delay_0_0, '0']
 - [low_pass_filter_0_0, '0', blocks_delay_0_0_0, '0']
-- [low_pass_filter_0_0, '0', blocks_delay_0_0_0_0, '0']
 - [low_pass_filter_0_0, '0', phase_sync_0_0, '0']
 - [phase_sync_0, '0', blocks_complex_to_real_0_0_0, '0']
 - [phase_sync_0_0, '0', blocks_complex_to_real_0_0_0_0_0, '0']

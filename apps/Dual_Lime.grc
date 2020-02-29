@@ -39,7 +39,7 @@ blocks:
     gui_hint: (0,0,1,1)
     label: RX Freq [MHz]
     type: real
-    value: '97.1'
+    value: '145'
   states:
     bus_sink: false
     bus_source: false
@@ -311,6 +311,18 @@ blocks:
     coordinate: [416, 828.0]
     rotation: 0
     state: enabled
+- name: time_delay
+  id: variable
+  parameters:
+    comment: ''
+    value: 158e-12*(freq-145e6)+111e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 124.0]
+    rotation: 0
+    state: true
 - name: trans_width
   id: variable_qtgui_range
   parameters:
@@ -425,7 +437,7 @@ blocks:
     comment: 'Empirical-based estimation
 
       for channel synchronization'
-    delay: int(samp_rate*146e6*269.1093e-6/freq)
+    delay: int(samp_rate*146e6*time_delay/freq)*int((freq>=145e6))
     maxoutbuf: '0'
     minoutbuf: '0'
     num_ports: '1'
@@ -468,7 +480,7 @@ blocks:
     bus_structure: null
     coordinate: [264, 184.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_message_debug_1
   id: blocks_message_debug
   parameters:
@@ -674,7 +686,7 @@ blocks:
     bus_structure: null
     coordinate: [264, 148.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: gpredict_MsgPairToVar_0_0_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -723,7 +735,7 @@ blocks:
     bus_structure: null
     coordinate: [16, 148.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: gpredict_port
   id: parameter
   parameters:

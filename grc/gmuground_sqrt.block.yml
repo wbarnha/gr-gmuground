@@ -28,7 +28,7 @@ outputs:
 
 templates:
     imports: import gmuground
-    make: "gmuground.sqrt(\n\titem_size=${type.size})"
+    make: "gmuground.sqrt(item_size=${type.size})"
 
 documentation: Calculates the square root of an input vector.
 

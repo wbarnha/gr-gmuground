@@ -23,5 +23,5 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/gmuground
+    interp_delay.h DESTINATION include/gmuground
 )
