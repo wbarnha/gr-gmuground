@@ -243,6 +243,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(2, 6):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.filerepeater_StateToBool_0 = filerepeater.StateToBool()
         self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/wbarnhart/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
         self._carrier_tool_bar = Qt.QToolBar(self)
         self._carrier_tool_bar.addWidget(Qt.QLabel('RX Freq [MHz]' + ": "))
@@ -293,9 +294,10 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.filerepeater_StateToBool_0, 'bool'), (self.blocks_selector_2, 'en'))
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
-        self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.blocks_selector_2, 'en'))
         self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
+        self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.filerepeater_StateToBool_0, 'state'))
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.blocks_message_debug_1, 'print_pdu'))
