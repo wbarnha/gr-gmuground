@@ -4,6 +4,7 @@
 The following dependencies must be installed:
 
 - [GNU Radio](https://github.com/gnuradio/gnuradio) (>=3.8.0)
+- [gr-limesdr](https://github.com/myriadrf/gr-limesdr) (gr-3.8)
 - [gr-satellites](https://github.com/daniestevez/gr-satellites) (next)
 - [gr-gpredict-doppler](https://github.com/ghostop14/gr-gpredict-doppler) (maint-3.8)
 - [gr-filerepeater](https://github.com/ghostop14/gr-filerepeater)
