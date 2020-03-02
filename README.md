@@ -43,7 +43,6 @@ Alternatively, you can run the `setup.sh` Bash script to install the dependencie
 # Operation
 
 ![](https://user-images.githubusercontent.com/25623043/75466860-d3956980-5958-11ea-8152-1d64cde69500.png)
-
-TBD
+To change the center frequency in real time, either double-click on the screen or enter the frequency in the upper-left corner. The center frequency is automatically shifted to process USB signals and decode these signals.
 
 More information can be found in the Wiki.
