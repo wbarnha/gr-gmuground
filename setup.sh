@@ -1,15 +1,6 @@
 #!/bin/bash
 #For setting up dependencies for gr-gmuground
 
-cd ~/
-git clone https://github.com/quiet/libfec
-cd libfec
-./configure
-make
-sudo make install
-sudo ldconfig
-cd
-
 sudo apt install  
       libboost-dev \
       libboost-date-time-dev \
@@ -37,6 +28,15 @@ sudo apt install
       opencl-headers
 
 pip3 install requests construct
+
+cd ~/
+git clone https://github.com/quiet/libfec
+cd libfec
+./configure
+make
+sudo make install
+sudo ldconfig
+cd
 
 git clone https://github.com/myriadrf/gr-limesdr
 cd gr-limesdr
@@ -88,6 +88,10 @@ cmake ..
 make -j3
 sudo make install
 sudo ldconfig
+cd ..
+for file in apps/*.grc
+do grcc $file
+done
 cd
 
 sudo apt-get install cmake xorg-dev libglu1-mesa-dev
@@ -121,6 +125,10 @@ cmake ../
 make -j3
 sudo make install
 sudo ldconfig
+cd ..
+for file in apps/*.grc
+do grcc $file
+done
 cd
 
 git clone https://github.com/ghostop14/gr-filerepeater

@@ -665,6 +665,23 @@ blocks:
     coordinate: [1296, 132.0]
     rotation: 0
     state: disabled
+- name: decodeApt_0
+  id: decodeApt
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain: '255'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate_in: '1920000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 976.0]
+    rotation: 0
+    state: true
 - name: filerepeater_AdvFileSink_0
   id: filerepeater_AdvFileSink
   parameters:

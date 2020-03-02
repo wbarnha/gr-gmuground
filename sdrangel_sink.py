@@ -21,16 +21,20 @@ if __name__ == '__main__':
         except:
             print("Warning: failed to XInitThreads()")
 
+import os
+import sys
+sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
+
 from PyQt5 import Qt
 from PyQt5.QtCore import QObject, pyqtSlot
 from gnuradio import blocks
 from gnuradio import gr
 from gnuradio.filter import firdes
-import sys
 import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+from satnogs_cw_decoder import satnogs_cw_decoder  # grc-generated hier_block
 import satellites.core
 from gnuradio import qtgui
 
@@ -93,10 +97,32 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
             lambda i: self.set_sat(self._sat_options[i]))
         # Create the radio buttons
         self.top_grid_layout.addWidget(self._sat_tool_bar)
+        self.satnogs_cw_decoder_0 = satnogs_cw_decoder(
+            antenna="",
+            bfo_freq=1e3,
+            bw=0.0,
+            decoded_data_file_path="/tmp/.satnogs/data/data",
+            dev_args="",
+            doppler_correction_per_sec=20,
+            enable_iq_dump=0,
+            file_path="test.wav",
+            gain=0.0,
+            iq_file_path="/tmp/iq.dat",
+            lo_offset=100e3,
+            rigctl_port=4532,
+            rx_freq=100e6,
+            samp_rate_rx=0.0,
+            soapy_rx_device="driver=invalid",
+            udp_IP="127.0.0.1",
+            udp_port=16887,
+            waterfall_file_path="/tmp/waterfall.dat",
+            wpm=20,
+        )
         self.satellites_satellite_decoder_0 = satellites.core.gr_satellites_flowgraph(name = sat_type[sat], samp_rate = samp_rate, grc_block = True, iq = False)
-        self.blocks_udp_source_0_0 = blocks.udp_source(gr.sizeof_float*1, '127.0.0.1', 7356, 1472, False)
-        self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
+        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_gr_complex*1, '127.0.0.1', 7356, 1472, False)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_message_debug_1 = blocks.message_debug()
+        self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
 
 
 
@@ -104,8 +130,10 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.blocks_message_debug_1, 'print'))
-        self.connect((self.blocks_throttle_0_0, 0), (self.satellites_satellite_decoder_0, 0))
-        self.connect((self.blocks_udp_source_0_0, 0), (self.blocks_throttle_0_0, 0))
+        self.connect((self.blocks_complex_to_real_0, 0), (self.satellites_satellite_decoder_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_complex_to_real_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.satnogs_cw_decoder_0, 0))
+        self.connect((self.blocks_udp_source_0, 0), (self.blocks_throttle_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "sdrangel_sink")
@@ -130,7 +158,7 @@ class sdrangel_sink(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
 
 

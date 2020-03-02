@@ -275,8 +275,8 @@ class sdrangel_source(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.blocks_udp_source_0, 0), (self.blocks_complex_to_real_0_0, 0))
         self.connect((self.blocks_udp_source_0, 0), (self.satnogs_cw_decoder_0, 0))
-        self.connect((self.limesdr_source_0_1, 1), (self.blocks_selector_1, 0))
         self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1, 1))
+        self.connect((self.limesdr_source_0_1, 1), (self.blocks_selector_1, 0))
         self.connect((self.limesdr_source_0_1, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.limesdr_source_0_1, 1), (self.blocks_selector_1_0, 1))
 
