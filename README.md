@@ -41,6 +41,9 @@ Alternatively, you can run the `setup.sh` Bash script to install the dependencie
 (Note: The guide for installing gr-fosphor [here](https://osmocom.org/projects/sdr/wiki/fosphor) indicates you must install the OpenCL libraries for Intel, AMD, or Nvidia. You must install the OpenCL library for your computer!)
 
 # Operation
+
+![](https://user-images.githubusercontent.com/25623043/75466860-d3956980-5958-11ea-8152-1d64cde69500.png)
+
 TBD
 
 More information can be found in the Wiki.
