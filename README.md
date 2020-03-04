@@ -2,7 +2,7 @@
 <p align="center">
   <img src=https://user-images.githubusercontent.com/25623043/75652038-193b8600-5c28-11ea-8f26-32cc496427ec.jpg>
 </p>
-Art produced and featured with permission from Jae Wook Choi.
+Art produced and reused with permission from Jae Wook Choi.
 
 # Installation
 The following dependencies must be installed:
