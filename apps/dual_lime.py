@@ -101,6 +101,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.doppler_freq = doppler_freq = freq
         self.time_delay = time_delay = 158e-12*(freq-145e6)+111e-6
         self.sig_save = sig_save = 2
+        self.save = save = 0
         self.sat_type = sat_type = {0:'3CAT-2',1:'AO-73',2:'FloripaSat 1',3:'ITASAT 1',4:'JY1-Sat',5:'Nayif-1',6:'UKube-1'}
         self.sat = sat = 0
         self.gain = gain = 30
@@ -210,7 +211,15 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(2, 6):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.save = _save_toggle_button = guiextra.MsgPushButton('Save Data', 'pressed',1,"default","default")
+        if int == bool:
+        	self._save_choices = {'Pressed': bool(1), 'Released': bool(0)}
+        elif int == str:
+        	self._save_choices = {'Pressed': "1".replace("'",""), 'Released': "0".replace("'","")}
+        else:
+        	self._save_choices = {'Pressed': 1, 'Released': 0}
+
+        _save_toggle_button = guiextra.ToggleButton(self.set_save, 'Save Data', self._save_choices, False,"'value'".replace("'",""))
+        _save_toggle_button.setColors("default","default","default","default")
         self.save = _save_toggle_button
 
         self.top_grid_layout.addWidget(_save_toggle_button, 5, 1, 1, 1)
@@ -311,8 +320,8 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
         self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.blocks_message_debug_1, 'print_pdu'))
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.satellites_print_timestamp_0, 'in'))
-        self.msg_connect((self.save, 'pressed'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
-        self.msg_connect((self.save, 'pressed'), (self.filerepeater_StateToBool_0, 'state'))
+        self.msg_connect((self.save, 'state'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
+        self.msg_connect((self.save, 'state'), (self.filerepeater_StateToBool_0, 'state'))
         self.connect((self.Maximal_Combining_0, 0), (self.blocks_selector_0, 3))
         self.connect((self.Selective_Combining_0, 0), (self.blocks_selector_0, 0))
         self.connect((self.Selective_Combining_BPSK_0, 0), (self.blocks_selector_0, 1))
@@ -417,6 +426,12 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.sig_save = sig_save
         self._sig_save_callback(self.sig_save)
         self.blocks_selector_2.set_input_index(self.sig_save)
+
+    def get_save(self):
+        return self.save
+
+    def set_save(self, save):
+        self.save = save
 
     def get_sat_type(self):
         return self.sat_type

@@ -229,6 +229,29 @@ blocks:
     coordinate: [1120, 12.0]
     rotation: 0
     state: true
+- name: save
+  id: variable_qtgui_toggle_button_msg
+  parameters:
+    comment: ''
+    gui_hint: (5,1,1,1)
+    initPressed: 'False'
+    label: Save Data
+    outputmsgname: value
+    pressBackgroundColor: default
+    pressFontColor: default
+    pressed: '1'
+    relBackgroundColor: default
+    relFontColor: default
+    released: '0'
+    type: int
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [34, 1187]
+    rotation: 0
+    state: true
 - name: sig_save
   id: variable_qtgui_chooser
   parameters:
@@ -685,7 +708,7 @@ blocks:
     affinity: ''
     alias: ''
     autostartFreqChange: 'False'
-    basedir: /home/stars/
+    basedir: /home/wbarnha/
     basefile: gr_record
     bits_per_sample: '8'
     comment: ''
@@ -1109,24 +1132,6 @@ blocks:
     coordinate: [1048, 812.0]
     rotation: 0
     state: disabled
-- name: save
-  id: variable_qtgui_msg_push_button
-  parameters:
-    comment: ''
-    gui_hint: (5,1,1,1)
-    label: Save Data
-    msgName: pressed
-    relBackgroundColor: default
-    relFontColor: default
-    type: int
-    value: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [48, 1174]
-    rotation: 0
-    state: true
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1256,10 +1261,9 @@ connections:
 - [qtgui_freq_sink_x_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
-- [save, pressed, filerepeater_AdvFileSink_0, recordstate]
-- [save, pressed, filerepeater_StateToBool_0, state]
+- [save, state, filerepeater_AdvFileSink_0, recordstate]
+- [save, state, filerepeater_StateToBool_0, state]
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
-- [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']
