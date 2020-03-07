@@ -229,23 +229,6 @@ blocks:
     coordinate: [1120, 12.0]
     rotation: 0
     state: true
-- name: save
-  id: variable_qtgui_check_box
-  parameters:
-    comment: ''
-    'false': '0'
-    gui_hint: (5,1,1,1)
-    label: Save Data
-    'true': '1'
-    type: int
-    value: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [432, 860.0]
-    rotation: 0
-    state: enabled
 - name: sig_save
   id: variable_qtgui_chooser
   parameters:
@@ -300,7 +283,7 @@ blocks:
     bus_structure: null
     coordinate: [1192, 344.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: Display
   id: qtgui_tab_widget
   parameters:
@@ -645,7 +628,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    enabled: 'True'
+    enabled: 'False'
     input_index: sig_save
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -702,7 +685,7 @@ blocks:
     affinity: ''
     alias: ''
     autostartFreqChange: 'False'
-    basedir: /home/
+    basedir: /home/stars/
     basefile: gr_record
     bits_per_sample: '8'
     comment: ''
@@ -735,7 +718,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [336, 1104.0]
+    coordinate: [332, 1110]
     rotation: 0
     state: enabled
 - name: fosphor_qt_sink_c_0_0_0
@@ -820,23 +803,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1408, 452.0]
-    rotation: 0
-    state: enabled
-- name: gpredict_VarToMsg_0
-  id: gpredict_VarToMsg
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    msgname: ''
-    target: save
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [64, 1220.0]
     rotation: 0
     state: enabled
 - name: gpredict_doppler_0
@@ -1143,6 +1109,24 @@ blocks:
     coordinate: [1048, 812.0]
     rotation: 0
     state: disabled
+- name: save
+  id: variable_qtgui_msg_push_button
+  parameters:
+    comment: ''
+    gui_hint: (5,1,1,1)
+    label: Save Data
+    msgName: pressed
+    relBackgroundColor: default
+    relFontColor: default
+    type: int
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1174]
+    rotation: 0
+    state: true
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1267,13 +1251,13 @@ connections:
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
-- [gpredict_VarToMsg_0, msgout, filerepeater_AdvFileSink_0, recordstate]
-- [gpredict_VarToMsg_0, msgout, filerepeater_StateToBool_0, state]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [qtgui_freq_sink_x_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
+- [save, pressed, filerepeater_AdvFileSink_0, recordstate]
+- [save, pressed, filerepeater_StateToBool_0, state]
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
