@@ -300,7 +300,7 @@ blocks:
     bus_structure: null
     coordinate: [1192, 344.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: Display
   id: qtgui_tab_widget
   parameters:
@@ -489,7 +489,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/wbarnhart/presync/145mhzch1
+    file: /home/wbarnha/presync/145mhzch1
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -511,7 +511,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/wbarnhart/presync/145mhzch2
+    file: /home/wbarnha/presync/145mhzch2
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -702,7 +702,7 @@ blocks:
     affinity: ''
     alias: ''
     autostartFreqChange: 'False'
-    basedir: /home/presync/
+    basedir: /home/
     basefile: gr_record
     bits_per_sample: '8'
     comment: ''
@@ -754,7 +754,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1136, 444.0]
+    coordinate: [1155, 448]
     rotation: 0
     state: enabled
 - name: freq

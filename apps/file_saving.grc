@@ -108,7 +108,7 @@ blocks:
     affinity: ''
     alias: ''
     autostartFreqChange: 'False'
-    basedir: /home/presync/
+    basedir: /home/
     basefile: gr_record
     bits_per_sample: '8'
     comment: ''

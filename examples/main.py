@@ -110,9 +110,9 @@ class main(gr.top_block, Qt.QWidget):
 
         self.top_grid_layout.addWidget(self.fmusbwide_0)
         self.blocks_message_debug_1 = blocks.message_debug()
-        self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch2', True, 0, 0)
+        self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnha/presync/145mhzch2', True, 0, 0)
         self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch1', True, 0, 0)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnha/presync/145mhzch1', True, 0, 0)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.Delay_sync_0 = Delay_sync(
             freq=146e6,

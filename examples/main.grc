@@ -44,6 +44,18 @@ blocks:
     coordinate: [200, 108.0]
     rotation: 0
     state: true
+- name: sat_type
+  id: variable
+  parameters:
+    comment: ''
+    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1-Sat'',5:''Nayif-1'',6:''UKube-1''}'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [294, 108]
+    rotation: 0
+    state: true
 - name: Combine_select_0
   id: Combine_select
   parameters:
@@ -60,7 +72,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 212.0]
+    coordinate: [525, 210]
     rotation: 0
     state: true
 - name: Delay_sync_0
@@ -81,6 +93,40 @@ blocks:
     coordinate: [264, 216.0]
     rotation: 0
     state: true
+- name: Display
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: (0,2,7,4)
+    label0: Waterfall
+    label1: NOAA
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Telemetry
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [578, 11]
+    rotation: 0
+    state: enabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -88,7 +134,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/wbarnhart/presync/145mhzch1
+    file: /home/wbarnha/presync/145mhzch1
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -110,7 +156,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/wbarnhart/presync/145mhzch2
+    file: /home/wbarnha/presync/145mhzch2
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -135,7 +181,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1504, 168.0]
+    coordinate: [1707, 167]
     rotation: 0
     state: true
 - name: blocks_selector_2
@@ -161,6 +207,22 @@ blocks:
     coordinate: [512, 1088.0]
     rotation: 0
     state: disabled
+- name: file_saving_0
+  id: file_saving
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    freq: 146e6
+    gui_hint: ''
+    samp_rate: 600e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [974, 345]
+    rotation: 0
+    state: true
 - name: filerepeater_AdvFileSink_0
   id: filerepeater_AdvFileSink
   parameters:
@@ -221,7 +283,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 196.0]
+    coordinate: [855, 195]
     rotation: 0
     state: true
 - name: fosphor_qt_sink_c_0
@@ -240,7 +302,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 356.0]
+    coordinate: [929, 130]
     rotation: 0
     state: true
 - name: gpredict_MsgPairToVar_0_0_0
@@ -254,7 +316,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 364.0]
+    coordinate: [1230, 138]
     rotation: 0
     state: enabled
 - name: gpredict_VarToMsg_0
@@ -326,6 +388,23 @@ blocks:
     coordinate: [24, 380.0]
     rotation: 0
     state: disabled
+- name: offset
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Frequency Offset
+    short_id: ''
+    type: eng_float
+    value: 50e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [430, 12]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: parameter
   parameters:
@@ -357,7 +436,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1248, 220.0]
+    coordinate: [1408, 219]
     rotation: 0
     state: enabled
 - name: satellites_satellite_decoder_0
@@ -378,7 +457,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 212.0]
+    coordinate: [1182, 211]
     rotation: 0
     state: true
 - name: satnogs_cw_decoder_0
@@ -454,12 +533,15 @@ blocks:
     state: disabled
 
 connections:
+- [Combine_select_0, '0', file_saving_0, '2']
 - [Combine_select_0, '0', fmusbwide_0, '0']
 - [Combine_select_0, '0', fosphor_qt_sink_c_0, '0']
 - [Delay_sync_0, '0', Combine_select_0, '0']
 - [Delay_sync_0, '1', Combine_select_0, '1']
 - [blocks_file_source_0, '0', Delay_sync_0, '0']
+- [blocks_file_source_0, '0', file_saving_0, '0']
 - [blocks_file_source_0_0, '0', Delay_sync_0, '1']
+- [blocks_file_source_0_0, '0', file_saving_0, '1']
 - [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [fmusbwide_0, '0', satellites_satellite_decoder_0, '0']

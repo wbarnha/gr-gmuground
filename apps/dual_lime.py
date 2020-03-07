@@ -25,7 +25,6 @@ import os
 import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
-from AptUI import AptUI  # grc-generated hier_block
 from Maximal_Combining import Maximal_Combining  # grc-generated hier_block
 from PyQt5 import Qt
 from PyQt5.QtCore import QObject, pyqtSlot
@@ -259,7 +258,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self._fosphor_qt_sink_c_0_0_0_win = sip.wrapinstance(self.fosphor_qt_sink_c_0_0_0.pyqwidget(), Qt.QWidget)
         self.Display_layout_0.addWidget(self._fosphor_qt_sink_c_0_0_0_win)
         self.filerepeater_StateToBool_0 = filerepeater.StateToBool()
-        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/presync/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
+        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
         self._carrier_tool_bar = Qt.QToolBar(self)
         self._carrier_tool_bar.addWidget(Qt.QLabel('RX Freq [MHz]' + ": "))
         self._carrier_line_edit = Qt.QLineEdit(str(self.carrier))
@@ -281,9 +280,9 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_selector_0.set_enabled(True)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_message_debug_1 = blocks.message_debug()
-        self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch2', True, 0, 0)
+        self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnha/presync/145mhzch2', True, 0, 0)
         self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch1', True, 0, 0)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnha/presync/145mhzch1', True, 0, 0)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_delay_0_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, abs(int(samp_rate*146e6*time_delay/freq))*int((samp_rate*146e6*time_delay/freq)<0))
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0))
@@ -302,9 +301,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
             filter_alpha=1e-3,
             tag_samps=1000,
         )
-        self.AptUI_0 = AptUI()
-
-        self.Display_layout_1.addWidget(self.AptUI_0)
 
 
 
@@ -338,7 +334,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_file_source_0_0, 0), (self.blocks_selector_1, 0))
         self.connect((self.blocks_file_source_0_0, 0), (self.blocks_selector_1_0, 1))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_complex_to_real_0, 0))
-        self.connect((self.blocks_selector_0, 0), (self.AptUI_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.blocks_selector_2, 2))
         self.connect((self.blocks_selector_0, 0), (self.fosphor_qt_sink_c_0_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))

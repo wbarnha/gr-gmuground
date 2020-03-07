@@ -1,7 +1,7 @@
 #!/bin/bash
 #For setting up dependencies to use gr-gmuground
 
-sudo apt install  
+sudo apt install -y \
       libboost-dev \
       libboost-date-time-dev \
       libboost-filesystem-dev \
@@ -10,6 +10,7 @@ sudo apt install
       libboost-thread-dev \
       libboost-regex-dev \
       libboost-test-dev \
+      libboost-all-dev \
       swig \
       cmake \
       build-essential \
@@ -25,7 +26,10 @@ sudo apt install
       git \
       ocl-icd-opencl-dev \
       opencl-clhpp-headers \
-      opencl-headers
+      opencl-headers \
+      libogg-dev \
+      libvorbis-dev
+
 
 pip3 install requests construct
 
@@ -36,6 +40,27 @@ cd libfec
 make
 sudo make install
 sudo ldconfig
+cd
+
+
+sudo add-apt-repository -y ppa:myriadrf/drivers
+sudo apt-get update
+sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images
+sudo apt-get install soapysdr-tools soapysdr-module-lms7
+
+#soapysdr-tools use to be called just soapysdr on older packages
+sudo apt-get install soapysdr soapysdr-module-lms7
+
+git clone https://github.com/myriadrf/LimeSuite.git
+cd LimeSuite
+git checkout stable
+mkdir builddir && cd builddir
+cmake ../
+make -j4
+sudo make install
+sudo ldconfig
+cd ~/LimeSuite/udev-rules
+sudo ./install.sh
 cd
 
 rm -rf gr-limesdr
@@ -94,7 +119,7 @@ make -j3
 sudo make install
 sudo ldconfig
 cd ..
-for file in apps/*.grc
+for file in examples/*.grc
 do grcc $file
 done
 cd
@@ -110,6 +135,7 @@ sudo make install
 sudo ldconfig
 cd
 
+sudo apt-get install intel-opencl-icd
 rm -rf gr-fosphor
 git clone git://git.osmocom.org/gr-fosphor
 cd gr-fosphor
