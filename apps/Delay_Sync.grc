@@ -1,0 +1,397 @@
+options:
+  parameters:
+    author: William Barnhart
+    category: gmuground
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Delay Synchronization
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: Delay_sync
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Delay Synchronization
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: channel
+  id: variable_qtgui_chooser
+  parameters:
+    comment: 'Delayed Channel refers to the
+
+      channel corresponding to an
+
+      antenna with a longer coaxial line'
+    gui_hint: ''
+    label: Delayed Channel
+    label0: Vertical
+    label1: Horizontal
+    label2: Equal
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '2'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: int
+    value: '0'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 12.0]
+    rotation: 0
+    state: enabled
+- name: time_delay
+  id: variable
+  parameters:
+    comment: ''
+    value: 158e-12*(freq-145e6)+111e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 108.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_magphase_0
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 216.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_magphase_0_0
+  id: blocks_complex_to_magphase
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 344.0]
+    rotation: 0
+    state: true
+- name: blocks_delay_0_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'Empirical-based estimation
+
+      for channel synchronization'
+    delay: int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 340.0]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0_0_0_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: abs(int(samp_rate*146e6*time_delay/freq))*int((samp_rate*146e6*time_delay/freq)<0)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 228.0]
+    rotation: 0
+    state: enabled
+- name: blocks_magphase_to_complex_0
+  id: blocks_magphase_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 216.0]
+    rotation: 0
+    state: true
+- name: blocks_selector_1
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: channel
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 308.0]
+    rotation: 0
+    state: enabled
+- name: blocks_selector_1_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: channel
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    num_outputs: '1'
+    output_index: '0'
+    showports: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 196.0]
+    rotation: 0
+    state: enabled
+- name: blocks_sub_xx_0
+  id: blocks_sub_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 296.0]
+    rotation: 0
+    state: true
+- name: blocks_sub_xx_0_0
+  id: blocks_sub_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1048, 248.0]
+    rotation: 0
+    state: true
+- name: blocks_vector_sink_x_0
+  id: blocks_vector_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    reserve_items: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 384.0]
+    rotation: 0
+    state: true
+- name: freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Frequency
+    short_id: ''
+    type: eng_float
+    value: 146e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 28.0]
+    rotation: 0
+    state: true
+- name: pad_sink_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Ch1
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 292.0]
+    rotation: 0
+    state: true
+- name: pad_sink_0_0
+  id: pad_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Ch2
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1464, 228.0]
+    rotation: 0
+    state: true
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Ch1
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 196.0]
+    rotation: 0
+    state: true
+- name: pad_source_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Ch2
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 308.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sample Rate
+    short_id: ''
+    type: ''
+    value: 600e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 28.0]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_complex_to_magphase_0, '0', blocks_magphase_to_complex_0, '0']
+- [blocks_complex_to_magphase_0, '1', blocks_sub_xx_0, '0']
+- [blocks_complex_to_magphase_0, '1', blocks_sub_xx_0_0, '0']
+- [blocks_complex_to_magphase_0_0, '0', blocks_vector_sink_x_0, '0']
+- [blocks_complex_to_magphase_0_0, '1', blocks_sub_xx_0, '1']
+- [blocks_delay_0_0_0, '0', blocks_complex_to_magphase_0_0, '0']
+- [blocks_delay_0_0_0_0, '0', blocks_complex_to_magphase_0, '0']
+- [blocks_delay_0_0_0_0, '0', pad_sink_0, '0']
+- [blocks_magphase_to_complex_0, '0', pad_sink_0_0, '0']
+- [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
+- [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
+- [blocks_sub_xx_0, '0', blocks_sub_xx_0_0, '1']
+- [blocks_sub_xx_0_0, '0', blocks_magphase_to_complex_0, '1']
+- [pad_source_0, '0', blocks_selector_1, '1']
+- [pad_source_0, '0', blocks_selector_1_0, '0']
+- [pad_source_0_0, '0', blocks_selector_1, '0']
+- [pad_source_0_0, '0', blocks_selector_1_0, '1']
+
+metadata:
+  file_format: 1

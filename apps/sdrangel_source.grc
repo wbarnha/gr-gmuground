@@ -502,12 +502,14 @@ blocks:
     comment: ''
     freq_center: freq
     freq_span: samp_rate
+    maxoutbuf: '0'
+    minoutbuf: '0'
     wintype: firdes.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1232, 396.0]
+    coordinate: [1176, 436.0]
     rotation: 0
     state: true
 - name: freq
@@ -541,6 +543,20 @@ blocks:
     coordinate: [264, 148.0]
     rotation: 0
     state: disabled
+- name: gpredict_MsgPairToVar_0_0_0
+  id: gpredict_MsgPairToVar
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    target: freq
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1352, 388.0]
+    rotation: 0
+    state: enabled
 - name: gpredict_doppler_0
   id: gpredict_doppler
   parameters:
@@ -605,7 +621,7 @@ blocks:
     oversample: '0'
     rf_freq: freq
     samp_rate: samp_rate
-    serial: 0009070105C62E09
+    serial: ''
   states:
     bus_sink: false
     bus_source: false
@@ -686,6 +702,7 @@ connections:
 - [blocks_selector_1_0, '0', blocks_add_xx_0, '0']
 - [blocks_udp_source_0, '0', blocks_complex_to_real_0_0, '0']
 - [blocks_udp_source_0, '0', satnogs_cw_decoder_0, '0']
+- [fosphor_glfw_sink_c_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [limesdr_source_0_1, '0', blocks_selector_1, '1']

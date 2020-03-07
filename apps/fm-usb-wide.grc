@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 12.0]
+    coordinate: [320, 12.0]
     rotation: 0
     state: enabled
 - name: mod
@@ -49,40 +49,28 @@ blocks:
   parameters:
     comment: ''
     gui_hint: ''
-    label: Modulation
-    label0: FM
-    label1: USB
-    label2: USB (Wide)
+    label: Mode
+    label0: USB
+    label1: USB (Wide)
+    label2: FM
     label3: ''
     label4: ''
     labels: '[]'
     num_opts: '3'
-    option1: '1'
-    option2: '2'
+    option1: '2'
+    option2: '0'
     option3: '3'
     option4: '4'
     options: '[0, 1, 2]'
     orient: Qt.QVBoxLayout
     type: int
-    value: '0'
+    value: '1'
     widget: combo_box
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [432, 4.0]
-    rotation: 0
-    state: enabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: 2.4e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [232, 12.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0
@@ -258,7 +246,7 @@ blocks:
     bus_structure: null
     coordinate: [1008, 200.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_throttle_0
   id: blocks_throttle
   parameters:
@@ -277,7 +265,24 @@ blocks:
     bus_structure: null
     coordinate: [1200, 388.0]
     rotation: 0
-    state: enabled
+    state: bypassed
+- name: decim
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Decimation
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 4.0]
+    rotation: 0
+    state: true
 - name: filter_width
   id: parameter
   parameters:
@@ -304,7 +309,7 @@ blocks:
     label: frequency
     short_id: f
     type: eng_float
-    value: '0'
+    value: 146e6
   states:
     bus_sink: false
     bus_source: false
@@ -319,7 +324,7 @@ blocks:
     alias: ''
     center_freq: doppler_freq-freq+offset
     comment: ''
-    decim: '50'
+    decim: decim
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
@@ -339,7 +344,7 @@ blocks:
     alias: ''
     center_freq: doppler_freq-freq+offset
     comment: ''
-    decim: '50'
+    decim: decim
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
@@ -359,7 +364,7 @@ blocks:
     alias: ''
     center_freq: doppler_freq-freq+offset
     comment: ''
-    decim: '50'
+    decim: decim
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
@@ -494,7 +499,24 @@ blocks:
     bus_structure: null
     coordinate: [1200, 228.0]
     rotation: 0
-    state: enabled
+    state: disabled
+- name: samp_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sample Rate
+    short_id: ''
+    type: eng_float
+    value: 600e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 4.0]
+    rotation: 0
+    state: true
 
 connections:
 - [analog_quadrature_demod_cf_0, '0', blocks_selector_0, '0']

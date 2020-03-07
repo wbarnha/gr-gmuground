@@ -7,7 +7,7 @@
 # GNU Radio Python Flow Graph
 # Title: Dual Lime RX
 # Author: William Barnhart
-# GNU Radio version: 3.8.0.0
+# GNU Radio version: 3.8.1.0
 
 from distutils.version import StrictVersion
 
@@ -54,7 +54,7 @@ from gnuradio import qtgui
 
 class dual_lime(gr.top_block, Qt.QWidget):
 
-    def __init__(self, gpredict_port=4532, offset=50e3, parameter_0=0, samp_rate=600e3):
+    def __init__(self, gpredict_port=4532, offset=50e3, samp_rate=600e3):
         gr.top_block.__init__(self, "Dual Lime RX")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Dual Lime RX")
@@ -90,7 +90,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         self.gpredict_port = gpredict_port
         self.offset = offset
-        self.parameter_0 = parameter_0
         self.samp_rate = samp_rate
 
         ##################################################
@@ -112,6 +111,26 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
+        # Create the options list
+        self._sig_save_options = (2, 0, 1, )
+        # Create the labels list
+        self._sig_save_labels = ('Combined Signal', 'Ch. 1', 'Ch. 2', )
+        # Create the combo box
+        self._sig_save_tool_bar = Qt.QToolBar(self)
+        self._sig_save_tool_bar.addWidget(Qt.QLabel('Channel to Save' + ": "))
+        self._sig_save_combo_box = Qt.QComboBox()
+        self._sig_save_tool_bar.addWidget(self._sig_save_combo_box)
+        for _label in self._sig_save_labels: self._sig_save_combo_box.addItem(_label)
+        self._sig_save_callback = lambda i: Qt.QMetaObject.invokeMethod(self._sig_save_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._sig_save_options.index(i)))
+        self._sig_save_callback(self.sig_save)
+        self._sig_save_combo_box.currentIndexChanged.connect(
+            lambda i: self.set_sig_save(self._sig_save_options[i]))
+        # Create the radio buttons
+        self.top_grid_layout.addWidget(self._sig_save_tool_bar, 5, 0, 1, 1)
+        for r in range(5, 6):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         # Create the options list
         self._com_options = (0, 1, 2, 3, )
         # Create the labels list
@@ -191,26 +210,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(2, 6):
             self.top_grid_layout.setColumnStretch(c, 1)
-        # Create the options list
-        self._sig_save_options = (2, 0, 1, )
-        # Create the labels list
-        self._sig_save_labels = ('Combined Signal', 'Ch. 1', 'Ch. 2', )
-        # Create the combo box
-        self._sig_save_tool_bar = Qt.QToolBar(self)
-        self._sig_save_tool_bar.addWidget(Qt.QLabel('Channel to Save' + ": "))
-        self._sig_save_combo_box = Qt.QComboBox()
-        self._sig_save_tool_bar.addWidget(self._sig_save_combo_box)
-        for _label in self._sig_save_labels: self._sig_save_combo_box.addItem(_label)
-        self._sig_save_callback = lambda i: Qt.QMetaObject.invokeMethod(self._sig_save_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._sig_save_options.index(i)))
-        self._sig_save_callback(self.sig_save)
-        self._sig_save_combo_box.currentIndexChanged.connect(
-            lambda i: self.set_sig_save(self._sig_save_options[i]))
-        # Create the radio buttons
-        self.top_grid_layout.addWidget(self._sig_save_tool_bar, 5, 0, 1, 1)
-        for r in range(5, 6):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
         _save_check_box = Qt.QCheckBox('Save Data')
         self._save_choices = {True: 1, False: 0}
         self._save_choices_inv = dict((v,k) for k,v in self._save_choices.items())
@@ -244,10 +243,8 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
         self.gpredict_VarToMsg_0 = gpredict.VarToMsgPair('')
         self.gpredict_MsgPairToVar_0_0_0 = gpredict.MsgPairToVar(self.set_freq)
-        self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_doppler_freq)
         self._gain_range = Range(0, 60, 1, 30, 70)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, 'Gain [dB]', "counter_slider", int)
         self.top_grid_layout.addWidget(self._gain_win, 2, 0, 1, 2)
@@ -262,7 +259,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self._fosphor_qt_sink_c_0_0_0_win = sip.wrapinstance(self.fosphor_qt_sink_c_0_0_0.pyqwidget(), Qt.QWidget)
         self.Display_layout_0.addWidget(self._fosphor_qt_sink_c_0_0_0_win)
         self.filerepeater_StateToBool_0 = filerepeater.StateToBool()
-        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/wbarnhart/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
+        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/presync/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
         self._carrier_tool_bar = Qt.QToolBar(self)
         self._carrier_tool_bar.addWidget(Qt.QLabel('RX Freq [MHz]' + ": "))
         self._carrier_line_edit = Qt.QLineEdit(str(self.carrier))
@@ -274,7 +271,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.blocks_selector_2 = blocks.selector(gr.sizeof_gr_complex*1,0,0)
+        self.blocks_selector_2 = blocks.selector(gr.sizeof_gr_complex*1,sig_save,0)
         self.blocks_selector_2.set_enabled(True)
         self.blocks_selector_1_0 = blocks.selector(gr.sizeof_gr_complex*1,channel,0)
         self.blocks_selector_1_0.set_enabled(True)
@@ -284,7 +281,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_selector_0.set_enabled(True)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_message_debug_1 = blocks.message_debug()
-        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch2', True, 0, 0)
         self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/wbarnhart/presync/145mhzch1', True, 0, 0)
@@ -319,8 +315,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
         self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
         self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.filerepeater_StateToBool_0, 'state'))
-        self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
-        self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.blocks_message_debug_1, 'print_pdu'))
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.satellites_print_timestamp_0, 'in'))
         self.connect((self.Maximal_Combining_0, 0), (self.blocks_selector_0, 3))
@@ -370,12 +364,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
     def set_offset(self, offset):
         self.offset = offset
         self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.freq-self.doppler_freq+self.offset)
-
-    def get_parameter_0(self):
-        return self.parameter_0
-
-    def set_parameter_0(self, parameter_0):
-        self.parameter_0 = parameter_0
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -432,6 +420,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
     def set_sig_save(self, sig_save):
         self.sig_save = sig_save
         self._sig_save_callback(self.sig_save)
+        self.blocks_selector_2.set_input_index(self.sig_save)
 
     def get_save(self):
         return self.save

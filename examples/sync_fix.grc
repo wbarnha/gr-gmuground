@@ -98,7 +98,7 @@ blocks:
     bus_structure: null
     coordinate: [704, 568.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_complex_to_magphase_0_0
   id: blocks_complex_to_magphase
   parameters:
@@ -114,7 +114,7 @@ blocks:
     bus_structure: null
     coordinate: [704, 712.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_complex_to_real_0
   id: blocks_complex_to_real
   parameters:
@@ -331,7 +331,7 @@ blocks:
     bus_structure: null
     coordinate: [1008, 632.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_vector_sink_x_0
   id: blocks_vector_sink_x
   parameters:
@@ -347,7 +347,7 @@ blocks:
     bus_structure: null
     coordinate: [1024, 712.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_vector_sink_x_0_0
   id: blocks_vector_sink_x
   parameters:
@@ -363,7 +363,7 @@ blocks:
     bus_structure: null
     coordinate: [1008, 568.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_vector_sink_x_0_0_0
   id: blocks_vector_sink_x
   parameters:
@@ -379,7 +379,7 @@ blocks:
     bus_structure: null
     coordinate: [1200, 720.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: freq_xlating_fir_filter_xxx_0_0
   id: freq_xlating_fir_filter_xxx
   parameters:
@@ -414,7 +414,7 @@ blocks:
     bus_structure: null
     coordinate: [1304, 644.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: gpredict_MsgPairToVar_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -515,7 +515,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 432.0]
+    coordinate: [728, 472.0]
     rotation: 0
     state: true
 - name: phase_sync_0_0
