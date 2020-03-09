@@ -31,7 +31,7 @@ sudo apt install -y \
       libvorbis-dev
 
 
-pip3 install requests construct
+pip3 install requests construct matplotlib
 
 cd ~/
 git clone https://github.com/quiet/libfec

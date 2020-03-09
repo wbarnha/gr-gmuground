@@ -255,7 +255,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             firdes.WIN_BLACKMAN_hARRIS, #wintype
             0, #fc
             samp_rate, #bw
-            '"Demodulated and Filtered Signal', #name
+            'Baseband', #name
             True, #plotfreq
             True, #plotwaterfall
             True, #plottime
@@ -264,7 +264,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0.set_update_time(1.0/10)
         self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
 
-        self.qtgui_sink_x_0.enable_rf_freq(False)
+        self.qtgui_sink_x_0.enable_rf_freq(True)
 
         self.top_grid_layout.addWidget(self._qtgui_sink_x_0_win, 6, 0, 1, 2)
         for r in range(6, 7):

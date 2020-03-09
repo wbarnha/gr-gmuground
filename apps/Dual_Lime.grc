@@ -822,7 +822,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 708.0]
+    coordinate: [427, 708]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0
@@ -1045,14 +1045,14 @@ blocks:
     gui_hint: (6,0,1,2)
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"Demodulated and Filtered Signal'
+    name: Baseband
     plotconst: 'True'
     plotfreq: 'True'
     plottime: 'True'
     plotwaterfall: 'True'
     rate: '10'
     showports: 'False'
-    showrf: 'False'
+    showrf: 'True'
     type: float
     wintype: firdes.WIN_BLACKMAN_hARRIS
   states:
