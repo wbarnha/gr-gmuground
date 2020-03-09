@@ -42,14 +42,14 @@ sudo make install
 sudo ldconfig
 cd
 
-
-sudo add-apt-repository -y ppa:myriadrf/drivers
-sudo apt-get update
-sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images
-sudo apt-get install soapysdr-tools soapysdr-module-lms7
+sudo apt install libsoapysdr-dev libi2c-dev libusb-1.0-0-dev git g++ cmake libsqlite3-dev libwxgtk3.0-dev freeglut3-dev
+#sudo add-apt-repository -y ppa:myriadrf/drivers
+#sudo apt-get update
+#sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images
+#sudo apt-get install soapysdr-tools soapysdr-module-lms7
 
 #soapysdr-tools use to be called just soapysdr on older packages
-sudo apt-get install soapysdr soapysdr-module-lms7
+#sudo apt-get install soapysdr soapysdr-module-lms7
 
 git clone https://github.com/myriadrf/LimeSuite.git
 cd LimeSuite
@@ -63,7 +63,7 @@ cd ~/LimeSuite/udev-rules
 sudo ./install.sh
 cd
 
-rm -rf gr-limesdr
+#rm -rf gr-limesdr
 git clone https://github.com/myriadrf/gr-limesdr
 cd gr-limesdr
 git checkout gr-3.8
@@ -75,7 +75,7 @@ sudo make install
 sudo ldconfig
 cd
 
-rm -rf gr-satnogs
+#rm -rf gr-satnogs
 git clone https://gitlab.com/librespacefoundation/satnogs/gr-satnogs.git
 cd gr-satnogs
 mkdir build
@@ -86,7 +86,7 @@ sudo make install
 sudo ldconfig
 cd
 
-rm -rf gr-satellites
+#rm -rf gr-satellites
 git clone https://github.com/daniestevez/gr-satellites
 cd gr-satellites
 git checkout next
@@ -98,7 +98,7 @@ sudo make install
 sudo ldconfig
 cd
 
-rm -rf gr-gpredict-doppler
+#rm -rf gr-gpredict-doppler
 git clone https://github.com/ghostop14/gr-gpredict-doppler
 cd gr-gpredict-doppler
 mkdir build
@@ -109,7 +109,7 @@ sudo make install
 sudo ldconfig
 cd
 
-rm -rf gr-display
+#rm -rf gr-display
 git clone https://github.com/wbarnha/gr-display
 cd gr-display
 mkdir build
@@ -136,7 +136,7 @@ sudo ldconfig
 cd
 
 sudo apt-get install intel-opencl-icd
-rm -rf gr-fosphor
+#rm -rf gr-fosphor
 git clone git://git.osmocom.org/gr-fosphor
 cd gr-fosphor
 git checkout -b test 6f3a8de592e181e9ac2e76800e50df427827ba5b
@@ -150,7 +150,7 @@ cd
 cd gr-fosphor/lib/fosphor
 make LDFLAGS=-L/opt/intel/opencl-1.2-4.5.0.8/lib64
 
-rm -rf gr-filerepeater
+#rm -rf gr-filerepeater
 git clone https://github.com/ghostop14/gr-filerepeater
 cd gr-filerepeater
 mkdir build
@@ -161,7 +161,7 @@ sudo make install
 sudo ldconfig
 cd
 
-rm -rf gr-guiextra
+#rm -rf gr-guiextra
 git clone https://github.com/ghostop14/gr-guiextra
 cd gr-guiextra
 mkdir build

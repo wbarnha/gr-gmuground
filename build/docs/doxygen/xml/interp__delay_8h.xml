@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="interp__delay_8h" kind="file" language="C++">
+    <compoundname>interp_delay.h</compoundname>
+    <includes refid="api_8h" local="no">gmuground/api.h</includes>
+    <includes local="no">gnuradio/block.h</includes>
+    <includedby refid="interp__delay__impl_8h" local="no">interp_delay_impl.h</includedby>
+    <incdepgraph>
+      <node id="9">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="8">
+        <label>gmuground/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>gnuradio/block.h</label>
+      </node>
+      <node id="7">
+        <label>interp_delay.h</label>
+        <link refid="interp__delay_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="11">
+        <label>interp_delay.h</label>
+        <link refid="interp__delay_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>interp_delay_impl.h</label>
+        <link refid="interp__delay__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1gmuground_1_1interp__delay" prot="public">gr::gmuground::interp_delay</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1gmuground">gr::gmuground</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/wbarnha/gr-gmuground/include/gmuground/interp_delay.h"/>
+  </compounddef>
+</doxygen>
