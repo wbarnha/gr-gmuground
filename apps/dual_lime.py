@@ -29,7 +29,6 @@ from AptUI import AptUI  # grc-generated hier_block
 from Maximal_Combining import Maximal_Combining  # grc-generated hier_block
 from PyQt5 import Qt
 from PyQt5.QtCore import QObject, pyqtSlot
-from gnuradio import eng_notation
 import sip
 from gnuradio import fosphor
 from gnuradio.fft import window
@@ -44,6 +43,7 @@ from gnuradio import gr
 import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
+from gnuradio import eng_notation
 from gnuradio.qtgui import Range, RangeWidget
 import datetime
 import filerepeater
@@ -96,14 +96,14 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.carrier = carrier = 145
-        self.freq = freq = carrier*1e6
+        self.freq = freq = 145.8*1e6
         self.doppler_freq = doppler_freq = freq
         self.time_delay = time_delay = 158e-12*(freq-145e6)+111e-6
         self.sig_save = sig_save = 2
         self.save = save = 0
         self.sat_type = sat_type = {0:'3CAT-2',1:'AO-73',2:'FloripaSat 1',3:'ITASAT 1',4:'JY1-Sat',5:'Nayif-1',6:'UKube-1'}
         self.sat = sat = 0
+        self.guiextra_msgdigitalnumbercontrol_0 = guiextra_msgdigitalnumbercontrol_0 = 145.8e6
         self.gain = gain = 30
         self.freq_shift = freq_shift = doppler_freq-freq
         self.com = com = 0
@@ -249,6 +249,16 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win = guiextra.MsgDigitalNumberControl(lbl = 'Frequency', minFreqHz = 110e6, maxFreqHz=400e6, parent=self,  ThousandsSeparator=",",backgroundColor="black",fontColor="white", varCallback=self.set_guiextra_msgdigitalnumbercontrol_0,outputmsgname="'freq'".replace("'",""))
+        self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win.setValue(145.8e6)
+        self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win.setReadOnly(False)
+        self.guiextra_msgdigitalnumbercontrol_0 = self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win
+
+        self.top_grid_layout.addWidget(self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win, 0, 0, 1, 1)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.gpredict_MsgPairToVar_0_0_0 = gpredict.MsgPairToVar(self.set_freq)
         self._gain_range = Range(0, 60, 1, 30, 70)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, 'Gain [dB]', "counter_slider", int)
@@ -265,17 +275,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.Display_layout_0.addWidget(self._fosphor_qt_sink_c_0_0_0_win)
         self.filerepeater_StateToBool_0 = filerepeater.StateToBool()
         self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/wbarnha/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
-        self._carrier_tool_bar = Qt.QToolBar(self)
-        self._carrier_tool_bar.addWidget(Qt.QLabel('RX Freq [MHz]' + ": "))
-        self._carrier_line_edit = Qt.QLineEdit(str(self.carrier))
-        self._carrier_tool_bar.addWidget(self._carrier_line_edit)
-        self._carrier_line_edit.returnPressed.connect(
-            lambda: self.set_carrier(eng_notation.str_to_num(str(self._carrier_line_edit.text()))))
-        self.top_grid_layout.addWidget(self._carrier_tool_bar, 0, 0, 1, 1)
-        for r in range(0, 1):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
         self.blocks_selector_2 = blocks.selector(gr.sizeof_gr_complex*1,sig_save,0)
         self.blocks_selector_2.set_enabled(False)
         self.blocks_selector_1_0 = blocks.selector(gr.sizeof_gr_complex*1,channel,0)
@@ -318,6 +317,8 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect((self.filerepeater_StateToBool_0, 'bool'), (self.blocks_selector_2, 'en'))
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
+        self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.guiextra_msgdigitalnumbercontrol_0, 'valuein'))
+        self.msg_connect((self.guiextra_msgdigitalnumbercontrol_0, 'valueout'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
         self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.blocks_message_debug_1, 'print_pdu'))
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.satellites_print_timestamp_0, 'in'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
@@ -381,14 +382,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
         self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, 1500, 500))
 
-    def get_carrier(self):
-        return self.carrier
-
-    def set_carrier(self, carrier):
-        self.carrier = carrier
-        Qt.QMetaObject.invokeMethod(self._carrier_line_edit, "setText", Qt.Q_ARG("QString", eng_notation.num_to_str(self.carrier)))
-        self.set_freq(self.carrier*1e6)
-
     def get_freq(self):
         return self.freq
 
@@ -445,6 +438,12 @@ class dual_lime(gr.top_block, Qt.QWidget):
     def set_sat(self, sat):
         self.sat = sat
         self._sat_callback(self.sat)
+
+    def get_guiextra_msgdigitalnumbercontrol_0(self):
+        return self.guiextra_msgdigitalnumbercontrol_0
+
+    def set_guiextra_msgdigitalnumbercontrol_0(self, guiextra_msgdigitalnumbercontrol_0):
+        self.guiextra_msgdigitalnumbercontrol_0 = guiextra_msgdigitalnumbercontrol_0
 
     def get_gain(self):
         return self.gain

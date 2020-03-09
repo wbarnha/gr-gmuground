@@ -44,9 +44,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 476.0]
+    coordinate: [217, 573]
     rotation: 0
-    state: true
+    state: disabled
 - name: channel
   id: variable_qtgui_chooser
   parameters:
@@ -106,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 556.0]
+    coordinate: [47, 569]
     rotation: 0
     state: enabled
 - name: doppler_freq
@@ -125,7 +125,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: carrier*1e6
+    value: 145.8*1e6
   states:
     bus_sink: false
     bus_source: false
@@ -166,6 +166,31 @@ blocks:
     coordinate: [48, 772.0]
     rotation: 0
     state: enabled
+- name: guiextra_msgdigitalnumbercontrol_0
+  id: guiextra_msgdigitalnumbercontrol
+  parameters:
+    ThousandsSeparator: ','
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: (0,0,1,1)
+    lbl: Frequency
+    maxFreqHz: 400e6
+    maxoutbuf: '0'
+    minFreqHz: 110e6
+    minoutbuf: '0'
+    outputmsgname: freq
+    readOnly: 'False'
+    relBackgroundColor: black
+    relFontColor: white
+    value: 145.8e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1466, 326]
+    rotation: 0
+    state: true
 - name: offset
   id: variable_qtgui_range
   parameters:
@@ -226,7 +251,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 12.0]
+    coordinate: [890, 10]
     rotation: 0
     state: true
 - name: save
@@ -338,7 +363,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1296, 244.0]
+    coordinate: [933, 208]
     rotation: 0
     state: enabled
 - name: Maximal_Combining_0
@@ -445,7 +470,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [792, 688.0]
+    coordinate: [850, 683]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -542,7 +567,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 184.0]
+    coordinate: [1370, 203]
     rotation: 0
     state: disabled
 - name: blocks_message_debug_1
@@ -555,7 +580,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1416, 624.0]
+    coordinate: [1474, 619]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -573,7 +598,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 672.0]
+    coordinate: [722, 667]
     rotation: 0
     state: enabled
 - name: blocks_selector_0
@@ -619,7 +644,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 420.0]
+    coordinate: [303, 419]
     rotation: 0
     state: enabled
 - name: blocks_selector_1_0
@@ -699,7 +724,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1296, 132.0]
+    coordinate: [1064, 10]
     rotation: 0
     state: disabled
 - name: filerepeater_AdvFileSink_0
@@ -760,7 +785,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1155, 448]
+    coordinate: [1190, 443]
     rotation: 0
     state: enabled
 - name: freq
@@ -811,7 +836,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 148.0]
+    coordinate: [1370, 167]
     rotation: 0
     state: disabled
 - name: gpredict_MsgPairToVar_0_0_0
@@ -825,7 +850,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1408, 452.0]
+    coordinate: [1763, 449]
     rotation: 0
     state: enabled
 - name: gpredict_doppler_0
@@ -843,7 +868,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 148.0]
+    coordinate: [1075, 167]
     rotation: 0
     state: disabled
 - name: gpredict_port
@@ -908,44 +933,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 308.0]
-    rotation: 0
-    state: disabled
-- name: limesdr_source_0_1
-  id: limesdr_source
-  parameters:
-    affinity: ''
-    alias: ''
-    allow_tcxo_dac: '0'
-    analog_bandw_ch0: 1.8e6
-    analog_bandw_ch1: 1.8e6
-    calibr_bandw_ch0: 2.5e6
-    calibr_bandw_ch1: 2.5e6
-    channel_mode: '2'
-    comment: 'Replace with your own source!
-
-      LimeSDR USB: 0009070105C62E09'
-    dacVal: '180'
-    digital_bandw_ch0: samp_rate
-    digital_bandw_ch1: samp_rate
-    filename: ''
-    gain_dB_ch0: gain
-    gain_dB_ch1: gain
-    lna_path_ch0: '2'
-    lna_path_ch1: '2'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    nco_freq_ch0: '0'
-    nco_freq_ch1: '0'
-    oversample: '0'
-    rf_freq: freq+(doppler_freq-freq)
-    samp_rate: samp_rate
-    serial: ''
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [40, 388.0]
+    coordinate: [47, 164]
     rotation: 0
     state: disabled
 - name: offset
@@ -962,7 +950,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 84.0]
+    coordinate: [894, 80]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0
@@ -1042,7 +1030,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1144, 512.0]
+    coordinate: [1203, 502]
     rotation: 0
     state: disabled
 - name: samp_rate
@@ -1076,7 +1064,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1160, 676.0]
+    coordinate: [1218, 671]
     rotation: 0
     state: enabled
 - name: satellites_satellite_decoder_0
@@ -1097,7 +1085,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 668.0]
+    coordinate: [1010, 663]
     rotation: 0
     state: true
 - name: satnogs_cw_decoder_0
@@ -1255,9 +1243,15 @@ connections:
 - [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
+- [fosphor_qt_sink_c_0_0_0, freq, guiextra_msgdigitalnumbercontrol_0, valuein]
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
+- [guiextra_msgdigitalnumbercontrol_0, valueout, gpredict_MsgPairToVar_0_0_0, inpair]
+- [limesdr_source_0_0, '0', blocks_selector_1, '1']
+- [limesdr_source_0_0, '0', blocks_selector_1_0, '0']
+- [limesdr_source_0_0, '1', blocks_selector_1, '0']
+- [limesdr_source_0_0, '1', blocks_selector_1_0, '1']
 - [qtgui_freq_sink_x_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
