@@ -1033,6 +1033,35 @@ blocks:
     coordinate: [1203, 502]
     rotation: 0
     state: disabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: (6,0,1,2)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Demodulated and Filtered Signal'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: float
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [804, 777]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: parameter
   parameters:
@@ -1218,6 +1247,7 @@ connections:
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
+- [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
 - [blocks_complex_to_real_0, '0', satellites_satellite_decoder_0, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']

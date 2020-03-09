@@ -29,6 +29,8 @@ from AptUI import AptUI  # grc-generated hier_block
 from Maximal_Combining import Maximal_Combining  # grc-generated hier_block
 from PyQt5 import Qt
 from PyQt5.QtCore import QObject, pyqtSlot
+from gnuradio import qtgui
+from gnuradio.filter import firdes
 import sip
 from gnuradio import fosphor
 from gnuradio.fft import window
@@ -38,7 +40,6 @@ from gnuradio import analog
 from gnuradio import blocks
 import pmt
 from gnuradio import filter
-from gnuradio.filter import firdes
 from gnuradio import gr
 import signal
 from argparse import ArgumentParser
@@ -249,6 +250,27 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.qtgui_sink_x_0 = qtgui.sink_f(
+            1024, #fftsize
+            firdes.WIN_BLACKMAN_hARRIS, #wintype
+            0, #fc
+            samp_rate, #bw
+            '"Demodulated and Filtered Signal', #name
+            True, #plotfreq
+            True, #plotwaterfall
+            True, #plottime
+            True #plotconst
+        )
+        self.qtgui_sink_x_0.set_update_time(1.0/10)
+        self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
+
+        self.qtgui_sink_x_0.enable_rf_freq(False)
+
+        self.top_grid_layout.addWidget(self._qtgui_sink_x_0_win, 6, 0, 1, 2)
+        for r in range(6, 7):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win = guiextra.MsgDigitalNumberControl(lbl = 'Frequency', minFreqHz = 110e6, maxFreqHz=400e6, parent=self,  ThousandsSeparator=",",backgroundColor="black",fontColor="white", varCallback=self.set_guiextra_msgdigitalnumbercontrol_0,outputmsgname="'freq'".replace("'",""))
         self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win.setValue(145.8e6)
         self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win.setReadOnly(False)
@@ -328,6 +350,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.Selective_Combining_BPSK_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 2))
+        self.connect((self.blocks_complex_to_real_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.blocks_complex_to_real_0, 0), (self.satellites_satellite_decoder_0, 0))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Maximal_Combining_0, 1))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Selective_Combining_0, 1))
@@ -381,6 +404,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
         self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, 1500, 500))
+        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
 
     def get_freq(self):
         return self.freq
