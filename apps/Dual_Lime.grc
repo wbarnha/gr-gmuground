@@ -470,7 +470,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [850, 683]
+    coordinate: [842, 683]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -580,7 +580,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1474, 619]
+    coordinate: [1634, 619]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -935,7 +935,7 @@ blocks:
     bus_structure: null
     coordinate: [46, 182]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: limesdr_source_0_0_0
   id: limesdr_source
   parameters:
@@ -970,7 +970,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 484]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: offset
   id: parameter
   parameters:
@@ -988,86 +988,6 @@ blocks:
     coordinate: [894, 80]
     rotation: 0
     state: true
-- name: qtgui_freq_sink_x_0
-  id: qtgui_freq_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    average: '1.0'
-    axislabels: 'True'
-    bw: samp_rate
-    color1: '"blue"'
-    color10: '"dark blue"'
-    color2: '"red"'
-    color3: '"green"'
-    color4: '"black"'
-    color5: '"cyan"'
-    color6: '"magenta"'
-    color7: '"yellow"'
-    color8: '"dark red"'
-    color9: '"dark green"'
-    comment: ''
-    ctrlpanel: 'False'
-    fc: freq
-    fftsize: '1024'
-    freqhalf: 'True'
-    grid: 'False'
-    gui_hint: Display@0
-    label: Relative Gain
-    label1: ''
-    label10: ''''''
-    label2: ''''''
-    label3: ''''''
-    label4: ''''''
-    label5: ''''''
-    label6: ''''''
-    label7: ''''''
-    label8: ''''''
-    label9: ''''''
-    legend: 'True'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '""'
-    nconnections: '1'
-    showports: 'True'
-    tr_chan: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_tag: '""'
-    type: complex
-    units: dB
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-    ymax: '10'
-    ymin: '-140'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1203, 502]
-    rotation: 0
-    state: disabled
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -1094,7 +1014,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [804, 777]
+    coordinate: [1080, 550]
     rotation: 0
     state: true
 - name: samp_rate
@@ -1128,7 +1048,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1218, 671]
+    coordinate: [1300, 671]
     rotation: 0
     state: enabled
 - name: satellites_satellite_decoder_0
@@ -1149,7 +1069,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1010, 663]
+    coordinate: [1071, 663]
     rotation: 0
     state: true
 - name: satnogs_cw_decoder_0
@@ -1181,9 +1101,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 812.0]
+    coordinate: [746, 765]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1301,7 +1221,6 @@ connections:
 - [blocks_multiply_xx_0, '0', blocks_complex_to_real_0, '0']
 - [blocks_selector_0, '0', AptUI_0, '0']
 - [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
-- [blocks_selector_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
@@ -1321,12 +1240,12 @@ connections:
 - [limesdr_source_0_0_0, '0', blocks_selector_1, '1']
 - [limesdr_source_0_0_0, '0', blocks_selector_1_0, '0']
 - [limesdr_source_0_0_0, '0', blocks_selector_1_0, '1']
-- [qtgui_freq_sink_x_0, freq, gpredict_MsgPairToVar_0_0_0, inpair]
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
+- [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']

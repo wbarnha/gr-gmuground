@@ -37,6 +37,7 @@ from gnuradio.fft import window
 from Selective_Combining import Selective_Combining  # grc-generated hier_block
 from Selective_Combining_BPSK import Selective_Combining_BPSK  # grc-generated hier_block
 from gnuradio import analog
+from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import filter
 from gnuradio import gr
@@ -257,6 +258,11 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
+                interpolation=48,
+                decimation=200,
+                taps=None,
+                fractional_bw=None)
         self.qtgui_sink_x_0 = qtgui.sink_f(
             1024, #fftsize
             firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -278,6 +284,15 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.low_pass_filter_0 = filter.fir_filter_ccf(
+            int(samp_rate/48e3),
+            firdes.low_pass(
+                1,
+                samp_rate,
+                500e3,
+                100e3,
+                firdes.WIN_HAMMING,
+                6.76))
         self.limesdr_source_0_0_0 = limesdr.source('', 0, '')
 
 
@@ -335,6 +350,11 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0))
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
+        self.audio_sink_0 = audio.sink(48000, '', True)
+        self.analog_wfm_rcv_0 = analog.wfm_rcv(
+        	quad_rate=480e3,
+        	audio_decimation=10,
+        )
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1500, 1, 0, 0)
         self.Selective_Combining_BPSK_0 = Selective_Combining_BPSK(
             filter_alpha=1e-3,
@@ -371,6 +391,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.Selective_Combining_0, 0), (self.blocks_selector_0, 0))
         self.connect((self.Selective_Combining_BPSK_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
+        self.connect((self.analog_wfm_rcv_0, 0), (self.audio_sink_0, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 2))
         self.connect((self.blocks_complex_to_real_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.blocks_complex_to_real_0, 0), (self.satellites_satellite_decoder_0, 0))
@@ -389,14 +410,17 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_selector_0, 0), (self.blocks_selector_2, 2))
         self.connect((self.blocks_selector_0, 0), (self.fosphor_qt_sink_c_0_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
+        self.connect((self.blocks_selector_0, 0), (self.low_pass_filter_0, 0))
         self.connect((self.blocks_selector_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_delay_0_0_0_0, 0))
         self.connect((self.blocks_selector_2, 0), (self.filerepeater_AdvFileSink_0, 0))
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_multiply_xx_0, 1))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 1))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 0))
-        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 1))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
+        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 1))
+        self.connect((self.low_pass_filter_0, 0), (self.rational_resampler_xxx_0, 0))
+        self.connect((self.rational_resampler_xxx_0, 0), (self.analog_wfm_rcv_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "dual_lime")
@@ -428,6 +452,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, 1500, 500))
         self.limesdr_source_0_0_0.set_digital_filter(self.samp_rate, 0)
         self.limesdr_source_0_0_0.set_digital_filter(self.samp_rate/10, 1)
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 500e3, 100e3, firdes.WIN_HAMMING, 6.76))
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
 
     def get_freq(self):

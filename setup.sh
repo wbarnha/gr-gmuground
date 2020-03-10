@@ -149,6 +149,7 @@ sudo ldconfig
 cd
 cd gr-fosphor/lib/fosphor
 make LDFLAGS=-L/opt/intel/opencl-1.2-4.5.0.8/lib64
+cd
 
 #rm -rf gr-filerepeater
 git clone https://github.com/ghostop14/gr-filerepeater
