@@ -32,6 +32,18 @@ options:
     state: enabled
 
 blocks:
+- name: audio_samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1201, 1008]
+    rotation: 0
+    state: enabled
 - name: carrier
   id: variable_qtgui_entry
   parameters:
@@ -274,7 +286,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [34, 1187]
+    coordinate: [47, 1182]
     rotation: 0
     state: true
 - name: sig_save
@@ -316,6 +328,26 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [688, 132.0]
+    rotation: 0
+    state: true
+- name: variable_cw_decoder_0
+  id: variable_cw_decoder
+  parameters:
+    channels: '4'
+    comment: ''
+    confidence: '0.90'
+    fft_size: '512'
+    max_frame_size: '96'
+    min_frame_size: '8'
+    overlapping: 512-8
+    samp_rate: audio_samp_rate/4
+    snr: '10'
+    wpm: wpm
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [990, 983]
     rotation: 0
     state: true
 - name: AptUI_0
@@ -436,7 +468,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 580.0]
+    coordinate: [470, 574]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0
@@ -470,7 +502,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [842, 683]
+    coordinate: [873, 683]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -534,7 +566,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 260.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_file_source_0_0
   id: blocks_file_source
   parameters:
@@ -556,7 +588,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 364]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -570,6 +602,19 @@ blocks:
     coordinate: [1370, 203]
     rotation: 0
     state: enabled
+- name: blocks_message_debug_0_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1342, 882]
+    rotation: 0
+    state: true
 - name: blocks_message_debug_1
   id: blocks_message_debug
   parameters:
@@ -598,7 +643,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [722, 667]
+    coordinate: [753, 667]
     rotation: 0
     state: enabled
 - name: blocks_selector_0
@@ -751,7 +796,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 1116.0]
+    coordinate: [776, 1113]
     rotation: 0
     state: enabled
 - name: filerepeater_StateToBool_0
@@ -822,7 +867,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [427, 708]
+    coordinate: [460, 706]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0
@@ -970,6 +1015,30 @@ blocks:
     bus_structure: null
     coordinate: [48, 484]
     rotation: 0
+    state: disabled
+- name: low_pass_filter_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '3000'
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: 48e3
+    type: fir_filter_ccf
+    width: 1e3
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [534, 817]
+    rotation: 0
     state: enabled
 - name: offset
   id: parameter
@@ -1015,6 +1084,26 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1080, 550]
+    rotation: 0
+    state: true
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '4'
+    fbw: '0'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [793, 840]
     rotation: 0
     state: true
 - name: samp_rate
@@ -1072,38 +1161,24 @@ blocks:
     coordinate: [1071, 663]
     rotation: 0
     state: true
-- name: satnogs_cw_decoder_0
-  id: satnogs_cw_decoder
+- name: satnogs_frame_decoder_0
+  id: satnogs_frame_decoder
   parameters:
     affinity: ''
     alias: ''
-    antenna: '""'
-    bfo_freq: 1e3
-    bw: '0.0'
     comment: ''
-    decoded_data_file_path: '"/tmp/.satnogs/data/data"'
-    dev_args: '""'
-    doppler_correction_per_sec: '20'
-    enable_iq_dump: '0'
-    file_path: '"test.wav"'
-    gain: '0.0'
-    iq_file_path: '"/tmp/iq.dat"'
-    lo_offset: 100e3
-    rigctl_port: '4532'
-    rx_freq: 100e6
-    samp_rate_rx: '0.0'
-    soapy_rx_device: '"driver=invalid"'
-    udp_IP: '"127.0.0.1"'
-    udp_port: '16887'
-    waterfall_file_path: '"/tmp/waterfall.dat"'
-    wpm: '20'
+    decoder_object: variable_cw_decoder_0
+    itype: complex
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [746, 765]
+    coordinate: [1049, 867]
     rotation: 0
-    state: enabled
+    state: true
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1127,7 +1202,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 212.0]
+    coordinate: [687, 220]
     rotation: 0
     state: enabled
 - name: virtual_sink_1_0
@@ -1153,7 +1228,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 716.0]
+    coordinate: [227, 713]
     rotation: 0
     state: enabled
 - name: virtual_source_1
@@ -1193,6 +1268,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [256, 1052.0]
+    rotation: 0
+    state: enabled
+- name: wpm
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '20'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1225, 1080]
     rotation: 0
     state: enabled
 
@@ -1240,12 +1332,15 @@ connections:
 - [limesdr_source_0_0_0, '0', blocks_selector_1, '1']
 - [limesdr_source_0_0_0, '0', blocks_selector_1_0, '0']
 - [limesdr_source_0_0_0, '0', blocks_selector_1_0, '1']
+- [low_pass_filter_0_0, '0', rational_resampler_xxx_0, '0']
+- [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
 - [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
 - [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
+- [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
-- [virtual_source_0, '0', satnogs_cw_decoder_0, '0']
+- [virtual_source_0, '0', low_pass_filter_0_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']

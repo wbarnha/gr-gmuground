@@ -87,7 +87,7 @@ sudo ldconfig
 cd
 
 #rm -rf gr-satellites
-git clone https://github.com/daniestevez/gr-satellites
+git clone --recursive https://github.com/daniestevez/gr-satellites
 cd gr-satellites
 git checkout next
 mkdir build
