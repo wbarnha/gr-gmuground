@@ -23,5 +23,5 @@ install(FILES
     gmuground_snr_selector.block.yml
     gmuground_sample_count.block.yml
     gmuground_ValToVar.block.yml
-    gmuground_interp_delay.block.yml DESTINATION share/gnuradio/grc/blocks
+    DESTINATION share/gnuradio/grc/blocks
 )
