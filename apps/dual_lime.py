@@ -32,6 +32,7 @@ from PyQt5.QtCore import QObject, pyqtSlot
 from gnuradio import qtgui
 from gnuradio.filter import firdes
 import sip
+import display
 from gnuradio import fosphor
 from gnuradio.fft import window
 from Selective_Combining import Selective_Combining  # grc-generated hier_block
@@ -50,7 +51,6 @@ import datetime
 import filerepeater
 import gpredict
 import guiextra
-import satellites
 import satellites.core
 import satnogs
 from gnuradio import qtgui
@@ -216,6 +216,9 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(2, 6):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.show_text_0 = display.show_text()
+        self._show_text_0_win = sip.wrapinstance(self.show_text_0.pyqwidget(), Qt.QWidget)
+        self.Display_layout_2.addWidget(self._show_text_0_win)
         if int == bool:
         	self._save_choices = {'Pressed': bool(1), 'Released': bool(0)}
         elif int == str:
@@ -234,7 +237,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.satnogs_frame_decoder_0 = satnogs.frame_decoder(variable_cw_decoder_0, 8 * 1)
         self.satellites_satellite_decoder_0 = satellites.core.gr_satellites_flowgraph(file = '/usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml', samp_rate = 48e3, grc_block = True, iq = False)
-        self.satellites_print_timestamp_0 = satellites.print_timestamp('%Y-%m-%d %H:%M:%S', True)
         # Create the options list
         self._sat_options = [0,1,2,3,4,5,6]
         # Create the labels list
@@ -327,7 +329,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_selector_0 = blocks.selector(gr.sizeof_gr_complex*1,com,0)
         self.blocks_selector_0.set_enabled(True)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
-        self.blocks_message_debug_1 = blocks.message_debug()
         self.blocks_message_debug_0_0 = blocks.message_debug()
         self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/stars/presync/145mhzch2', True, 0, 0)
@@ -366,8 +367,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.guiextra_msgdigitalnumbercontrol_0, 'valueout'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
-        self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.blocks_message_debug_1, 'print_pdu'))
-        self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.satellites_print_timestamp_0, 'in'))
+        self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.blocks_message_debug_0_0, 'print'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_StateToBool_0, 'state'))

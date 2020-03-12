@@ -615,19 +615,6 @@ blocks:
     coordinate: [1342, 882]
     rotation: 0
     state: true
-- name: blocks_message_debug_1
-  id: blocks_message_debug
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1634, 619]
-    rotation: 0
-    state: enabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -1123,23 +1110,6 @@ blocks:
     coordinate: [504, 108.0]
     rotation: 0
     state: true
-- name: satellites_print_timestamp_0
-  id: satellites_print_timestamp
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    count: 'True'
-    fmt: '%Y-%m-%d %H:%M:%S'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1300, 671]
-    rotation: 0
-    state: enabled
 - name: satellites_satellite_decoder_0
   id: satellites_satellite_decoder
   parameters:
@@ -1177,6 +1147,20 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1049, 867]
+    rotation: 0
+    state: true
+- name: show_text_0
+  id: show_text
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: Display@2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1396, 683]
     rotation: 0
     state: true
 - name: virtual_sink_0
@@ -1334,8 +1318,7 @@ connections:
 - [limesdr_source_0_0_0, '0', blocks_selector_1_0, '1']
 - [low_pass_filter_0_0, '0', rational_resampler_xxx_0, '0']
 - [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
-- [satellites_print_timestamp_0, out, blocks_message_debug_1, print_pdu]
-- [satellites_satellite_decoder_0, out, satellites_print_timestamp_0, in]
+- [satellites_satellite_decoder_0, out, show_text_0, disp_pdu]
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
