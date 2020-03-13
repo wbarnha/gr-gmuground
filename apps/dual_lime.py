@@ -195,6 +195,22 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.Misc = Qt.QTabWidget()
+        self.Misc_widget_0 = Qt.QWidget()
+        self.Misc_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Misc_widget_0)
+        self.Misc_grid_layout_0 = Qt.QGridLayout()
+        self.Misc_layout_0.addLayout(self.Misc_grid_layout_0)
+        self.Misc.addTab(self.Misc_widget_0, 'Translated Baseband')
+        self.Misc_widget_1 = Qt.QWidget()
+        self.Misc_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Misc_widget_1)
+        self.Misc_grid_layout_1 = Qt.QGridLayout()
+        self.Misc_layout_1.addLayout(self.Misc_grid_layout_1)
+        self.Misc.addTab(self.Misc_widget_1, 'Telemetry')
+        self.top_grid_layout.addWidget(self.Misc, 6, 0, 1, 2)
+        for r in range(6, 7):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.Display = Qt.QTabWidget()
         self.Display_widget_0 = Qt.QWidget()
         self.Display_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Display_widget_0)
@@ -206,11 +222,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.Display_grid_layout_1 = Qt.QGridLayout()
         self.Display_layout_1.addLayout(self.Display_grid_layout_1)
         self.Display.addTab(self.Display_widget_1, 'NOAA')
-        self.Display_widget_2 = Qt.QWidget()
-        self.Display_layout_2 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Display_widget_2)
-        self.Display_grid_layout_2 = Qt.QGridLayout()
-        self.Display_layout_2.addLayout(self.Display_grid_layout_2)
-        self.Display.addTab(self.Display_widget_2, 'Telemetry')
         self.top_grid_layout.addWidget(self.Display, 0, 2, 7, 4)
         for r in range(0, 7):
             self.top_grid_layout.setRowStretch(r, 1)
@@ -218,7 +229,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.show_text_0 = display.show_text()
         self._show_text_0_win = sip.wrapinstance(self.show_text_0.pyqwidget(), Qt.QWidget)
-        self.Display_layout_2.addWidget(self._show_text_0_win)
+        self.Misc_layout_1.addWidget(self._show_text_0_win)
         if int == bool:
         	self._save_choices = {'Pressed': bool(1), 'Released': bool(0)}
         elif int == str:
@@ -278,11 +289,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
         self.qtgui_sink_x_0.enable_rf_freq(True)
 
-        self.top_grid_layout.addWidget(self._qtgui_sink_x_0_win, 6, 0, 1, 2)
-        for r in range(6, 7):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 2):
-            self.top_grid_layout.setColumnStretch(c, 1)
+        self.Misc_layout_0.addWidget(self._qtgui_sink_x_0_win)
         self.low_pass_filter_0_0 = filter.fir_filter_ccf(
             1,
             firdes.low_pass(
@@ -369,6 +376,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.msg_connect((self.guiextra_msgdigitalnumbercontrol_0, 'valueout'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.blocks_message_debug_0_0, 'print'))
+        self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_StateToBool_0, 'state'))
         self.connect((self.Maximal_Combining_0, 0), (self.blocks_selector_0, 3))

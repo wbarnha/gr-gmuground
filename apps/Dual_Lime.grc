@@ -390,12 +390,12 @@ blocks:
     label7: Tab 7
     label8: Tab 8
     label9: Tab 9
-    num_tabs: '3'
+    num_tabs: '2'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [933, 208]
+    coordinate: [939, 206]
     rotation: 0
     state: enabled
 - name: Maximal_Combining_0
@@ -413,6 +413,40 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [704, 496.0]
+    rotation: 0
+    state: enabled
+- name: Misc
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: (6,0,1,2)
+    label0: Translated Baseband
+    label1: Telemetry
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Telemetry
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1292, 527]
     rotation: 0
     state: enabled
 - name: Selective_Combining_0
@@ -1053,7 +1087,7 @@ blocks:
     comment: ''
     fc: '0'
     fftsize: '1024'
-    gui_hint: (6,0,1,2)
+    gui_hint: Misc@0
     maxoutbuf: '0'
     minoutbuf: '0'
     name: Baseband
@@ -1155,7 +1189,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    gui_hint: Display@2
+    gui_hint: Misc@1
   states:
     bus_sink: false
     bus_source: false
@@ -1320,6 +1354,7 @@ connections:
 - [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
 - [satellites_satellite_decoder_0, out, show_text_0, disp_pdu]
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
+- [satnogs_frame_decoder_0, out, show_text_0, disp_pdu]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']

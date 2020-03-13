@@ -96,7 +96,7 @@ blocks:
     bus_structure: null
     coordinate: [616, 348.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: antenna
   id: parameter
   parameters:
@@ -150,7 +150,7 @@ blocks:
     bus_structure: null
     coordinate: [1000, 384.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -179,7 +179,7 @@ blocks:
     bus_structure: null
     coordinate: [808, 380.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: bw
   id: parameter
   parameters:
@@ -404,7 +404,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 492.0]
+    coordinate: [197, 492]
     rotation: 0
     state: true
 - name: rational_resampler_xxx_0
@@ -540,9 +540,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1144, 364.0]
+    coordinate: [1191, 364]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: satnogs_udp_msg_sink_0_0
   id: satnogs_udp_msg_sink
   parameters:
