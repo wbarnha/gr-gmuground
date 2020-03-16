@@ -103,6 +103,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.doppler_freq = doppler_freq = freq
         self.audio_samp_rate = audio_samp_rate = 48000
         self.variable_cw_decoder_0 = variable_cw_decoder_0 = satnogs.cw_decoder_make(audio_samp_rate/4, 512, 512-8, wpm, 10, 0.90, 4, 8, 96)
+        self.transition_bw = transition_bw = 1000
         self.time_delay = time_delay = 158e-12*(freq-145e6)+111e-6
         self.sig_save = sig_save = 2
         self.save = save = 0
@@ -111,6 +112,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.guiextra_msgdigitalnumbercontrol_0 = guiextra_msgdigitalnumbercontrol_0 = 145.8e6
         self.gain = gain = 30
         self.freq_shift = freq_shift = doppler_freq-freq
+        self.decimation = decimation = samp_rate/audio_samp_rate
         self.com = com = 0
         self.channel = channel = 0
 
@@ -319,7 +321,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(1, firdes.low_pass(1, samp_rate, 1500, 500), freq-doppler_freq+offset, samp_rate)
+        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(1, firdes.low_pass(1, samp_rate, samp_rate/(2*decimation), transition_bw), samp_rate/2+offset, samp_rate)
         self.fosphor_qt_sink_c_0_0_0 = fosphor.qt_sink_c()
         self.fosphor_qt_sink_c_0_0_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(freq, samp_rate)
@@ -429,18 +431,20 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
     def set_offset(self, offset):
         self.offset = offset
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.freq-self.doppler_freq+self.offset)
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.samp_rate/2+self.offset)
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.set_decimation(self.samp_rate/self.audio_samp_rate)
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
         self.blocks_delay_0_0_0.set_dly(int(self.samp_rate*146e6*self.time_delay/self.freq)*int((self.samp_rate*146e6*self.time_delay/self.freq)>0))
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, 1500, 500))
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, self.samp_rate/(2*self.decimation), self.transition_bw))
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.samp_rate/2+self.offset)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
 
     def get_wpm(self):
@@ -461,7 +465,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.filerepeater_AdvFileSink_0.setCenterFrequency(self.freq)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.freq-self.doppler_freq+self.offset)
 
     def get_doppler_freq(self):
         return self.doppler_freq
@@ -469,19 +472,26 @@ class dual_lime(gr.top_block, Qt.QWidget):
     def set_doppler_freq(self, doppler_freq):
         self.doppler_freq = doppler_freq
         self.set_freq_shift(self.doppler_freq-self.freq)
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.freq-self.doppler_freq+self.offset)
 
     def get_audio_samp_rate(self):
         return self.audio_samp_rate
 
     def set_audio_samp_rate(self, audio_samp_rate):
         self.audio_samp_rate = audio_samp_rate
+        self.set_decimation(self.samp_rate/self.audio_samp_rate)
 
     def get_variable_cw_decoder_0(self):
         return self.variable_cw_decoder_0
 
     def set_variable_cw_decoder_0(self, variable_cw_decoder_0):
         self.variable_cw_decoder_0 = variable_cw_decoder_0
+
+    def get_transition_bw(self):
+        return self.transition_bw
+
+    def set_transition_bw(self, transition_bw):
+        self.transition_bw = transition_bw
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, self.samp_rate/(2*self.decimation), self.transition_bw))
 
     def get_time_delay(self):
         return self.time_delay
@@ -535,6 +545,13 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
     def set_freq_shift(self, freq_shift):
         self.freq_shift = freq_shift
+
+    def get_decimation(self):
+        return self.decimation
+
+    def set_decimation(self, decimation):
+        self.decimation = decimation
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, self.samp_rate/(2*self.decimation), self.transition_bw))
 
     def get_com(self):
         return self.com
