@@ -28,8 +28,17 @@ sudo apt install -y \
       opencl-clhpp-headers \
       opencl-headers \
       libogg-dev \
-      libvorbis-dev
-
+      libvorbis-dev \
+      xorg-dev \
+      libglu1-mesa-dev \
+      libsoapysdr-dev \
+      libi2c-dev \
+      libusb-1.0-0-dev \
+      g++ \
+      libsqlite3-dev \
+      libwxgtk3.0-dev \
+      freeglut3-dev \
+      python3-pip
 
 pip3 install requests construct matplotlib
 
@@ -42,7 +51,6 @@ sudo make install
 sudo ldconfig
 cd
 
-sudo apt install libsoapysdr-dev libi2c-dev libusb-1.0-0-dev git g++ cmake libsqlite3-dev libwxgtk3.0-dev freeglut3-dev
 #sudo add-apt-repository -y ppa:myriadrf/drivers
 #sudo apt-get update
 #sudo apt-get install limesuite liblimesuite-dev limesuite-udev limesuite-images
@@ -124,7 +132,6 @@ do grcc $file
 done
 cd
 
-sudo apt-get install cmake xorg-dev libglu1-mesa-dev
 git clone https://github.com/glfw/glfw
 cd glfw
 mkdir build
@@ -135,7 +142,6 @@ sudo make install
 sudo ldconfig
 cd
 
-sudo apt-get install intel-opencl-icd
 #rm -rf gr-fosphor
 git clone git://git.osmocom.org/gr-fosphor
 cd gr-fosphor
