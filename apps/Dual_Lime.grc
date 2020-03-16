@@ -1267,7 +1267,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    decim: int(samp_rate/48e3)+1
+    decim: int(samp_rate/48e3)
     fbw: '0'
     interp: '1'
     maxoutbuf: '0'
@@ -1290,7 +1290,7 @@ blocks:
     label: Sample Rate
     short_id: ''
     type: eng_float
-    value: 2.048e6
+    value: 2.4e6
   states:
     bus_sink: false
     bus_source: false
