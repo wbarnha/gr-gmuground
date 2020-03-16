@@ -175,6 +175,17 @@ sudo make install
 sudo ldconfig
 cd
 
+#rm -rf gr-inspector
+git clone https://github.com/gnuradio/gr-inspector
+cd gr-inspector
+mkdir build
+cd build
+cmake ..
+make -j3
+sudo make install
+sudo ldconfig
+cd
+
 #rm -rf gr-guiextra
 git clone https://github.com/ghostop14/gr-guiextra
 cd gr-guiextra
