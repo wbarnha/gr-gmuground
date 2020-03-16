@@ -117,7 +117,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1065, 787]
+    coordinate: [940, 784]
     rotation: 0
     state: true
 - name: doppler_freq
@@ -374,7 +374,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [957, 787]
+    coordinate: [832, 784]
     rotation: 0
     state: true
 - name: variable_cw_decoder_0
@@ -493,7 +493,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1866, 798]
+    coordinate: [1741, 795]
     rotation: 0
     state: enabled
 - name: Selective_Combining_0
@@ -549,29 +549,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [718, 611]
-    rotation: 0
-    state: enabled
-- name: analog_sig_source_x_0_0
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '1'
-    comment: ''
-    freq: freq_shift
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    phase: '0'
-    samp_rate: samp_rate
-    type: complex
-    waveform: analog.GR_COS_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [242, 621]
+    coordinate: [619, 608]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0
@@ -605,7 +583,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1375, 805]
+    coordinate: [1250, 802]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -715,7 +693,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1550, 903]
+    coordinate: [1425, 900]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -733,25 +711,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1001, 704]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_xx_0_0
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: "Doppler shifting without \nadjusting PLL of hardware"
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [522, 722]
+    coordinate: [876, 701]
     rotation: 0
     state: enabled
 - name: blocks_selector_0
@@ -963,19 +923,20 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    center_freq: samp_rate/2
+    center_freq: freq_shift
     comment: ''
     decim: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
-    taps: firdes.low_pass(1, samp_rate, samp_rate/(2*decimation), transition_bw)
+    taps: firdes.complex_band_pass(1, samp_rate, -samp_rate/(2*decimation), samp_rate/(2*decimation),
+      transition_bw)
     type: ccc
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [706, 743]
+    coordinate: [582, 736]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0
@@ -1092,7 +1053,7 @@ blocks:
     quant: '0.0001'
     samp_rate: samp_rate
     sensitivity: '0.9'
-    threshold: '-90'
+    threshold: '-80'
     window: firdes.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
@@ -1192,7 +1153,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [742, 837]
+    coordinate: [617, 834]
     rotation: 0
     state: enabled
 - name: offset
@@ -1209,7 +1170,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [481, 840]
+    coordinate: [238, 545]
     rotation: 0
     state: true
 - name: qtgui_sink_x_0
@@ -1238,7 +1199,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1583, 784]
+    coordinate: [1458, 781]
     rotation: 0
     state: true
 - name: rational_resampler_xxx_0
@@ -1258,7 +1219,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1001, 861]
+    coordinate: [876, 858]
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0_0
@@ -1278,7 +1239,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1174, 723]
+    coordinate: [1049, 720]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -1316,7 +1277,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1678, 707]
+    coordinate: [1553, 704]
     rotation: 0
     state: true
 - name: satnogs_frame_decoder_0
@@ -1334,7 +1295,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1257, 888]
+    coordinate: [1132, 885]
     rotation: 0
     state: enabled
 - name: show_text_0
@@ -1348,7 +1309,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2003, 727]
+    coordinate: [1878, 724]
     rotation: 0
     state: true
 - name: virtual_sink_0
@@ -1400,7 +1361,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [292, 750]
+    coordinate: [347, 744]
     rotation: 0
     state: enabled
 - name: virtual_source_1
@@ -1465,7 +1426,6 @@ connections:
 - [Selective_Combining_0, '0', blocks_selector_0, '0']
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
-- [analog_sig_source_x_0_0, '0', blocks_multiply_xx_0_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
 - [blocks_complex_to_real_0, '0', satellites_satellite_decoder_0, '0']
@@ -1484,8 +1444,6 @@ connections:
 - [blocks_file_source_0_0, '0', blocks_selector_1, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
-- [blocks_multiply_xx_0_0, '0', freq_xlating_fir_filter_xxx_0, '0']
-- [blocks_multiply_xx_0_0, '0', low_pass_filter_0_0, '0']
 - [blocks_selector_0, '0', AptUI_0, '0']
 - [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_selector_0, '0', inspector_signal_detector_cvf_0, '0']
@@ -1517,7 +1475,8 @@ connections:
 - [satnogs_frame_decoder_0, out, show_text_0, disp_pdu]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
-- [virtual_source_0, '0', blocks_multiply_xx_0_0, '1']
+- [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
+- [virtual_source_0, '0', low_pass_filter_0_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']

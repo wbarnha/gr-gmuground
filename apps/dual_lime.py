@@ -58,7 +58,7 @@ from gnuradio import qtgui
 
 class dual_lime(gr.top_block, Qt.QWidget):
 
-    def __init__(self, gpredict_port=4532, offset=50e3, samp_rate=2.048e6, wpm=20):
+    def __init__(self, gpredict_port=4532, offset=50e3, samp_rate=2.4e6, wpm=20):
         gr.top_block.__init__(self, "Dual Lime RX")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Dual Lime RX")
@@ -286,12 +286,12 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
                 interpolation=1,
-                decimation=int(samp_rate/48e3)+1,
+                decimation=int(samp_rate/48e3),
                 taps=None,
                 fractional_bw=None)
         self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
                 interpolation=1,
-                decimation=4,
+                decimation=int(samp_rate/48e3)+1,
                 taps=None,
                 fractional_bw=None)
         self.qtgui_sink_x_0 = qtgui.sink_f(
@@ -341,7 +341,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
 
         self.limesdr_source_0_0_0.calibrate(2.5e6, 0)
-        self.inspector_signal_detector_cvf_0 = inspector.signal_detector_cvf(samp_rate, 4096, firdes.WIN_BLACKMAN_hARRIS, -90, 0.9, False, 0.2, 0.0001, 10, '')
+        self.inspector_signal_detector_cvf_0 = inspector.signal_detector_cvf(samp_rate, 4096, firdes.WIN_BLACKMAN_hARRIS, -80, 0.9, False, 0.2, 0.0001, 10, '')
         self.inspector_qtgui_sink_vf_0 = inspector.qtgui_inspector_sink_vf(
           samp_rate,
           4096,
@@ -366,7 +366,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
         self.gpredict_MsgPairToVar_0_0_0 = gpredict.MsgPairToVar(self.set_freq)
         self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_doppler_freq)
-        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(1, firdes.low_pass(1, samp_rate, samp_rate/(2*decimation), transition_bw), samp_rate/2, samp_rate)
+        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(1, firdes.complex_band_pass(1, samp_rate, -samp_rate/(2*decimation), samp_rate/(2*decimation), transition_bw), freq_shift, samp_rate)
         self.fosphor_qt_sink_c_0_0_0 = fosphor.qt_sink_c()
         self.fosphor_qt_sink_c_0_0_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(freq, samp_rate)
@@ -382,7 +382,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_selector_1.set_enabled(True)
         self.blocks_selector_0 = blocks.selector(gr.sizeof_gr_complex*1,com,0)
         self.blocks_selector_0.set_enabled(True)
-        self.blocks_multiply_xx_0_0 = blocks.multiply_vcc(1)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_message_debug_0_0 = blocks.message_debug()
         self.blocks_message_debug_0 = blocks.message_debug()
@@ -390,8 +389,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0))
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
-        self.analog_sig_source_x_0_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, freq_shift, 1, 0, 0)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1500, 1, 0, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1500*50, 1, 0, 0)
         self.Selective_Combining_BPSK_0 = Selective_Combining_BPSK(
             filter_alpha=1e-3,
             tag_samps=1000,
@@ -428,7 +426,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.Selective_Combining_0, 0), (self.blocks_selector_0, 0))
         self.connect((self.Selective_Combining_BPSK_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
-        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0_0, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 2))
         self.connect((self.blocks_complex_to_real_0, 0), (self.qtgui_sink_x_0, 0))
         self.connect((self.blocks_complex_to_real_0, 0), (self.satellites_satellite_decoder_0, 0))
@@ -443,13 +440,12 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_selector_2, 0))
         self.connect((self.blocks_multiply_xx_0, 0), (self.rational_resampler_xxx_0_0, 0))
-        self.connect((self.blocks_multiply_xx_0_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
-        self.connect((self.blocks_multiply_xx_0_0, 0), (self.low_pass_filter_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.AptUI_0, 0))
-        self.connect((self.blocks_selector_0, 0), (self.blocks_multiply_xx_0_0, 1))
         self.connect((self.blocks_selector_0, 0), (self.blocks_selector_2, 2))
         self.connect((self.blocks_selector_0, 0), (self.fosphor_qt_sink_c_0_0_0, 0))
+        self.connect((self.blocks_selector_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.inspector_signal_detector_cvf_0, 0))
+        self.connect((self.blocks_selector_0, 0), (self.low_pass_filter_0_0, 0))
         self.connect((self.blocks_selector_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_delay_0_0_0_0, 0))
         self.connect((self.blocks_selector_2, 0), (self.filerepeater_AdvFileSink_0, 0))
@@ -457,8 +453,8 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.inspector_signal_detector_cvf_0, 0), (self.inspector_qtgui_sink_vf_0, 0))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 1))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 0))
-        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 1))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
+        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 1))
         self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.satnogs_frame_decoder_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_complex_to_real_0, 0))
@@ -486,12 +482,10 @@ class dual_lime(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.blocks_delay_0_0_0.set_dly(int(self.samp_rate*146e6*self.time_delay/self.freq)*int((self.samp_rate*146e6*self.time_delay/self.freq)>0))
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, self.samp_rate/(2*self.decimation), self.transition_bw))
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.samp_rate/2)
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.complex_band_pass(1, self.samp_rate, -self.samp_rate/(2*self.decimation), self.samp_rate/(2*self.decimation), self.transition_bw))
         self.inspector_qtgui_sink_vf_0.set_samp_rate(self.samp_rate)
         self.inspector_signal_detector_cvf_0.set_samp_rate(self.samp_rate)
         self.limesdr_source_0_0_0.set_digital_filter(self.samp_rate, 0)
@@ -545,7 +539,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
     def set_transition_bw(self, transition_bw):
         self.transition_bw = transition_bw
-        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, self.samp_rate/(2*self.decimation), self.transition_bw))
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.complex_band_pass(1, self.samp_rate, -self.samp_rate/(2*self.decimation), self.samp_rate/(2*self.decimation), self.transition_bw))
 
     def get_time_delay(self):
         return self.time_delay
@@ -607,14 +601,14 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
     def set_freq_shift(self, freq_shift):
         self.freq_shift = freq_shift
-        self.analog_sig_source_x_0_0.set_frequency(self.freq_shift)
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.freq_shift)
 
     def get_decimation(self):
         return self.decimation
 
     def set_decimation(self, decimation):
         self.decimation = decimation
-        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.low_pass(1, self.samp_rate, self.samp_rate/(2*self.decimation), self.transition_bw))
+        self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.complex_band_pass(1, self.samp_rate, -self.samp_rate/(2*self.decimation), self.samp_rate/(2*self.decimation), self.transition_bw))
 
     def get_com(self):
         return self.com
@@ -643,7 +637,7 @@ def argument_parser():
         "--offset", dest="offset", type=eng_float, default="50.0k",
         help="Set Frequency Offset [default=%(default)r]")
     parser.add_argument(
-        "--samp-rate", dest="samp_rate", type=eng_float, default="2.048M",
+        "--samp-rate", dest="samp_rate", type=eng_float, default="2.4M",
         help="Set Sample Rate [default=%(default)r]")
     parser.add_argument(
         "--wpm", dest="wpm", type=intx, default=20,
