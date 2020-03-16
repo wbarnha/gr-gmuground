@@ -14,6 +14,7 @@ The following dependencies must be installed:
 - [gr-filerepeater](https://github.com/ghostop14/gr-filerepeater)
 - [gr-fosphor](https://github.com/osmocom/gr-fosphor) (beta)
 - [gr-display](https://github.com/wbarnha/gr-display)
+- [gr-inspector](https://github.com/gnuradio/gr-inspector)
 - [libfec](https://github.com/quiet/libfec)
 - [construct](https://construct.readthedocs.io/en/latest/) 
 - [swig](http://www.swig.org/)
