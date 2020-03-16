@@ -42,6 +42,13 @@ sudo apt install -y \
 
 pip3 install requests construct matplotlib
 
+if cat /proc/cpuinfo | grep 'vendor' | grep -q 'GenuineIntel'; then
+   echo "Intel Processor Detected"
+   add-apt-repository ppa:intel-opencl/intel-opencl
+   apt-get update
+   apt-get install intel-opencl-icd
+fi
+
 cd ~/
 git clone https://github.com/quiet/libfec
 cd libfec
