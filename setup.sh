@@ -44,9 +44,9 @@ pip3 install requests construct matplotlib
 
 if cat /proc/cpuinfo | grep 'vendor' | grep -q 'GenuineIntel'; then
    echo "Intel Processor Detected"
-   add-apt-repository ppa:intel-opencl/intel-opencl
-   apt-get update
-   apt-get install intel-opencl-icd
+   sudo add-apt-repository ppa:intel-opencl/intel-opencl
+   sudo apt-get update
+   sudo apt-get install intel-opencl-icd
 fi
 
 cd ~/
