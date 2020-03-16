@@ -284,6 +284,11 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
+        self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
+                interpolation=1,
+                decimation=int(samp_rate/48e3)+1,
+                taps=None,
+                fractional_bw=None)
         self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
                 interpolation=1,
                 decimation=4,
@@ -359,7 +364,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
-        self.gpredict_VarToMsg_0 = gpredict.VarToMsgPair('freq')
         self.gpredict_MsgPairToVar_0_0_0 = gpredict.MsgPairToVar(self.set_freq)
         self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_doppler_freq)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(1, firdes.low_pass(1, samp_rate, samp_rate/(2*decimation), transition_bw), samp_rate/2, samp_rate)
@@ -411,7 +415,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect((self.filerepeater_StateToBool_0, 'bool'), (self.blocks_selector_2, 'en'))
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
-        self.msg_connect((self.gpredict_VarToMsg_0, 'msgout'), (self.guiextra_msgdigitalnumbercontrol_0, 'valuein'))
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.guiextra_msgdigitalnumbercontrol_0, 'valueout'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
@@ -439,7 +442,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.Selective_Combining_BPSK_0, 0))
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_selector_2, 0))
-        self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_complex_to_real_0, 0))
+        self.connect((self.blocks_multiply_xx_0, 0), (self.rational_resampler_xxx_0_0, 0))
         self.connect((self.blocks_multiply_xx_0_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
         self.connect((self.blocks_multiply_xx_0_0, 0), (self.low_pass_filter_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.AptUI_0, 0))
@@ -458,6 +461,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.satnogs_frame_decoder_0, 0))
+        self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_complex_to_real_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "dual_lime")
@@ -512,7 +516,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.filerepeater_AdvFileSink_0.setCenterFrequency(self.freq)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.gpredict_VarToMsg_0.variableChanged(self.freq)
         self.inspector_qtgui_sink_vf_0.set_cfreq(self.freq)
         self.limesdr_source_0_0_0.set_center_freq(self.freq, 0)
         self.qtgui_sink_x_0.set_frequency_range(self.freq, self.audio_samp_rate)

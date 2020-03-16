@@ -211,7 +211,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1577, 356]
+    coordinate: [1421, 312]
     rotation: 0
     state: true
 - name: ledstate
@@ -1006,23 +1006,6 @@ blocks:
     coordinate: [1867, 343]
     rotation: 0
     state: enabled
-- name: gpredict_VarToMsg_0
-  id: gpredict_VarToMsg
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    msgname: freq
-    target: freq
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1312, 323]
-    rotation: 0
-    state: true
 - name: gpredict_doppler_0
   id: gpredict_doppler
   parameters:
@@ -1264,7 +1247,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    decim: '4'
+    decim: int(samp_rate/48e3)+1
     fbw: '0'
     interp: '1'
     maxoutbuf: '0'
@@ -1297,7 +1280,7 @@ blocks:
     bus_structure: null
     coordinate: [1174, 723]
     rotation: 0
-    state: bypassed
+    state: enabled
 - name: samp_rate
   id: parameter
   parameters:
@@ -1513,7 +1496,6 @@ connections:
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
-- [gpredict_VarToMsg_0, msgout, guiextra_msgdigitalnumbercontrol_0, valuein]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [guiextra_msgdigitalnumbercontrol_0, valueout, gpredict_MsgPairToVar_0_0_0, inpair]
