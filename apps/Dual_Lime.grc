@@ -211,7 +211,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1421, 312]
+    coordinate: [1051, 212]
     rotation: 0
     state: true
 - name: ledstate
@@ -235,28 +235,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1774, 557]
-    rotation: 0
-    state: disabled
-- name: offset
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: Frequency Offset (MHz)
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: '-1'
-    step: 1e-2
-    stop: '1'
-    value: '0'
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [312, 12.0]
+    coordinate: [1480, 557]
     rotation: 0
     state: disabled
 - name: sat
@@ -408,7 +387,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1118, 820]
+    coordinate: [1097, 794]
     rotation: 0
     state: enabled
 - name: Display
@@ -549,7 +528,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [619, 608]
+    coordinate: [614, 608]
     rotation: 0
     state: enabled
 - name: blocks_add_xx_0
@@ -633,7 +612,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/stars/presync/145mhzch1
+    file: /home/stars/presync/146mhzch1
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -647,7 +626,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 260.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_file_source_0_0
   id: blocks_file_source
   parameters:
@@ -655,7 +634,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/stars/presync/145mhzch2
+    file: /home/stars/presync/146mhzch2
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -669,7 +648,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 364]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -806,40 +785,6 @@ blocks:
     coordinate: [560, 976.0]
     rotation: 0
     state: enabled
-- name: controls
-  id: qtgui_tab_widget
-  parameters:
-    alias: ''
-    comment: ''
-    gui_hint: ''
-    label0: Frequency Controls
-    label1: Channel Controls
-    label10: Tab 10
-    label11: Tab 11
-    label12: Tab 12
-    label13: Tab 13
-    label14: Tab 14
-    label15: Tab 15
-    label16: Tab 16
-    label17: Tab 17
-    label18: Tab 18
-    label19: Tab 19
-    label2: File Processing
-    label3: Tab 3
-    label4: Tab 4
-    label5: Tab 5
-    label6: Tab 6
-    label7: Tab 7
-    label8: Tab 8
-    label9: Tab 9
-    num_tabs: '3'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1064, 10]
-    rotation: 0
-    state: disabled
 - name: filerepeater_AdvFileSink_0
   id: filerepeater_AdvFileSink
   parameters:
@@ -901,23 +846,6 @@ blocks:
     coordinate: [1190, 443]
     rotation: 0
     state: enabled
-- name: freq
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: Frequency
-    short_id: ''
-    type: intx
-    value: carrier*1e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [760, 12.0]
-    rotation: 0
-    state: disabled
 - name: freq_xlating_fir_filter_xxx_0
   id: freq_xlating_fir_filter_xxx
   parameters:
@@ -964,7 +892,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1867, 343]
+    coordinate: [1497, 243]
     rotation: 0
     state: enabled
 - name: gpredict_doppler_0
@@ -1084,7 +1012,7 @@ blocks:
     bus_structure: null
     coordinate: [53, 481]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: low_pass_filter_0_0
   id: low_pass_filter
   parameters:
@@ -1152,7 +1080,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1458, 781]
+    coordinate: [1503, 785]
     rotation: 0
     state: true
 - name: rational_resampler_xxx_0
@@ -1161,7 +1089,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    decim: int(samp_rate/48e3)+1
+    decim: int(samp_rate/48e3)
     fbw: '0'
     interp: '1'
     maxoutbuf: '0'
@@ -1172,7 +1100,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [876, 858]
+    coordinate: [872, 858]
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0_0
@@ -1192,7 +1120,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1042, 689]
+    coordinate: [1038, 689]
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0_0_0
@@ -1212,7 +1140,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [879, 766]
+    coordinate: [875, 766]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -1250,7 +1178,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1553, 704]
+    coordinate: [1502, 707]
     rotation: 0
     state: true
 - name: satnogs_frame_decoder_0
@@ -1282,7 +1210,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1878, 724]
+    coordinate: [1784, 726]
     rotation: 0
     state: true
 - name: virtual_sink_0
