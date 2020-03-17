@@ -50,7 +50,6 @@ import datetime
 import filerepeater
 import gpredict
 import guiextra
-import inspector
 import limesdr
 import satellites.core
 import satnogs
@@ -341,18 +340,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
 
 
         self.limesdr_source_0_0_0.calibrate(2.5e6, 0)
-        self.inspector_signal_detector_cvf_0 = inspector.signal_detector_cvf(samp_rate, 4096, firdes.WIN_BLACKMAN_hARRIS, -80, 0.9, False, 0.2, 0.0001, 10, '')
-        self.inspector_qtgui_sink_vf_0 = inspector.qtgui_inspector_sink_vf(
-          samp_rate,
-          4096,
-          freq,
-          1,
-          1,
-          False
-        )
-        self._inspector_qtgui_sink_vf_0_win = sip.wrapinstance(self.inspector_qtgui_sink_vf_0.pyqwidget(), Qt.QWidget)
-
-        self.Display_layout_2.addWidget(self._inspector_qtgui_sink_vf_0_win)
         self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win = guiextra.MsgDigitalNumberControl(lbl = 'Frequency', minFreqHz = 80e6, maxFreqHz=400e6, parent=self,  ThousandsSeparator=",",backgroundColor="black",fontColor="white", varCallback=self.set_guiextra_msgdigitalnumbercontrol_0,outputmsgname="'freq'".replace("'",""))
         self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win.setValue(145.8e6)
         self._guiextra_msgdigitalnumbercontrol_0_msgdigctl_win.setReadOnly(False)
@@ -389,7 +376,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, int(samp_rate*146e6*time_delay/freq)*int((samp_rate*146e6*time_delay/freq)>0))
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1500*50, 1, 0, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 1500, 1, 0, 0)
         self.Selective_Combining_BPSK_0 = Selective_Combining_BPSK(
             filter_alpha=1e-3,
             tag_samps=1000,
@@ -416,7 +403,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.guiextra_msgdigitalnumbercontrol_0, 'valueout'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
-        self.msg_connect((self.inspector_signal_detector_cvf_0, 'map_out'), (self.inspector_qtgui_sink_vf_0, 'map_in'))
         self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.blocks_message_debug_0_0, 'print'))
         self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
@@ -444,17 +430,15 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_selector_0, 0), (self.blocks_selector_2, 2))
         self.connect((self.blocks_selector_0, 0), (self.fosphor_qt_sink_c_0_0_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))
-        self.connect((self.blocks_selector_0, 0), (self.inspector_signal_detector_cvf_0, 0))
         self.connect((self.blocks_selector_0, 0), (self.low_pass_filter_0_0, 0))
         self.connect((self.blocks_selector_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_delay_0_0_0_0, 0))
         self.connect((self.blocks_selector_2, 0), (self.filerepeater_AdvFileSink_0, 0))
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_multiply_xx_0, 1))
-        self.connect((self.inspector_signal_detector_cvf_0, 0), (self.inspector_qtgui_sink_vf_0, 0))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 1))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 0))
-        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 1))
+        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.satnogs_frame_decoder_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_complex_to_real_0, 0))
@@ -486,8 +470,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
         self.freq_xlating_fir_filter_xxx_0.set_taps(firdes.complex_band_pass(1, self.samp_rate, -self.samp_rate/(2*self.decimation), self.samp_rate/(2*self.decimation), self.transition_bw))
-        self.inspector_qtgui_sink_vf_0.set_samp_rate(self.samp_rate)
-        self.inspector_signal_detector_cvf_0.set_samp_rate(self.samp_rate)
         self.limesdr_source_0_0_0.set_digital_filter(self.samp_rate, 0)
         self.limesdr_source_0_0_0.set_digital_filter(self.samp_rate/10, 1)
         self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 3000, 1e3, firdes.WIN_HAMMING, 6.76))
@@ -510,7 +492,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.blocks_delay_0_0_0_0.set_dly(abs(int(self.samp_rate*146e6*self.time_delay/self.freq))*int((self.samp_rate*146e6*self.time_delay/self.freq)<0))
         self.filerepeater_AdvFileSink_0.setCenterFrequency(self.freq)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(self.freq, self.samp_rate)
-        self.inspector_qtgui_sink_vf_0.set_cfreq(self.freq)
         self.limesdr_source_0_0_0.set_center_freq(self.freq, 0)
         self.qtgui_sink_x_0.set_frequency_range(self.freq, self.audio_samp_rate)
 

@@ -117,7 +117,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [940, 784]
+    coordinate: [1009, 610]
     rotation: 0
     state: true
 - name: doppler_freq
@@ -374,7 +374,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [832, 784]
+    coordinate: [901, 610]
     rotation: 0
     state: true
 - name: variable_cw_decoder_0
@@ -408,7 +408,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1192, 344.0]
+    coordinate: [1118, 820]
     rotation: 0
     state: enabled
 - name: Display
@@ -583,7 +583,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1250, 802]
+    coordinate: [1273, 747]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -680,7 +680,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1218, 598]
+    coordinate: [1212, 530]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0_0
@@ -950,7 +950,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1511, 562]
+    coordinate: [1505, 494]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0_0_0
@@ -982,7 +982,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 561]
+    coordinate: [946, 493]
     rotation: 0
     state: enabled
 - name: gpredict_port
@@ -1015,53 +1015,6 @@ blocks:
     coordinate: [632, 12.0]
     rotation: 0
     state: true
-- name: inspector_qtgui_sink_vf_0
-  id: inspector_qtgui_sink_vf
-  parameters:
-    affinity: ''
-    alias: ''
-    cfreq: freq
-    comment: ''
-    fft_len: '4096'
-    gui_hint: Display@2
-    manual: 'False'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    msgports: '1'
-    rf_unit: '1'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1524, 157]
-    rotation: 0
-    state: enabled
-- name: inspector_signal_detector_cvf_0
-  id: inspector_signal_detector_cvf
-  parameters:
-    affinity: ''
-    alias: ''
-    auto: 'False'
-    avg: '0.2'
-    comment: ''
-    fft_len: '4096'
-    logfile: ''
-    maxoutbuf: '0'
-    min_bw: '10'
-    minoutbuf: '0'
-    quant: '0.0001'
-    samp_rate: samp_rate
-    sensitivity: '0.9'
-    threshold: '-80'
-    window: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1191, 149]
-    rotation: 0
-    state: enabled
 - name: limesdr_source_0_0
   id: limesdr_source
   parameters:
@@ -1239,7 +1192,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1049, 720]
+    coordinate: [1042, 689]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0_0_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: int(samp_rate/192e3)
+    fbw: '0'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [879, 766]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -1444,9 +1417,7 @@ connections:
 - [blocks_file_source_0_0, '0', blocks_selector_1, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
-- [blocks_selector_0, '0', AptUI_0, '0']
 - [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
-- [blocks_selector_0, '0', inspector_signal_detector_cvf_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
@@ -1454,11 +1425,10 @@ connections:
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
+- [freq_xlating_fir_filter_xxx_0, '0', rational_resampler_xxx_0_0_0, '0']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [guiextra_msgdigitalnumbercontrol_0, valueout, gpredict_MsgPairToVar_0_0_0, inpair]
-- [inspector_signal_detector_cvf_0, '0', inspector_qtgui_sink_vf_0, '0']
-- [inspector_signal_detector_cvf_0, map_out, inspector_qtgui_sink_vf_0, map_in]
 - [limesdr_source_0_0, '0', blocks_selector_1, '1']
 - [limesdr_source_0_0, '0', blocks_selector_1_0, '0']
 - [limesdr_source_0_0, '1', blocks_selector_1, '0']
@@ -1470,6 +1440,7 @@ connections:
 - [low_pass_filter_0_0, '0', rational_resampler_xxx_0, '0']
 - [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
 - [rational_resampler_xxx_0_0, '0', blocks_complex_to_real_0, '0']
+- [rational_resampler_xxx_0_0_0, '0', AptUI_0, '0']
 - [satellites_satellite_decoder_0, out, show_text_0, disp_pdu]
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [satnogs_frame_decoder_0, out, show_text_0, disp_pdu]
