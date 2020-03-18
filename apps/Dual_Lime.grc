@@ -32,18 +32,6 @@ options:
     state: enabled
 
 blocks:
-- name: alpha
-  id: variable
-  parameters:
-    comment: ''
-    value: '0.35'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [286, 1589]
-    rotation: 0
-    state: enabled
 - name: audio_samp_rate
   id: variable
   parameters:
@@ -129,7 +117,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1009, 610]
+    coordinate: [1019, 586]
     rotation: 0
     state: true
 - name: doppler_freq
@@ -250,30 +238,6 @@ blocks:
     coordinate: [1480, 557]
     rotation: 0
     state: disabled
-- name: nfilts
-  id: variable
-  parameters:
-    comment: ''
-    value: '16'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [390, 1589]
-    rotation: 0
-    state: enabled
-- name: rrc_taps
-  id: variable
-  parameters:
-    comment: ''
-    value: firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), alpha, 11*sps*nfilts)
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [366, 1661]
-    rotation: 0
-    state: enabled
 - name: sat
   id: variable_qtgui_chooser
   parameters:
@@ -285,8 +249,8 @@ blocks:
     label2: Equal
     label3: ''
     label4: ''
-    labels: '["3CAT-2","AO-73","FloripaSat 1","ITASAT 1","JY1SAT (JO-97)","NAYIF-1
-      (EO-88)","UKUBE-1"]'
+    labels: '["Generic 1k2 FSK","3CAT-2","FloripaSat 1","ITASAT 1","AO-73","JY1SAT
+      (JO-97)","NAYIF-1 (EO-88)"]'
     num_opts: '0'
     option1: '1'
     option2: '2'
@@ -308,14 +272,14 @@ blocks:
   id: variable
   parameters:
     comment: NORAD IDs
-    value: (41732,39444,44885,43786,43803,42017,40074)
+    value: (41732,39444,44885,43786,43803,42017)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [298, 97]
     rotation: 0
-    state: true
+    state: disabled
 - name: save
   id: variable_qtgui_toggle_button_msg
   parameters:
@@ -348,10 +312,10 @@ blocks:
     label0: Combined Signal
     label1: Ch. 1
     label2: Ch. 2
-    label3: ''
+    label3: Filtered
     label4: ''
     labels: '[]'
-    num_opts: '3'
+    num_opts: '4'
     option1: '0'
     option2: '1'
     option3: '3'
@@ -365,19 +329,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 796.0]
-    rotation: 0
-    state: enabled
-- name: sps
-  id: variable
-  parameters:
-    comment: ''
-    value: '8'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [198, 1589]
+    coordinate: [220, 746]
     rotation: 0
     state: enabled
 - name: time_delay
@@ -401,7 +353,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [901, 610]
+    coordinate: [911, 586]
     rotation: 0
     state: true
 - name: variable_cw_decoder_0
@@ -579,23 +531,6 @@ blocks:
     coordinate: [614, 608]
     rotation: 0
     state: enabled
-- name: bfo
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: carrier frequency of the BPSK signal
-    short_id: ''
-    type: eng_float
-    value: '1500'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [195, 1674]
-    rotation: 0
-    state: enabled
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -627,42 +562,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1273, 747]
-    rotation: 0
-    state: enabled
-- name: blocks_complex_to_real_0_0
-  id: blocks_complex_to_real
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1487, 1485]
-    rotation: 0
-    state: enabled
-- name: blocks_delay_0
-  id: blocks_delay
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    delay: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_ports: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1143, 1561]
+    coordinate: [1243, 717]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -772,41 +672,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1560, 987]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_conjugate_cc_0
-  id: blocks_multiply_conjugate_cc
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1279, 1469]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_const_vxx_0
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '4'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1671, 1481]
+    coordinate: [1464, 901]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -906,7 +772,7 @@ blocks:
     input_index: sig_save
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_inputs: '3'
+    num_inputs: '4'
     num_outputs: '1'
     output_index: '0'
     showports: 'True'
@@ -919,49 +785,52 @@ blocks:
     coordinate: [560, 976.0]
     rotation: 0
     state: enabled
-- name: digital_fll_band_edge_cc_0
-  id: digital_fll_band_edge_cc
+- name: blocks_selector_3
+  id: blocks_selector
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    filter_size: '100'
+    enabled: 'True'
+    input_index: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
-    rolloff: '0.350'
-    samps_per_sym: sps
-    type: cc
-    w: '0.01'
+    num_inputs: '1'
+    num_outputs: '2'
+    output_index: int(sat==4 or sat==5 or sat == 6)
+    showports: 'True'
+    type: float
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [623, 1461]
+    coordinate: [262, 1465]
     rotation: 0
-    state: enabled
-- name: digital_pfb_clock_sync_xxx_0
-  id: digital_pfb_clock_sync_xxx
+    state: true
+- name: blocks_selector_3_0
+  id: blocks_selector
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    filter_size: nfilts
-    init_phase: nfilts/2
-    loop_bw: '0.1'
-    max_dev: '0.05'
+    enabled: 'True'
+    input_index: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
-    osps: '1'
-    sps: sps
-    taps: rrc_taps
-    type: ccf
+    num_inputs: '1'
+    num_outputs: '3'
+    output_index: int(sat==0 or sat==4 or sat == 5)
+    showports: 'True'
+    type: float
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [871, 1469]
+    coordinate: [695, 1420]
     rotation: 0
-    state: enabled
+    state: true
 - name: filerepeater_AdvFileSink_0
   id: filerepeater_AdvFileSink
   parameters:
@@ -986,7 +855,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [778, 1170]
+    coordinate: [818, 1166]
     rotation: 0
     state: enabled
 - name: filerepeater_StateToBool_0
@@ -1001,9 +870,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [332, 1110]
+    coordinate: [331, 1213]
     rotation: 0
     state: enabled
+- name: floripasat_1_0
+  id: floripasat_1
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    invert: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [965, 1497]
+    rotation: 0
+    state: true
 - name: fosphor_qt_sink_c_0_0_0
   id: fosphor_qt_sink_c
   parameters:
@@ -1044,26 +929,37 @@ blocks:
     coordinate: [582, 736]
     rotation: 0
     state: enabled
-- name: freq_xlating_fir_filter_xxx_0_0
-  id: freq_xlating_fir_filter_xxx
+- name: funcube_0
+  id: funcube
   parameters:
     affinity: ''
     alias: ''
-    center_freq: bfo
+    bfo: '1500'
     comment: ''
-    decim: '5'
     maxoutbuf: '0'
     minoutbuf: '0'
-    samp_rate: samp_rate
-    taps: firdes.low_pass(1, 48000, 1300, 500)
-    type: fcf
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [193, 1481]
+    coordinate: [546, 1582]
     rotation: 0
-    state: enabled
+    state: true
+- name: generic_1k2_afsk_ax25_0
+  id: generic_1k2_afsk_ax25
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 1421]
+    rotation: 0
+    state: true
 - name: gpredict_MsgPairToVar_0
   id: gpredict_MsgPairToVar
   parameters:
@@ -1277,7 +1173,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1501, 727]
+    coordinate: [1471, 697]
     rotation: 0
     state: true
 - name: rational_resampler_xxx_0
@@ -1340,23 +1236,6 @@ blocks:
     coordinate: [875, 766]
     rotation: 0
     state: enabled
-- name: rms_agc_0
-  id: rms_agc
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha: 1e-2
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    reference: '0.5'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [431, 1497]
-    rotation: 0
-    state: enabled
 - name: samp_rate
   id: parameter
   parameters:
@@ -1374,6 +1253,22 @@ blocks:
     coordinate: [472, 235]
     rotation: 0
     state: true
+- name: sat_3cat_2_0
+  id: sat_3cat_2
+  parameters:
+    affinity: ''
+    alias: ''
+    bfo: '12000'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [961, 1455]
+    rotation: 0
+    state: true
 - name: satellites_ao40_fec_decoder_soft_0
   id: satellites_ao40_fec_decoder_soft
   parameters:
@@ -1386,9 +1281,39 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1613, 1618]
-    rotation: 180
+    coordinate: [894, 1586]
+    rotation: 0
     state: enabled
+- name: satellites_check_address_0
+  id: satellites_check_address
+  parameters:
+    address: 3CAT2
+    affinity: ''
+    alias: ''
+    comment: ''
+    direction: '"from"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1573, 1442]
+    rotation: 0
+    state: enabled
+- name: satellites_floripasat_telemetry_parser_0
+  id: satellites_floripasat_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1288, 1626]
+    rotation: 0
+    state: true
 - name: satellites_funcube_telemetry_parser_0
   id: satellites_funcube_telemetry_parser
   parameters:
@@ -1399,8 +1324,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [893, 1674]
+    coordinate: [561, 1662]
     rotation: 180
+    state: enabled
+- name: satellites_hdlc_deframer_0
+  id: satellites_hdlc_deframer
+  parameters:
+    affinity: ''
+    alias: ''
+    check_fcs: 'False'
+    comment: ''
+    max_length: '10000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1294, 1447]
+    rotation: 0
     state: enabled
 - name: satellites_print_timestamp_0
   id: satellites_print_timestamp
@@ -1416,9 +1358,22 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1187, 1686]
+    coordinate: [932, 1650]
     rotation: 180
     state: enabled
+- name: satellites_sat3cat2_telemetry_parser_0
+  id: satellites_sat3cat2_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1793, 1398]
+    rotation: 0
+    state: true
 - name: satnogs_frame_decoder_0
   id: satnogs_frame_decoder
   parameters:
@@ -1434,7 +1389,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1132, 885]
+    coordinate: [1129, 886]
     rotation: 0
     state: enabled
 - name: show_text_0
@@ -1443,13 +1398,13 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    gui_hint: Misc@1
+    gui_hint: ''
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1263, 1620]
-    rotation: 180
+    coordinate: [1836, 1539]
+    rotation: 0
     state: true
 - name: virtual_sink_0
   id: virtual_sink
@@ -1500,7 +1455,20 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1527, 856]
+    coordinate: [1497, 826]
+    rotation: 0
+    state: true
+- name: virtual_sink_3
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: filter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [886, 651]
     rotation: 0
     state: true
 - name: virtual_source_0
@@ -1513,7 +1481,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [347, 744]
+    coordinate: [391, 744]
     rotation: 0
     state: enabled
 - name: virtual_source_1
@@ -1555,6 +1523,19 @@ blocks:
     coordinate: [256, 1052.0]
     rotation: 0
     state: enabled
+- name: virtual_source_1_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: filter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [257, 1095]
+    rotation: 0
+    state: enabled
 - name: virtual_source_2
   id: virtual_source
   parameters:
@@ -1565,7 +1546,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [4, 1489]
+    coordinate: [56, 1481]
     rotation: 0
     state: true
 - name: wpm
@@ -1594,8 +1575,6 @@ connections:
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
 - [blocks_complex_to_real_0, '0', virtual_sink_2, '0']
-- [blocks_complex_to_real_0_0, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_delay_0, '0', blocks_multiply_conjugate_cc_0, '1']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
@@ -1610,22 +1589,26 @@ connections:
 - [blocks_file_source_0, '0', blocks_selector_1_0, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
-- [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_real_0_0, '0']
-- [blocks_multiply_const_vxx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
 - [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
 - [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
-- [digital_fll_band_edge_cc_0, '0', digital_pfb_clock_sync_xxx_0, '0']
-- [digital_pfb_clock_sync_xxx_0, '0', blocks_delay_0, '0']
-- [digital_pfb_clock_sync_xxx_0, '0', blocks_multiply_conjugate_cc_0, '0']
+- [blocks_selector_3, '0', blocks_selector_3_0, '0']
+- [blocks_selector_3, '1', funcube_0, '0']
+- [blocks_selector_3_0, '0', generic_1k2_afsk_ax25_0, '0']
+- [blocks_selector_3_0, '1', sat_3cat_2_0, '0']
+- [blocks_selector_3_0, '2', floripasat_1_0, '0']
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
+- [floripasat_1_0, out, satellites_floripasat_telemetry_parser_0, in]
+- [floripasat_1_0, out, show_text_0, disp_pdu]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
 - [freq_xlating_fir_filter_xxx_0, '0', rational_resampler_xxx_0_0_0, '0']
-- [freq_xlating_fir_filter_xxx_0_0, '0', rms_agc_0, '0']
+- [freq_xlating_fir_filter_xxx_0, '0', virtual_sink_3, '0']
+- [funcube_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
+- [generic_1k2_afsk_ax25_0, out, show_text_0, disp_pdu]
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [guiextra_msgdigitalnumbercontrol_0, valueout, gpredict_MsgPairToVar_0_0_0, inpair]
@@ -1641,9 +1624,12 @@ connections:
 - [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
 - [rational_resampler_xxx_0_0, '0', blocks_complex_to_real_0, '0']
 - [rational_resampler_xxx_0_0_0, '0', AptUI_0, '0']
-- [rms_agc_0, '0', digital_fll_band_edge_cc_0, '0']
+- [sat_3cat_2_0, '0', satellites_hdlc_deframer_0, '0']
 - [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
 - [satellites_ao40_fec_decoder_soft_0, out, show_text_0, disp_pdu]
+- [satellites_check_address_0, ok, satellites_sat3cat2_telemetry_parser_0, in]
+- [satellites_check_address_0, ok, show_text_0, disp_pdu]
+- [satellites_hdlc_deframer_0, out, satellites_check_address_0, in]
 - [satellites_print_timestamp_0, out, satellites_funcube_telemetry_parser_0, in]
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
@@ -1653,7 +1639,8 @@ connections:
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']
-- [virtual_source_2, '0', freq_xlating_fir_filter_xxx_0_0, '0']
+- [virtual_source_1_0_0_0, '0', blocks_selector_2, '3']
+- [virtual_source_2, '0', blocks_selector_3, '0']
 
 metadata:
   file_format: 1
