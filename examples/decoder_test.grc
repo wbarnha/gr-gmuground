@@ -1,0 +1,619 @@
+options:
+  parameters:
+    author: William Barnhart
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Check if decoders can be changed in real-time
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: decoder_test
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Decoder Testing
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [266, 12]
+    rotation: 0
+    state: enabled
+- name: sat
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Demo Satellite
+    label0: 3CAT-2
+    label1: AO-73
+    label2: Equal
+    label3: ''
+    label4: ''
+    labels: '["3CAT-2","AO-73","FloripaSat 1","ITASAT 1","JY1SAT (JO-97)","NAYIF-1
+      (EO-88)","UKUBE-1"]'
+    num_opts: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0,1,2,3,4,5,6]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [56, 342]
+    rotation: 0
+    state: enabled
+- name: sat_type
+  id: variable
+  parameters:
+    comment: ''
+    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1-Sat'',5:''Nayif-1'',6:''UKube-1''}'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [380, 11]
+    rotation: 0
+    state: disabled
+- name: sat_type
+  id: variable
+  parameters:
+    comment: NORAD IDs
+    value: (41732,39444,44885,43786,43803,42017,40074)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [56, 241]
+    rotation: 0
+    state: true
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 245]
+    rotation: 0
+    state: true
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [701, 25]
+    rotation: 0
+    state: true
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1380, 152]
+    rotation: 0
+    state: disabled
+- name: blocks_message_debug_0_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1350, 300]
+    rotation: 0
+    state: enabled
+- name: blocks_selector_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '1'
+    num_outputs: '7'
+    output_index: sat
+    showports: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [715, 292]
+    rotation: 0
+    state: true
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: /home/wbarnha/gr-satellites/satellite-recordings/itasat1.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [182, 162]
+    rotation: 0
+    state: true
+- name: low_pass_filter_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '3000'
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: 1e3
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [898, 11]
+    rotation: 0
+    state: bypassed
+- name: low_pass_filter_0_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '3000'
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: interp_fir_filter_fff
+    width: 1e3
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [455, 150]
+    rotation: 0
+    state: enabled
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '1024'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [718, 145]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_0_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '1024'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1137, 40]
+    rotation: 0
+    state: enabled
+- name: satellites_satellite_decoder_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[sat]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [972, 154]
+    rotation: 0
+    state: disabled
+- name: satellites_satellite_decoder_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[0]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [977, 228]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[1]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [974, 301]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[2]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [974, 372]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[3]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [970, 449]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[4]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [974, 518]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[5]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [977, 594]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[6]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [979, 678]
+    rotation: 0
+    state: true
+- name: show_text_0
+  id: show_text
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1411, 252]
+    rotation: 0
+    state: disabled
+
+connections:
+- [blocks_float_to_complex_0, '0', low_pass_filter_0_0, '0']
+- [blocks_selector_0, '0', satellites_satellite_decoder_0_0, '0']
+- [blocks_selector_0, '1', satellites_satellite_decoder_0_0_0, '0']
+- [blocks_selector_0, '2', satellites_satellite_decoder_0_0_0_0, '0']
+- [blocks_selector_0, '3', satellites_satellite_decoder_0_0_0_0_0, '0']
+- [blocks_selector_0, '4', satellites_satellite_decoder_0_0_0_0_0_0, '0']
+- [blocks_selector_0, '5', satellites_satellite_decoder_0_0_0_0_0_0_0, '0']
+- [blocks_selector_0, '6', satellites_satellite_decoder_0_0_0_0_0_0_0_0, '0']
+- [blocks_wavfile_source_0, '0', low_pass_filter_0_0_0, '0']
+- [blocks_wavfile_source_0, '0', satellites_satellite_decoder_0, '0']
+- [low_pass_filter_0_0, '0', qtgui_freq_sink_x_0_0, '0']
+- [low_pass_filter_0_0_0, '0', audio_sink_0, '0']
+- [low_pass_filter_0_0_0, '0', blocks_float_to_complex_0, '0']
+- [low_pass_filter_0_0_0, '0', blocks_selector_0, '0']
+- [low_pass_filter_0_0_0, '0', qtgui_freq_sink_x_0, '0']
+- [satellites_satellite_decoder_0, out, blocks_message_debug_0, print_pdu]
+- [satellites_satellite_decoder_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_satellite_decoder_0_0_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_satellite_decoder_0_0_0_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0_0_0, out, blocks_message_debug_0_0, print_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0_0_0_0, out, blocks_message_debug_0_0, print_pdu]
+
+metadata:
+  file_format: 1

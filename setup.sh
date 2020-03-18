@@ -111,6 +111,10 @@ cmake ..
 make -j3
 sudo make install
 sudo ldconfig
+cd ..
+for file in python/hier/*.grc
+do grcc $file
+done
 cd
 
 #rm -rf gr-gpredict-doppler

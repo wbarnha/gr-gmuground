@@ -1,6 +1,6 @@
 options:
   parameters:
-    author: Example
+    author: William Barnhart
     category: Custom
     cmake_opt: ''
     comment: ''

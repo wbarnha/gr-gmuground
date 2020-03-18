@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1201, 1008]
+    coordinate: [1520, 1023]
     rotation: 0
     state: enabled
 - name: channel
@@ -129,7 +129,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [314, 163]
+    coordinate: [194, 17]
     rotation: 0
     state: true
 - name: freq
@@ -271,13 +271,13 @@ blocks:
 - name: sat_type
   id: variable
   parameters:
-    comment: ''
-    value: '{0:''3CAT-2'',1:''AO-73'',2:''FloripaSat 1'',3:''ITASAT 1'',4:''JY1-Sat'',5:''Nayif-1'',6:''UKube-1''}'
+    comment: NORAD IDs
+    value: (41732,39444,44885,43786,43803,42017,40074)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [890, 10]
+    coordinate: [298, 97]
     rotation: 0
     state: true
 - name: save
@@ -341,7 +341,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [417, 159]
+    coordinate: [362, 10]
     rotation: 0
     state: true
 - name: transition_bw
@@ -373,7 +373,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [990, 983]
+    coordinate: [878, 972]
     rotation: 0
     state: true
 - name: AptUI_0
@@ -626,7 +626,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 260.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_file_source_0_0
   id: blocks_file_source
   parameters:
@@ -648,7 +648,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 364]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -672,7 +672,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1425, 900]
+    coordinate: [1547, 870]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -716,6 +716,29 @@ blocks:
     coordinate: [960, 328.0]
     rotation: 0
     state: enabled
+- name: blocks_selector_0_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '1'
+    num_outputs: '7'
+    output_index: sat
+    showports: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1191, 1141]
+    rotation: 0
+    state: true
 - name: blocks_selector_1
   id: blocks_selector
   parameters:
@@ -1012,7 +1035,7 @@ blocks:
     bus_structure: null
     coordinate: [53, 481]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: low_pass_filter_0_0
   id: low_pass_filter
   parameters:
@@ -1080,7 +1103,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1503, 785]
+    coordinate: [1501, 727]
     rotation: 0
     state: true
 - name: rational_resampler_xxx_0
@@ -1160,25 +1183,151 @@ blocks:
     coordinate: [472, 235]
     rotation: 0
     state: true
-- name: satellites_satellite_decoder_0
+- name: satellites_satellite_decoder_0_0
   id: satellites_satellite_decoder
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    definition: file
+    definition: norad
     file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
     iq: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: 1KUNS-PF
-    norad: '99999'
-    samp_rate: 48e3
+    name: str(sat_type)
+    norad: sat_type[0]
+    samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1502, 707]
+    coordinate: [1503, 1010]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[1]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1500, 1083]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[2]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1499, 1155]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[3]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1496, 1231]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[4]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1500, 1300]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[5]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1503, 1376]
+    rotation: 0
+    state: true
+- name: satellites_satellite_decoder_0_0_0_0_0_0_0_0
+  id: satellites_satellite_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    definition: norad
+    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
+    iq: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: str(sat_type)
+    norad: sat_type[6]
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1505, 1460]
     rotation: 0
     state: true
 - name: satnogs_frame_decoder_0
@@ -1210,7 +1359,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1784, 726]
+    coordinate: [1924, 1253]
     rotation: 0
     state: true
 - name: virtual_sink_0
@@ -1318,7 +1467,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1225, 1080]
+    coordinate: [1520, 1095]
     rotation: 0
     state: enabled
 
@@ -1328,8 +1477,8 @@ connections:
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
+- [blocks_complex_to_real_0, '0', blocks_selector_0_0, '0']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
-- [blocks_complex_to_real_0, '0', satellites_satellite_decoder_0, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
@@ -1347,6 +1496,13 @@ connections:
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
 - [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
+- [blocks_selector_0_0, '0', satellites_satellite_decoder_0_0, '0']
+- [blocks_selector_0_0, '1', satellites_satellite_decoder_0_0_0, '0']
+- [blocks_selector_0_0, '2', satellites_satellite_decoder_0_0_0_0, '0']
+- [blocks_selector_0_0, '3', satellites_satellite_decoder_0_0_0_0_0, '0']
+- [blocks_selector_0_0, '4', satellites_satellite_decoder_0_0_0_0_0_0, '0']
+- [blocks_selector_0_0, '5', satellites_satellite_decoder_0_0_0_0_0_0_0, '0']
+- [blocks_selector_0_0, '6', satellites_satellite_decoder_0_0_0_0_0_0_0_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
 - [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
@@ -1369,7 +1525,13 @@ connections:
 - [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
 - [rational_resampler_xxx_0_0, '0', blocks_complex_to_real_0, '0']
 - [rational_resampler_xxx_0_0_0, '0', AptUI_0, '0']
-- [satellites_satellite_decoder_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0_0_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0_0_0, out, show_text_0, disp_pdu]
+- [satellites_satellite_decoder_0_0_0_0_0_0_0_0, out, show_text_0, disp_pdu]
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [satnogs_frame_decoder_0, out, show_text_0, disp_pdu]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
