@@ -37,6 +37,9 @@ from gnuradio import fosphor
 from gnuradio.fft import window
 from Selective_Combining import Selective_Combining  # grc-generated hier_block
 from Selective_Combining_BPSK import Selective_Combining_BPSK  # grc-generated hier_block
+from floripasat_1 import floripasat_1  # grc-generated hier_block
+from funcube import funcube  # grc-generated hier_block
+from generic_1k2_afsk_ax25 import generic_1k2_afsk_ax25  # grc-generated hier_block
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import filter
@@ -46,12 +49,14 @@ from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
 from gnuradio.qtgui import Range, RangeWidget
+from sat_3cat_2 import sat_3cat_2  # grc-generated hier_block
+from satellites_ao40_fec_decoder_soft import satellites_ao40_fec_decoder_soft  # grc-generated hier_block
 import datetime
 import filerepeater
 import gpredict
 import guiextra
 import limesdr
-import satellites.core
+import satellites
 import satnogs
 from gnuradio import qtgui
 
@@ -107,7 +112,6 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.time_delay = time_delay = 158e-12*(freq-145e6)+111e-6
         self.sig_save = sig_save = 2
         self.save = save = 0
-        self.sat_type = sat_type = {0:'3CAT-2',1:'AO-73',2:'FloripaSat 1',3:'ITASAT 1',4:'JY1-Sat',5:'Nayif-1',6:'UKube-1'}
         self.sat = sat = 0
         self.guiextra_msgdigitalnumbercontrol_0 = guiextra_msgdigitalnumbercontrol_0 = 145.8e6
         self.gain = gain = 30
@@ -121,9 +125,9 @@ class dual_lime(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
         # Create the options list
-        self._sig_save_options = (2, 0, 1, )
+        self._sig_save_options = (2, 0, 1, 3, )
         # Create the labels list
-        self._sig_save_labels = ('Combined Signal', 'Ch. 1', 'Ch. 2', )
+        self._sig_save_labels = ('Combined Signal', 'Ch. 1', 'Ch. 2', 'Filtered', )
         # Create the combo box
         self._sig_save_tool_bar = Qt.QToolBar(self)
         self._sig_save_tool_bar.addWidget(Qt.QLabel('Channel to Save' + ": "))
@@ -137,6 +141,26 @@ class dual_lime(gr.top_block, Qt.QWidget):
         # Create the radio buttons
         self.top_grid_layout.addWidget(self._sig_save_tool_bar, 5, 0, 1, 1)
         for r in range(5, 6):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        # Create the options list
+        self._sat_options = [0,1,2,3,4,5,6]
+        # Create the labels list
+        self._sat_labels = ["Generic 1k2 FSK","3CAT-2","FloripaSat 1","ITASAT 1","AO-73","JY1SAT (JO-97)","NAYIF-1 (EO-88)"]
+        # Create the combo box
+        self._sat_tool_bar = Qt.QToolBar(self)
+        self._sat_tool_bar.addWidget(Qt.QLabel('Demo Satellite' + ": "))
+        self._sat_combo_box = Qt.QComboBox()
+        self._sat_tool_bar.addWidget(self._sat_combo_box)
+        for _label in self._sat_labels: self._sat_combo_box.addItem(_label)
+        self._sat_callback = lambda i: Qt.QMetaObject.invokeMethod(self._sat_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._sat_options.index(i)))
+        self._sat_callback(self.sat)
+        self._sat_combo_box.currentIndexChanged.connect(
+            lambda i: self.set_sat(self._sat_options[i]))
+        # Create the radio buttons
+        self.top_grid_layout.addWidget(self._sat_tool_bar, 3, 0, 1, 1)
+        for r in range(3, 4):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
@@ -244,7 +268,7 @@ class dual_lime(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.show_text_0 = display.show_text()
         self._show_text_0_win = sip.wrapinstance(self.show_text_0.pyqwidget(), Qt.QWidget)
-        self.Misc_layout_1.addWidget(self._show_text_0_win)
+        self.top_grid_layout.addWidget(self._show_text_0_win)
         if int == bool:
         	self._save_choices = {'Pressed': bool(1), 'Released': bool(0)}
         elif int == str:
@@ -262,27 +286,16 @@ class dual_lime(gr.top_block, Qt.QWidget):
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.satnogs_frame_decoder_0 = satnogs.frame_decoder(variable_cw_decoder_0, 8 * 1)
-        self.satellites_satellite_decoder_0 = satellites.core.gr_satellites_flowgraph(file = '/usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml', samp_rate = 48e3, grc_block = True, iq = False)
-        # Create the options list
-        self._sat_options = [0,1,2,3,4,5,6]
-        # Create the labels list
-        self._sat_labels = ["3CAT-2","AO-73","FloripaSat 1","ITASAT 1","JY1SAT (JO-97)","NAYIF-1 (EO-88)","UKUBE-1"]
-        # Create the combo box
-        self._sat_tool_bar = Qt.QToolBar(self)
-        self._sat_tool_bar.addWidget(Qt.QLabel('Demo Satellite' + ": "))
-        self._sat_combo_box = Qt.QComboBox()
-        self._sat_tool_bar.addWidget(self._sat_combo_box)
-        for _label in self._sat_labels: self._sat_combo_box.addItem(_label)
-        self._sat_callback = lambda i: Qt.QMetaObject.invokeMethod(self._sat_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._sat_options.index(i)))
-        self._sat_callback(self.sat)
-        self._sat_combo_box.currentIndexChanged.connect(
-            lambda i: self.set_sat(self._sat_options[i]))
-        # Create the radio buttons
-        self.top_grid_layout.addWidget(self._sat_tool_bar, 3, 0, 1, 1)
-        for r in range(3, 4):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
+        self.satellites_sat3cat2_telemetry_parser_0 = satellites.sat3cat2_telemetry_parser()
+        self.satellites_print_timestamp_0 = satellites.print_timestamp('%Y-%m-%d %H:%M:%S', True)
+        self.satellites_hdlc_deframer_0 = satellites.hdlc_deframer(check_fcs=False, max_length=10000)
+        self.satellites_funcube_telemetry_parser_0 = satellites.funcube_telemetry_parser()
+        self.satellites_floripasat_telemetry_parser_0 = satellites.floripasat_telemetry_parser()
+        self.satellites_check_address_0 = satellites.check_address('3CAT2', "from")
+        self.satellites_ao40_fec_decoder_soft_0 = satellites_ao40_fec_decoder_soft()
+        self.sat_3cat_2_0 = sat_3cat_2(
+            bfo=12000,
+        )
         self.rational_resampler_xxx_0_0_0 = filter.rational_resampler_ccc(
                 interpolation=1,
                 decimation=int(samp_rate/192e3),
@@ -358,14 +371,25 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.gpredict_doppler_0 = gpredict.doppler('localhost', gpredict_port, True)
         self.gpredict_MsgPairToVar_0_0_0 = gpredict.MsgPairToVar(self.set_freq)
         self.gpredict_MsgPairToVar_0 = gpredict.MsgPairToVar(self.set_doppler_freq)
+        self.generic_1k2_afsk_ax25_0 = generic_1k2_afsk_ax25()
+        self.funcube_0 = funcube(
+            bfo=1500,
+        )
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(1, firdes.complex_band_pass(1, samp_rate, -samp_rate/(2*decimation), samp_rate/(2*decimation), transition_bw), freq_shift, samp_rate)
         self.fosphor_qt_sink_c_0_0_0 = fosphor.qt_sink_c()
         self.fosphor_qt_sink_c_0_0_0.set_fft_window(firdes.WIN_BLACKMAN_hARRIS)
         self.fosphor_qt_sink_c_0_0_0.set_frequency_range(freq, samp_rate)
         self._fosphor_qt_sink_c_0_0_0_win = sip.wrapinstance(self.fosphor_qt_sink_c_0_0_0.pyqwidget(), Qt.QWidget)
         self.Display_layout_0.addWidget(self._fosphor_qt_sink_c_0_0_0_win)
+        self.floripasat_1_0 = floripasat_1(
+            invert=1,
+        )
         self.filerepeater_StateToBool_0 = filerepeater.StateToBool()
-        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/wbarnha/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
+        self.filerepeater_AdvFileSink_0 = filerepeater.AdvFileSink(1, gr.sizeof_gr_complex*1, '/home/stars/', 'gr_record', freq, samp_rate, 0, 0,False,False,False, 8,False,False)
+        self.blocks_selector_3_0 = blocks.selector(gr.sizeof_float*1,0,int(sat==0 or sat==4 or sat == 5))
+        self.blocks_selector_3_0.set_enabled(True)
+        self.blocks_selector_3 = blocks.selector(gr.sizeof_float*1,0,int(sat==4 or sat==5 or sat == 6))
+        self.blocks_selector_3.set_enabled(True)
         self.blocks_selector_2 = blocks.selector(gr.sizeof_gr_complex*1,sig_save,0)
         self.blocks_selector_2.set_enabled(False)
         self.blocks_selector_1_0 = blocks.selector(gr.sizeof_gr_complex*1,channel,0)
@@ -404,13 +428,20 @@ class dual_lime(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.filerepeater_StateToBool_0, 'bool'), (self.blocks_selector_2, 'en'))
+        self.msg_connect((self.floripasat_1_0, 'out'), (self.satellites_floripasat_telemetry_parser_0, 'in'))
+        self.msg_connect((self.floripasat_1_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.fosphor_qt_sink_c_0_0_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
+        self.msg_connect((self.generic_1k2_afsk_ax25_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.gpredict_doppler_0, 'state'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.gpredict_doppler_0, 'freq'), (self.gpredict_MsgPairToVar_0, 'inpair'))
         self.msg_connect((self.guiextra_msgdigitalnumbercontrol_0, 'valueout'), (self.gpredict_MsgPairToVar_0_0_0, 'inpair'))
-        self.msg_connect((self.satellites_satellite_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
+        self.msg_connect((self.satellites_ao40_fec_decoder_soft_0, 'out'), (self.satellites_print_timestamp_0, 'in'))
+        self.msg_connect((self.satellites_ao40_fec_decoder_soft_0, 'out'), (self.show_text_0, 'disp_pdu'))
+        self.msg_connect((self.satellites_check_address_0, 'ok'), (self.satellites_sat3cat2_telemetry_parser_0, 'in'))
+        self.msg_connect((self.satellites_check_address_0, 'ok'), (self.show_text_0, 'disp_pdu'))
+        self.msg_connect((self.satellites_hdlc_deframer_0, 'out'), (self.satellites_check_address_0, 'in'))
+        self.msg_connect((self.satellites_print_timestamp_0, 'out'), (self.satellites_funcube_telemetry_parser_0, 'in'))
         self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.blocks_message_debug_0_0, 'print'))
-        self.msg_connect((self.satnogs_frame_decoder_0, 'out'), (self.show_text_0, 'disp_pdu'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_AdvFileSink_0, 'recordstate'))
         self.msg_connect((self.save, 'state'), (self.filerepeater_StateToBool_0, 'state'))
         self.connect((self.Maximal_Combining_0, 0), (self.blocks_selector_0, 3))
@@ -418,8 +449,8 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.Selective_Combining_BPSK_0, 0), (self.blocks_selector_0, 1))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_selector_0, 2))
+        self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_selector_3, 0))
         self.connect((self.blocks_complex_to_real_0, 0), (self.qtgui_sink_x_0, 0))
-        self.connect((self.blocks_complex_to_real_0, 0), (self.satellites_satellite_decoder_0, 0))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Maximal_Combining_0, 1))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Selective_Combining_0, 1))
         self.connect((self.blocks_delay_0_0_0, 0), (self.Selective_Combining_BPSK_0, 1))
@@ -438,16 +469,24 @@ class dual_lime(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_selector_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.blocks_selector_1_0, 0), (self.blocks_delay_0_0_0_0, 0))
         self.connect((self.blocks_selector_2, 0), (self.filerepeater_AdvFileSink_0, 0))
+        self.connect((self.blocks_selector_3, 0), (self.blocks_selector_3_0, 0))
+        self.connect((self.blocks_selector_3, 1), (self.funcube_0, 0))
+        self.connect((self.blocks_selector_3_0, 2), (self.floripasat_1_0, 0))
+        self.connect((self.blocks_selector_3_0, 0), (self.generic_1k2_afsk_ax25_0, 0))
+        self.connect((self.blocks_selector_3_0, 1), (self.sat_3cat_2_0, 0))
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_multiply_xx_0, 1))
+        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_selector_2, 3))
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0_0_0, 0))
+        self.connect((self.funcube_0, 0), (self.satellites_ao40_fec_decoder_soft_0, 0))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 0))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1, 1))
-        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 1))
+        self.connect((self.limesdr_source_0_0_0, 0), (self.blocks_selector_1_0, 0))
         self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.satnogs_frame_decoder_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_complex_to_real_0, 0))
         self.connect((self.rational_resampler_xxx_0_0_0, 0), (self.AptUI_0, 0))
+        self.connect((self.sat_3cat_2_0, 0), (self.satellites_hdlc_deframer_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "dual_lime")
@@ -550,18 +589,14 @@ class dual_lime(gr.top_block, Qt.QWidget):
     def set_save(self, save):
         self.save = save
 
-    def get_sat_type(self):
-        return self.sat_type
-
-    def set_sat_type(self, sat_type):
-        self.sat_type = sat_type
-
     def get_sat(self):
         return self.sat
 
     def set_sat(self, sat):
         self.sat = sat
         self._sat_callback(self.sat)
+        self.blocks_selector_3.set_output_index(int(self.sat==4 or self.sat==5 or self.sat == 6))
+        self.blocks_selector_3_0.set_output_index(int(self.sat==0 or self.sat==4 or self.sat == 5))
 
     def get_guiextra_msgdigitalnumbercontrol_0(self):
         return self.guiextra_msgdigitalnumbercontrol_0
