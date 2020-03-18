@@ -253,9 +253,9 @@ class decoder_test(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 3000, 1e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 3000, 1e3, firdes.WIN_HAMMING, 6.76))
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_freq_sink_x_0_0.set_frequency_range(0, self.samp_rate)
-        self.low_pass_filter_0_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 3000, 1e3, firdes.WIN_HAMMING, 6.76))
 
 
 

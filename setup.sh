@@ -40,14 +40,14 @@ sudo apt install -y \
       freeglut3-dev \
       python3-pip
 
-pip3 install requests construct matplotlib
-
 if cat /proc/cpuinfo | grep 'vendor' | grep -q 'GenuineIntel'; then
    echo "Intel Processor Detected"
    sudo add-apt-repository ppa:intel-opencl/intel-opencl
    sudo apt-get update
    sudo apt-get install intel-opencl-icd
 fi
+
+pip3 install requests construct matplotlib
 
 cd ~/
 git clone https://github.com/quiet/libfec
@@ -71,7 +71,7 @@ cd LimeSuite
 git checkout stable
 mkdir builddir && cd builddir
 cmake ../
-make -j4
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd ~/LimeSuite/udev-rules
@@ -85,7 +85,7 @@ git checkout gr-3.8
 mkdir build
 cd build
 cmake ..
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd
@@ -102,19 +102,28 @@ sudo ldconfig
 cd
 
 #rm -rf gr-satellites
-git clone --recursive https://github.com/daniestevez/gr-satellites
+#Remove --recursive to not download satellite-recordings
+git clone https://github.com/daniestevez/gr-satellites
 cd gr-satellites
 git checkout next
 mkdir build
 cd build
 cmake ..
-make -j3
+make -j $(nproc --all)
+sudo make install
+sudo ldconfig
+cd 
+rm -rf gr-satellites
+git clone --recursive https://github.com/wbarnha/gr-satellites
+git checkout maint-3.8
+mkdir build
+cd build
+cmake ..
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd ..
-for file in python/hier/*.grc
-do grcc $file
-done
+./compile.sh
 cd
 
 #rm -rf gr-gpredict-doppler
@@ -123,7 +132,7 @@ cd gr-gpredict-doppler
 mkdir build
 cd build
 cmake ..
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd
@@ -134,7 +143,7 @@ cd gr-display
 mkdir build
 cd build
 cmake ..
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd ..
@@ -148,7 +157,7 @@ cd glfw
 mkdir build
 cd build
 cmake ../ -DBUILD_SHARED_LIBS=true
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd
@@ -160,7 +169,7 @@ git checkout -b test 6f3a8de592e181e9ac2e76800e50df427827ba5b
 mkdir build
 cd build
 cmake ..
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd
@@ -174,18 +183,7 @@ cd gr-filerepeater
 mkdir build
 cd build
 cmake ..
-make -j3
-sudo make install
-sudo ldconfig
-cd
-
-#rm -rf gr-inspector
-git clone https://github.com/gnuradio/gr-inspector
-cd gr-inspector
-mkdir build
-cd build
-cmake ..
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd
@@ -196,7 +194,7 @@ cd gr-guiextra
 mkdir build
 cd build
 cmake ..
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd
@@ -205,7 +203,7 @@ cd ~/gr-gmuground
 mkdir build
 cd build
 cmake ../
-make -j3
+make -j $(nproc --all)
 sudo make install
 sudo ldconfig
 cd ..

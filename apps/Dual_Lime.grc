@@ -22,7 +22,7 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: Dual Lime RX
-    window_size: 1280, 4056
+    window_size: 1280, 4096
   states:
     bus_sink: false
     bus_source: false
@@ -32,6 +32,18 @@ options:
     state: enabled
 
 blocks:
+- name: alpha
+  id: variable
+  parameters:
+    comment: ''
+    value: '0.35'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [286, 1589]
+    rotation: 0
+    state: enabled
 - name: audio_samp_rate
   id: variable
   parameters:
@@ -41,7 +53,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1520, 1023]
+    coordinate: [747, 1088]
     rotation: 0
     state: enabled
 - name: channel
@@ -238,6 +250,30 @@ blocks:
     coordinate: [1480, 557]
     rotation: 0
     state: disabled
+- name: nfilts
+  id: variable
+  parameters:
+    comment: ''
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [390, 1589]
+    rotation: 0
+    state: enabled
+- name: rrc_taps
+  id: variable
+  parameters:
+    comment: ''
+    value: firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), alpha, 11*sps*nfilts)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [366, 1661]
+    rotation: 0
+    state: enabled
 - name: sat
   id: variable_qtgui_chooser
   parameters:
@@ -330,6 +366,18 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [256, 796.0]
+    rotation: 0
+    state: enabled
+- name: sps
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [198, 1589]
     rotation: 0
     state: enabled
 - name: time_delay
@@ -531,6 +579,23 @@ blocks:
     coordinate: [614, 608]
     rotation: 0
     state: enabled
+- name: bfo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: carrier frequency of the BPSK signal
+    short_id: ''
+    type: eng_float
+    value: '1500'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [195, 1674]
+    rotation: 0
+    state: enabled
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -563,6 +628,41 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1273, 747]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_real_0_0
+  id: blocks_complex_to_real
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1487, 1485]
+    rotation: 0
+    state: enabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1143, 1561]
     rotation: 0
     state: enabled
 - name: blocks_delay_0_0_0
@@ -672,7 +772,41 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1547, 870]
+    coordinate: [1560, 987]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_conjugate_cc_0
+  id: blocks_multiply_conjugate_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1279, 1469]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '4'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1671, 1481]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -716,29 +850,6 @@ blocks:
     coordinate: [960, 328.0]
     rotation: 0
     state: enabled
-- name: blocks_selector_0_0
-  id: blocks_selector
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    enabled: 'True'
-    input_index: '0'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '1'
-    num_outputs: '7'
-    output_index: sat
-    showports: 'False'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1191, 1141]
-    rotation: 0
-    state: true
 - name: blocks_selector_1
   id: blocks_selector
   parameters:
@@ -806,6 +917,49 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [560, 976.0]
+    rotation: 0
+    state: enabled
+- name: digital_fll_band_edge_cc_0
+  id: digital_fll_band_edge_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filter_size: '100'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rolloff: '0.350'
+    samps_per_sym: sps
+    type: cc
+    w: '0.01'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [623, 1461]
+    rotation: 0
+    state: enabled
+- name: digital_pfb_clock_sync_xxx_0
+  id: digital_pfb_clock_sync_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filter_size: nfilts
+    init_phase: nfilts/2
+    loop_bw: '0.1'
+    max_dev: '0.05'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    osps: '1'
+    sps: sps
+    taps: rrc_taps
+    type: ccf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [871, 1469]
     rotation: 0
     state: enabled
 - name: filerepeater_AdvFileSink_0
@@ -888,6 +1042,26 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [582, 736]
+    rotation: 0
+    state: enabled
+- name: freq_xlating_fir_filter_xxx_0_0
+  id: freq_xlating_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: bfo
+    comment: ''
+    decim: '5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    taps: firdes.low_pass(1, 48000, 1300, 500)
+    type: fcf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [193, 1481]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0
@@ -1166,6 +1340,23 @@ blocks:
     coordinate: [875, 766]
     rotation: 0
     state: enabled
+- name: rms_agc_0
+  id: rms_agc
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: 1e-2
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reference: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [431, 1497]
+    rotation: 0
+    state: enabled
 - name: samp_rate
   id: parameter
   parameters:
@@ -1183,153 +1374,51 @@ blocks:
     coordinate: [472, 235]
     rotation: 0
     state: true
-- name: satellites_satellite_decoder_0_0
-  id: satellites_satellite_decoder
+- name: satellites_ao40_fec_decoder_soft_0
+  id: satellites_ao40_fec_decoder_soft
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[0]
-    samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1503, 1010]
-    rotation: 0
-    state: true
-- name: satellites_satellite_decoder_0_0_0
-  id: satellites_satellite_decoder
+    coordinate: [1613, 1618]
+    rotation: 180
+    state: enabled
+- name: satellites_funcube_telemetry_parser_0
+  id: satellites_funcube_telemetry_parser
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[1]
-    samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1500, 1083]
-    rotation: 0
-    state: true
-- name: satellites_satellite_decoder_0_0_0_0
-  id: satellites_satellite_decoder
+    coordinate: [893, 1674]
+    rotation: 180
+    state: enabled
+- name: satellites_print_timestamp_0
+  id: satellites_print_timestamp
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
+    count: 'True'
+    fmt: '%Y-%m-%d %H:%M:%S'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[2]
-    samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1499, 1155]
-    rotation: 0
-    state: true
-- name: satellites_satellite_decoder_0_0_0_0_0
-  id: satellites_satellite_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[3]
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1496, 1231]
-    rotation: 0
-    state: true
-- name: satellites_satellite_decoder_0_0_0_0_0_0
-  id: satellites_satellite_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[4]
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1500, 1300]
-    rotation: 0
-    state: true
-- name: satellites_satellite_decoder_0_0_0_0_0_0_0
-  id: satellites_satellite_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[5]
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1503, 1376]
-    rotation: 0
-    state: true
-- name: satellites_satellite_decoder_0_0_0_0_0_0_0_0
-  id: satellites_satellite_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    definition: norad
-    file: /usr/local/lib/python3/dist-packages/satellites/satyaml/ITASAT_1.yml
-    iq: 'False'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: str(sat_type)
-    norad: sat_type[6]
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1505, 1460]
-    rotation: 0
-    state: true
+    coordinate: [1187, 1686]
+    rotation: 180
+    state: enabled
 - name: satnogs_frame_decoder_0
   id: satnogs_frame_decoder
   parameters:
@@ -1359,8 +1448,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1924, 1253]
-    rotation: 0
+    coordinate: [1263, 1620]
+    rotation: 180
     state: true
 - name: virtual_sink_0
   id: virtual_sink
@@ -1401,6 +1490,19 @@ blocks:
     coordinate: [704, 564.0]
     rotation: 0
     state: enabled
+- name: virtual_sink_2
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: todecode
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1527, 856]
+    rotation: 0
+    state: true
 - name: virtual_source_0
   id: virtual_source
   parameters:
@@ -1453,6 +1555,19 @@ blocks:
     coordinate: [256, 1052.0]
     rotation: 0
     state: enabled
+- name: virtual_source_2
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: todecode
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [4, 1489]
+    rotation: 0
+    state: true
 - name: wpm
   id: parameter
   parameters:
@@ -1467,7 +1582,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1520, 1095]
+    coordinate: [779, 922]
     rotation: 0
     state: enabled
 
@@ -1477,8 +1592,10 @@ connections:
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
-- [blocks_complex_to_real_0, '0', blocks_selector_0_0, '0']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
+- [blocks_complex_to_real_0, '0', virtual_sink_2, '0']
+- [blocks_complex_to_real_0_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_delay_0, '0', blocks_multiply_conjugate_cc_0, '1']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_0, '1']
 - [blocks_delay_0_0_0, '0', Selective_Combining_BPSK_0, '1']
@@ -1493,23 +1610,22 @@ connections:
 - [blocks_file_source_0, '0', blocks_selector_1_0, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1, '0']
 - [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
+- [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_real_0_0, '0']
+- [blocks_multiply_const_vxx_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
 - [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
-- [blocks_selector_0_0, '0', satellites_satellite_decoder_0_0, '0']
-- [blocks_selector_0_0, '1', satellites_satellite_decoder_0_0_0, '0']
-- [blocks_selector_0_0, '2', satellites_satellite_decoder_0_0_0_0, '0']
-- [blocks_selector_0_0, '3', satellites_satellite_decoder_0_0_0_0_0, '0']
-- [blocks_selector_0_0, '4', satellites_satellite_decoder_0_0_0_0_0_0, '0']
-- [blocks_selector_0_0, '5', satellites_satellite_decoder_0_0_0_0_0_0_0, '0']
-- [blocks_selector_0_0, '6', satellites_satellite_decoder_0_0_0_0_0_0_0_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
 - [blocks_selector_2, '0', filerepeater_AdvFileSink_0, '0']
+- [digital_fll_band_edge_cc_0, '0', digital_pfb_clock_sync_xxx_0, '0']
+- [digital_pfb_clock_sync_xxx_0, '0', blocks_delay_0, '0']
+- [digital_pfb_clock_sync_xxx_0, '0', blocks_multiply_conjugate_cc_0, '0']
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
 - [freq_xlating_fir_filter_xxx_0, '0', rational_resampler_xxx_0_0_0, '0']
+- [freq_xlating_fir_filter_xxx_0_0, '0', rms_agc_0, '0']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [guiextra_msgdigitalnumbercontrol_0, valueout, gpredict_MsgPairToVar_0_0_0, inpair]
@@ -1525,15 +1641,11 @@ connections:
 - [rational_resampler_xxx_0, '0', satnogs_frame_decoder_0, '0']
 - [rational_resampler_xxx_0_0, '0', blocks_complex_to_real_0, '0']
 - [rational_resampler_xxx_0_0_0, '0', AptUI_0, '0']
-- [satellites_satellite_decoder_0_0, out, show_text_0, disp_pdu]
-- [satellites_satellite_decoder_0_0_0, out, show_text_0, disp_pdu]
-- [satellites_satellite_decoder_0_0_0_0, out, show_text_0, disp_pdu]
-- [satellites_satellite_decoder_0_0_0_0_0, out, show_text_0, disp_pdu]
-- [satellites_satellite_decoder_0_0_0_0_0_0, out, show_text_0, disp_pdu]
-- [satellites_satellite_decoder_0_0_0_0_0_0_0, out, show_text_0, disp_pdu]
-- [satellites_satellite_decoder_0_0_0_0_0_0_0_0, out, show_text_0, disp_pdu]
+- [rms_agc_0, '0', digital_fll_band_edge_cc_0, '0']
+- [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
+- [satellites_ao40_fec_decoder_soft_0, out, show_text_0, disp_pdu]
+- [satellites_print_timestamp_0, out, satellites_funcube_telemetry_parser_0, in]
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
-- [satnogs_frame_decoder_0, out, show_text_0, disp_pdu]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
@@ -1541,6 +1653,7 @@ connections:
 - [virtual_source_1, '0', blocks_selector_2, '0']
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']
+- [virtual_source_2, '0', freq_xlating_fir_filter_xxx_0_0, '0']
 
 metadata:
   file_format: 1
