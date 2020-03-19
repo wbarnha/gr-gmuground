@@ -406,7 +406,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [780, 386]
+    coordinate: [867, 409]
     rotation: 0
     state: true
 - name: Decode_Demo_0
@@ -440,7 +440,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [374, 390]
+    coordinate: [293, 389]
     rotation: 0
     state: true
 - name: Display
@@ -527,7 +527,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [786, 280]
+    coordinate: [791, 309]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -647,7 +647,7 @@ blocks:
     coordinate: [1190, 443]
     rotation: 0
     state: enabled
-- name: freq_xlating_fir_filter_xxx_0
+- name: freq_xlating_fir_filter_xxx_0_0
   id: freq_xlating_fir_filter_xxx
   parameters:
     affinity: ''
@@ -665,7 +665,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [582, 736]
+    coordinate: [573, 427]
+    rotation: 0
+    state: enabled
+- name: freq_xlating_fir_filter_xxx_0_0_0
+  id: freq_xlating_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: freq_shift
+    comment: ''
+    decim: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    taps: firdes.complex_band_pass(1, samp_rate, -samp_rate/(2*decimation), samp_rate/(2*decimation),
+      transition_bw)
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [575, 515]
     rotation: 0
     state: enabled
 - name: gpredict_MsgPairToVar_0
@@ -1015,7 +1036,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [654, 455]
+    coordinate: [693, 265]
     rotation: 0
     state: enabled
 - name: virtual_sink_3
@@ -1028,7 +1049,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [886, 651]
+    coordinate: [1199, 332]
     rotation: 0
     state: true
 - name: virtual_source_0
@@ -1116,11 +1137,12 @@ blocks:
 
 connections:
 - [Combine_select_0, '0', virtual_sink_0, '0']
-- [Delay_sync_0, '0', Combine_select_0, '0']
+- [Combine_select_0, '0', virtual_sink_3, '0']
 - [Delay_sync_0, '0', Selective_Combining_0, '0']
+- [Delay_sync_0, '0', freq_xlating_fir_filter_xxx_0_0, '0']
 - [Delay_sync_0, '0', virtual_sink_1, '0']
-- [Delay_sync_0, '1', Combine_select_0, '1']
 - [Delay_sync_0, '1', Selective_Combining_0, '1']
+- [Delay_sync_0, '1', freq_xlating_fir_filter_xxx_0_0_0, '0']
 - [Delay_sync_0, '1', virtual_sink_1_0, '0']
 - [Selective_Combining_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
@@ -1128,9 +1150,8 @@ connections:
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0, inpair]
-- [freq_xlating_fir_filter_xxx_0, '0', blocks_multiply_xx_0, '1']
-- [freq_xlating_fir_filter_xxx_0, '0', rational_resampler_xxx_0_0_0, '0']
-- [freq_xlating_fir_filter_xxx_0, '0', virtual_sink_3, '0']
+- [freq_xlating_fir_filter_xxx_0_0, '0', Combine_select_0, '0']
+- [freq_xlating_fir_filter_xxx_0_0_0, '0', Combine_select_0, '1']
 - [gpredict_doppler_0, freq, gpredict_MsgPairToVar_0, inpair]
 - [gpredict_doppler_0, state, blocks_message_debug_0, print]
 - [guiextra_msgdigitalnumbercontrol_0, valueout, gpredict_MsgPairToVar_0_0_0, inpair]
@@ -1144,8 +1165,9 @@ connections:
 - [rational_resampler_xxx_0_0_0, '0', AptUI_0, '0']
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [save, state, file_saving_0, Save]
-- [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
+- [virtual_source_0, '0', blocks_multiply_xx_0, '1']
 - [virtual_source_0, '0', low_pass_filter_0_0, '0']
+- [virtual_source_0, '0', rational_resampler_xxx_0_0_0, '0']
 - [virtual_source_1, '0', file_saving_0, '0']
 - [virtual_source_1_0, '0', file_saving_0, '1']
 - [virtual_source_1_0_0, '0', file_saving_0, '2']
