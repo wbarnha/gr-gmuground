@@ -1,0 +1,351 @@
+options:
+  parameters:
+    author: William Barnhart
+    category: gmuground
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Demo Decoder
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: hb_qt_gui
+    hier_block_src_path: '.:'
+    id: Decode_Demo
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Demo Decoder
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: blocks_selector_3
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '1'
+    num_outputs: '2'
+    output_index: int(sat==4 or sat==5 or sat == 6)
+    showports: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [209, 177]
+    rotation: 0
+    state: true
+- name: blocks_selector_3_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '1'
+    num_outputs: '3'
+    output_index: int(sat==0 or sat==4 or sat == 5)
+    showports: 'True'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [501, 176]
+    rotation: 0
+    state: true
+- name: floripasat_1_0
+  id: floripasat_1
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    invert: inv
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [771, 253]
+    rotation: 0
+    state: true
+- name: funcube_0
+  id: funcube
+  parameters:
+    affinity: ''
+    alias: ''
+    bfo: '1500'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [452, 326]
+    rotation: 0
+    state: true
+- name: generic_1k2_afsk_ax25_0
+  id: generic_1k2_afsk_ax25
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [766, 177]
+    rotation: 0
+    state: true
+- name: inv
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Invert Waveform (Floripa, -1 to invert)
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [367, 13]
+    rotation: 0
+    state: true
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: 3CAT-2 is non-operational
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [637, 88]
+    rotation: 0
+    state: true
+- name: pad_source_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: in
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [20, 193]
+    rotation: 0
+    state: true
+- name: sat
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Satellite
+    short_id: ''
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [250, 12]
+    rotation: 0
+    state: true
+- name: sat_3cat_2_0
+  id: sat_3cat_2
+  parameters:
+    affinity: ''
+    alias: ''
+    bfo: '12000'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [767, 211]
+    rotation: 0
+    state: true
+- name: satellites_ao40_fec_decoder_soft_0
+  id: satellites_ao40_fec_decoder_soft
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [771, 330]
+    rotation: 0
+    state: enabled
+- name: satellites_check_address_0
+  id: satellites_check_address
+  parameters:
+    address: 3CAT2
+    affinity: ''
+    alias: ''
+    comment: ''
+    direction: '"from"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1375, 198]
+    rotation: 0
+    state: enabled
+- name: satellites_floripasat_telemetry_parser_0
+  id: satellites_floripasat_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1090, 382]
+    rotation: 0
+    state: true
+- name: satellites_funcube_telemetry_parser_0
+  id: satellites_funcube_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [438, 406]
+    rotation: 180
+    state: enabled
+- name: satellites_hdlc_deframer_0
+  id: satellites_hdlc_deframer
+  parameters:
+    affinity: ''
+    alias: ''
+    check_fcs: 'False'
+    comment: ''
+    max_length: '10000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 203]
+    rotation: 0
+    state: enabled
+- name: satellites_print_timestamp_0
+  id: satellites_print_timestamp
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    count: 'True'
+    fmt: '%Y-%m-%d %H:%M:%S'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [809, 394]
+    rotation: 180
+    state: enabled
+- name: satellites_sat3cat2_telemetry_parser_0
+  id: satellites_sat3cat2_telemetry_parser
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1595, 154]
+    rotation: 0
+    state: true
+- name: show_text_0
+  id: show_text
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1638, 295]
+    rotation: 0
+    state: true
+
+connections:
+- [blocks_selector_3, '0', blocks_selector_3_0, '0']
+- [blocks_selector_3, '1', funcube_0, '0']
+- [blocks_selector_3_0, '0', generic_1k2_afsk_ax25_0, '0']
+- [blocks_selector_3_0, '1', sat_3cat_2_0, '0']
+- [blocks_selector_3_0, '2', floripasat_1_0, '0']
+- [floripasat_1_0, out, satellites_floripasat_telemetry_parser_0, in]
+- [floripasat_1_0, out, show_text_0, disp_pdu]
+- [funcube_0, '0', satellites_ao40_fec_decoder_soft_0, '0']
+- [generic_1k2_afsk_ax25_0, out, show_text_0, disp_pdu]
+- [pad_source_0, '0', blocks_selector_3, '0']
+- [sat_3cat_2_0, '0', satellites_hdlc_deframer_0, '0']
+- [satellites_ao40_fec_decoder_soft_0, out, satellites_print_timestamp_0, in]
+- [satellites_ao40_fec_decoder_soft_0, out, show_text_0, disp_pdu]
+- [satellites_check_address_0, ok, satellites_sat3cat2_telemetry_parser_0, in]
+- [satellites_check_address_0, ok, show_text_0, disp_pdu]
+- [satellites_hdlc_deframer_0, out, satellites_check_address_0, in]
+- [satellites_print_timestamp_0, out, satellites_funcube_telemetry_parser_0, in]
+
+metadata:
+  file_format: 1

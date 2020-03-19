@@ -68,7 +68,7 @@ blocks:
     alias: ''
     append: 'True'
     comment: ''
-    file: /home/wbarnhart/test
+    file: /home/stars/test
     type: complex
     unbuffered: 'False'
     vlen: '1'
@@ -85,11 +85,11 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    enabled: 'True'
+    enabled: 'False'
     input_index: sig_save
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_inputs: '3'
+    num_inputs: '4'
     num_outputs: '1'
     output_index: '0'
     showports: 'True'
@@ -108,7 +108,7 @@ blocks:
     affinity: ''
     alias: ''
     autostartFreqChange: 'False'
-    basedir: /home/
+    basedir: /home/stars/
     basefile: gr_record
     bits_per_sample: '8'
     comment: ''
@@ -198,7 +198,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 236.0]
+    coordinate: [199, 237]
     rotation: 0
     state: true
 - name: pad_source_0_0_0
@@ -218,7 +218,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 268.0]
+    coordinate: [92, 271]
+    rotation: 0
+    state: true
+- name: pad_source_0_0_0_0
+  id: pad_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    label: Filtered
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '1'
+    optional: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [305, 299]
     rotation: 0
     state: true
 - name: pad_source_1
@@ -266,6 +286,7 @@ connections:
 - [pad_source_0, '0', blocks_selector_2, '0']
 - [pad_source_0_0, '0', blocks_selector_2, '1']
 - [pad_source_0_0_0, '0', blocks_selector_2, '2']
+- [pad_source_0_0_0_0, '0', blocks_selector_2, '3']
 - [pad_source_1, out, filerepeater_AdvFileSink_0, recordstate]
 - [pad_source_1, out, filerepeater_StateToBool_0, state]
 
