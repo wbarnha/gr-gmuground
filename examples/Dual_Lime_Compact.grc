@@ -165,7 +165,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 1014]
+    coordinate: [821, 497]
     rotation: 0
     state: true
 - name: gain
@@ -331,7 +331,7 @@ blocks:
     bus_structure: null
     coordinate: [220, 746]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: time_delay
   id: variable
   parameters:
@@ -641,6 +641,24 @@ blocks:
     coordinate: [1053, 1162]
     rotation: 0
     state: true
+- name: digital_probe_mpsk_snr_est_c_0
+  id: digital_probe_mpsk_snr_est_c
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg_nsamples: '100000'
+    type: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [885, 993]
+    rotation: 0
+    state: enabled
 - name: file_saving_0
   id: file_saving
   parameters:
@@ -648,7 +666,7 @@ blocks:
     alias: ''
     comment: ''
     freq: 146e6
-    gui_hint: ''
+    gui_hint: (5,0,1,1)
     samp_rate: 600e3
   states:
     bus_sink: false
@@ -828,6 +846,29 @@ blocks:
     coordinate: [504, 12.0]
     rotation: 0
     state: enabled
+- name: guiextra_ledindicator_0
+  id: guiextra_ledindicator
+  parameters:
+    affinity: ''
+    alias: ''
+    cellalignment: '1'
+    comment: ''
+    gui_hint: (1,1,1,1)
+    label: '"State"'
+    maxSize: '40'
+    offColor: red
+    onColor: green
+    position: '1'
+    sat: sat
+    state: '0'
+    verticalalignment: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1375, 973]
+    rotation: 0
+    state: enabled
 - name: import_0
   id: import
   parameters:
@@ -910,7 +951,7 @@ blocks:
     bus_structure: null
     coordinate: [37, 474]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: low_pass_filter_0_0
   id: low_pass_filter
   parameters:
@@ -1444,12 +1485,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1015, 921]
+    coordinate: [1710, 479]
     rotation: 0
     state: enabled
 
 connections:
 - [Combine_select_0, '0', blocks_multiply_xx_0, '1']
+- [Combine_select_0, '0', digital_probe_mpsk_snr_est_c_0, '0']
 - [Combine_select_0, '0', file_saving_0, '2']
 - [Combine_select_0, '0', low_pass_filter_0_0, '0']
 - [Delay_sync_0, '0', blocks_add_xx_0, '0']
@@ -1467,6 +1509,7 @@ connections:
 - [blocks_selector_3_0, '0', generic_1k2_afsk_ax25_0, '0']
 - [blocks_selector_3_0, '1', sat_3cat_2_0, '0']
 - [blocks_selector_3_0, '2', floripasat_1_0, '0']
+- [digital_probe_mpsk_snr_est_c_0, snr, guiextra_ledindicator_0, state]
 - [floripasat_1_0, out, satellites_floripasat_telemetry_parser_0, in]
 - [floripasat_1_0, out, show_text_0, disp_pdu]
 - [fosphor_qt_sink_c_0_0_0, freq, gpredict_MsgPairToVar_0, inpair]
@@ -1495,6 +1538,7 @@ connections:
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [save, state, file_saving_0, Save]
 - [soapy_source_0, '0', Delay_sync_0, '0']
+- [soapy_source_0, '0', Delay_sync_0, '1']
 - [virtual_source_0, '0', Combine_select_0, '0']
 - [virtual_source_0, '0', rational_resampler_xxx_0_0_0, '0']
 - [virtual_source_0_0, '0', Combine_select_0, '1']

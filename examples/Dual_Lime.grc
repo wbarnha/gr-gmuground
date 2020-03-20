@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [747, 1088]
+    coordinate: [900, 1014]
     rotation: 0
     state: enabled
 - name: channel
@@ -373,7 +373,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [878, 972]
+    coordinate: [1072, 984]
     rotation: 0
     state: true
 - name: AptUI_0
@@ -787,6 +787,24 @@ blocks:
     coordinate: [695, 1420]
     rotation: 0
     state: true
+- name: digital_probe_mpsk_snr_est_c_0
+  id: digital_probe_mpsk_snr_est_c
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.001'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg_nsamples: '100000'
+    type: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [521, 1318]
+    rotation: 0
+    state: enabled
 - name: filerepeater_AdvFileSink_0
   id: filerepeater_AdvFileSink
   parameters:
@@ -811,7 +829,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [818, 1166]
+    coordinate: [875, 1086]
     rotation: 0
     state: enabled
 - name: filerepeater_StateToBool_0
@@ -977,6 +995,29 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [504, 12.0]
+    rotation: 0
+    state: enabled
+- name: guiextra_ledindicator_0
+  id: guiextra_ledindicator
+  parameters:
+    affinity: ''
+    alias: ''
+    cellalignment: '1'
+    comment: ''
+    gui_hint: (1,1,1,1)
+    label: '"State"'
+    maxSize: '40'
+    offColor: red
+    onColor: green
+    position: '1'
+    sat: sat
+    state: '0'
+    verticalalignment: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1147, 1295]
     rotation: 0
     state: enabled
 - name: import_0
@@ -1621,6 +1662,7 @@ connections:
 - [blocks_selector_3_0, '0', generic_1k2_afsk_ax25_0, '0']
 - [blocks_selector_3_0, '1', sat_3cat_2_0, '0']
 - [blocks_selector_3_0, '2', floripasat_1_0, '0']
+- [digital_probe_mpsk_snr_est_c_0, snr, guiextra_ledindicator_0, state]
 - [filerepeater_StateToBool_0, bool, blocks_selector_2, en]
 - [floripasat_1_0, out, satellites_floripasat_telemetry_parser_0, in]
 - [floripasat_1_0, out, show_text_0, disp_pdu]
@@ -1665,6 +1707,7 @@ connections:
 - [virtual_source_1_0, '0', blocks_selector_2, '1']
 - [virtual_source_1_0_0, '0', blocks_selector_2, '2']
 - [virtual_source_1_0_0_0, '0', blocks_selector_2, '3']
+- [virtual_source_1_0_0_0, '0', digital_probe_mpsk_snr_est_c_0, '0']
 - [virtual_source_2, '0', blocks_selector_3, '0']
 
 metadata:

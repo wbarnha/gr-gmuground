@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: grc_qt_example
+    id: rssi_demo
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -92,7 +92,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [723, 191]
+    coordinate: [19, 174]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -104,7 +104,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [10, 170]
+    coordinate: [58, 97]
     rotation: 0
     state: enabled
 - name: sat
@@ -137,7 +137,7 @@ blocks:
     coordinate: [162, 326]
     rotation: 0
     state: enabled
-- name: snr
+- name: snr1
   id: variable
   parameters:
     comment: ''
@@ -146,23 +146,23 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [585, 246]
+    coordinate: [393, 408]
     rotation: 0
-    state: true
+    state: disabled
 - name: state
   id: variable
   parameters:
     comment: Evaluates SNR value and returns Boolean value for LED
-    value: int((sat == 0 and snr >= 0.387204) or (sat == 1 and snr >= 0.387204) or
-      (sat == 2 and snr >= 0.280505) or (sat == 3 or sat == 4 or sat == 5 and snr
-      >= 0.44457))
+    value: int((sat == 0 and float(snr1) >= 0.387204) or (sat == 1 and float(snr1)
+      >= 0.387204) or (sat == 2 and float(snr1) >= 0.280505) or (sat == 3 or sat ==
+      4 or sat == 5 and float(snr1) >= 0.44457))
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [334, 342]
+    coordinate: [384, 342]
     rotation: 0
-    state: true
+    state: disabled
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -234,58 +234,13 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    msg_nsamples: '10000'
+    msg_nsamples: '100000'
     type: '3'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [897, 366]
-    rotation: 0
-    state: true
-- name: gpredict_MsgPairToVar_0
-  id: gpredict_MsgPairToVar
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    target: snr
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1560, 164]
-    rotation: 0
-    state: enabled
-- name: gpredict_MsgPairToVar_0_0
-  id: gpredict_MsgPairToVar
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    target: snr
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1533, 496]
-    rotation: 0
-    state: disabled
-- name: gpredict_VarToMsg_0
-  id: gpredict_VarToMsg
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    msgname: state
-    target: bool(state)
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [903, 253]
+    coordinate: [898, 371]
     rotation: 0
     state: enabled
 - name: guiextra_ledindicator_0
@@ -301,37 +256,14 @@ blocks:
     offColor: red
     onColor: green
     position: '1'
-    state: state
+    sat: sat
+    state: '0'
     verticalalignment: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1413, 318]
-    rotation: 0
-    state: disabled
-- name: guiextra_ledindicator_0_0
-  id: guiextra_ledindicator
-  parameters:
-    affinity: ''
-    alias: ''
-    cellalignment: '1'
-    comment: ''
-    gui_hint: ''
-    label: '"State"'
-    maxSize: '40'
-    offColor: red
-    onColor: green
-    position: '1'
-    state: int((sat == 0 and snr >= 0.387204) or (sat == 1 and snr >= 0.387204) or
-      (sat == 2 and snr >= 0.280505) or (sat == 3 or sat == 4 or sat == 5 and snr
-      >= 0.44457))
-    verticalalignment: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1546, 248]
+    coordinate: [1388, 351]
     rotation: 0
     state: enabled
 - name: qtgui_edit_box_msg_0
@@ -342,30 +274,8 @@ blocks:
     comment: ''
     gui_hint: ''
     is_pair: 'False'
-    is_static: 'False'
-    key: ''
-    label: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-    value: snr
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1219, 123]
-    rotation: 0
-    state: disabled
-- name: qtgui_edit_box_msg_0_0
-  id: qtgui_edit_box_msg
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    gui_hint: ''
-    is_pair: 'False'
-    is_static: 'False'
-    key: ''
+    is_static: 'True'
+    key: '''snr'''
     label: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -375,9 +285,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1235, 462]
+    coordinate: [1276, 190]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -413,13 +323,8 @@ connections:
 - [blocks_throttle_0, '0', channels_channel_model_0, '0']
 - [channels_channel_model_0, '0', digital_probe_mpsk_snr_est_c_0, '0']
 - [channels_channel_model_0, '0', qtgui_sink_x_0, '0']
-- [digital_probe_mpsk_snr_est_c_0, snr, gpredict_MsgPairToVar_0, inpair]
+- [digital_probe_mpsk_snr_est_c_0, snr, guiextra_ledindicator_0, state]
 - [digital_probe_mpsk_snr_est_c_0, snr, qtgui_edit_box_msg_0, val]
-- [digital_probe_mpsk_snr_est_c_0, snr, qtgui_edit_box_msg_0_0, val]
-- [gpredict_VarToMsg_0, msgout, guiextra_ledindicator_0_0, state]
-- [qtgui_edit_box_msg_0, msg, gpredict_MsgPairToVar_0, inpair]
-- [qtgui_edit_box_msg_0, msg, guiextra_ledindicator_0, state]
-- [qtgui_edit_box_msg_0_0, msg, guiextra_ledindicator_0, state]
 
 metadata:
   file_format: 1

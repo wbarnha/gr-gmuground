@@ -189,7 +189,7 @@ sudo ldconfig
 cd
 
 #rm -rf gr-guiextra
-git clone https://github.com/ghostop14/gr-guiextra
+git clone https://github.com/wbarnha/gr-guiextra
 cd gr-guiextra
 mkdir build
 cd build
