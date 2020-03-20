@@ -5,6 +5,8 @@
 Art produced and reused with permission from Jae Wook Choi.
 
 # Installation
+If you don't already have GNU Radio, you can quickly install it using [this](https://github.com/wbarnha/grsetup) Shell script.
+
 The following dependencies must be installed:
 
 - [GNU Radio](https://github.com/gnuradio/gnuradio) (>=3.8.0)
