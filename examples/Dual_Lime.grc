@@ -605,50 +605,6 @@ blocks:
     coordinate: [496, 340]
     rotation: 0
     state: enabled
-- name: blocks_file_source_0
-  id: blocks_file_source
-  parameters:
-    affinity: ''
-    alias: ''
-    begin_tag: pmt.PMT_NIL
-    comment: ''
-    file: /home/stars/presync/146mhzch1
-    length: '0'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    repeat: 'True'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [48, 260.0]
-    rotation: 0
-    state: disabled
-- name: blocks_file_source_0_0
-  id: blocks_file_source
-  parameters:
-    affinity: ''
-    alias: ''
-    begin_tag: pmt.PMT_NIL
-    comment: ''
-    file: /home/stars/presync/146mhzch2
-    length: '0'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    repeat: 'True'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [48, 364]
-    rotation: 0
-    state: disabled
 - name: blocks_message_debug_0
   id: blocks_message_debug
   parameters:
@@ -759,7 +715,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 308.0]
+    coordinate: [304, 308]
     rotation: 0
     state: enabled
 - name: blocks_selector_2
@@ -1068,7 +1024,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [46, 182]
+    coordinate: [53, 376]
     rotation: 0
     state: disabled
 - name: limesdr_source_0_0_0
@@ -1105,7 +1061,7 @@ blocks:
     bus_structure: null
     coordinate: [53, 481]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: low_pass_filter_0_0
   id: low_pass_filter
   parameters:
@@ -1406,6 +1362,75 @@ blocks:
     coordinate: [1836, 1539]
     rotation: 0
     state: true
+- name: soapy_source_0
+  id: soapy_source
+  parameters:
+    affinity: ''
+    agc0: 'False'
+    agc1: 'False'
+    alias: ''
+    amp_gain0: '0'
+    ant0: RX
+    ant1: RX2
+    args: ''
+    balance0: '0'
+    balance1: '0'
+    bw0: '0'
+    bw1: '0'
+    center_freq0: freq
+    center_freq1: '0'
+    clock_rate: '0'
+    clock_source: ''
+    comment: RTL-SDR
+    correction0: '0'
+    correction1: '0'
+    dc_offset0: '0'
+    dc_offset1: '0'
+    dc_removal0: 'False'
+    dc_removal1: 'True'
+    dev: driver=rtlsdr
+    devname: rtlsdr
+    gain_mode0: Overall
+    gain_mode1: Overall
+    ifgr_gain: '59'
+    lna_gain0: '10'
+    lna_gain1: '10'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mix_gain0: '10'
+    nchan: '1'
+    nco_freq0: '0'
+    nco_freq1: '0'
+    overall_gain0: gain
+    overall_gain1: '10'
+    pga_gain0: '24'
+    pga_gain1: '24'
+    rfgr_gain: '9'
+    rxvga1_gain: '5'
+    rxvga2_gain: '0'
+    samp_rate: samp_rate
+    sdrplay_agc_setpoint: '-30'
+    sdrplay_biastee: 'True'
+    sdrplay_dabnotch: 'False'
+    sdrplay_if_mode: Zero-IF
+    sdrplay_rfnotch: 'False'
+    settings0: ''
+    settings1: ''
+    stream_args: ''
+    tia_gain0: '0'
+    tia_gain1: '0'
+    tune_args0: ''
+    tune_args1: ''
+    tuner_gain0: '10'
+    type: fc32
+    vga_gain0: '10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [41, 118]
+    rotation: 0
+    state: true
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -1573,6 +1598,7 @@ connections:
 - [Selective_Combining_BPSK_0, '0', blocks_selector_0, '1']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_add_xx_0, '0', blocks_selector_0, '2']
+- [blocks_add_xx_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_complex_to_real_0, '0', qtgui_sink_x_0, '0']
 - [blocks_complex_to_real_0, '0', virtual_sink_2, '0']
 - [blocks_delay_0_0_0, '0', Maximal_Combining_0, '1']
@@ -1585,12 +1611,7 @@ connections:
 - [blocks_delay_0_0_0_0, '0', Selective_Combining_BPSK_0, '0']
 - [blocks_delay_0_0_0_0, '0', blocks_add_xx_0, '0']
 - [blocks_delay_0_0_0_0, '0', virtual_sink_1, '0']
-- [blocks_file_source_0, '0', blocks_selector_1, '1']
-- [blocks_file_source_0, '0', blocks_selector_1_0, '0']
-- [blocks_file_source_0_0, '0', blocks_selector_1, '0']
-- [blocks_file_source_0_0, '0', blocks_selector_1_0, '1']
 - [blocks_multiply_xx_0, '0', rational_resampler_xxx_0_0, '0']
-- [blocks_selector_0, '0', fosphor_qt_sink_c_0_0_0, '0']
 - [blocks_selector_0, '0', virtual_sink_0, '0']
 - [blocks_selector_1, '0', blocks_delay_0_0_0, '0']
 - [blocks_selector_1_0, '0', blocks_delay_0_0_0_0, '0']
@@ -1634,6 +1655,10 @@ connections:
 - [satnogs_frame_decoder_0, out, blocks_message_debug_0_0, print]
 - [save, state, filerepeater_AdvFileSink_0, recordstate]
 - [save, state, filerepeater_StateToBool_0, state]
+- [soapy_source_0, '0', blocks_selector_1, '0']
+- [soapy_source_0, '0', blocks_selector_1, '1']
+- [soapy_source_0, '0', blocks_selector_1_0, '0']
+- [soapy_source_0, '0', blocks_selector_1_0, '1']
 - [virtual_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [virtual_source_0, '0', low_pass_filter_0_0, '0']
 - [virtual_source_1, '0', blocks_selector_2, '0']

@@ -84,7 +84,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    invert: inv
+    invert: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -141,7 +141,7 @@ blocks:
     bus_structure: null
     coordinate: [367, 13]
     rotation: 0
-    state: true
+    state: disabled
 - name: note_0
   id: note
   parameters:
@@ -152,7 +152,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [637, 88]
+    coordinate: [592, 36]
     rotation: 0
     state: true
 - name: pad_source_0
