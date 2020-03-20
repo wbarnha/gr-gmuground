@@ -41,7 +41,7 @@ Alternatively, you can run the `setup.sh` Bash script to install the dependencie
 (Note: The guide for installing gr-fosphor [here](https://osmocom.org/projects/sdr/wiki/fosphor) indicates you must install the OpenCL libraries for Intel, AMD, or Nvidia. You must install the OpenCL library for your computer!)
 It is recommended to setup OpenCL for Intel CPUs by installing the SDK [here](https://software.seek.intel.com/intel-opencl?os=linux). Once this is complete, running `setup.sh` will take care of everything for you.`
 
-If you don't have a LimeSDR, feel free to install `cubicsdr` and `soapysdr-tools` to expand your options with [gr-soapy](https://gitlab.com/williambbarnhart/gr-soapy).
+If you don't have a LimeSDR, feel free to install `cubicsdr`, `python3-soapysdr`, and `soapysdr-tools` to expand your options to the RTL SDR, etc., with [gr-soapy](https://gitlab.com/librespacefoundation/gr-soapy/).
 
 # Operation
 
