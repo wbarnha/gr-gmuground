@@ -16,6 +16,7 @@ The following dependencies must be installed:
 - [gr-filerepeater](https://github.com/ghostop14/gr-filerepeater)
 - [gr-fosphor](https://github.com/osmocom/gr-fosphor) (beta)
 - [gr-display](https://github.com/wbarnha/gr-display)
+- [gr-guiextra](https://github.com/wbarnha/gr-guiextra)
 - [libfec](https://github.com/quiet/libfec)
 - [construct](https://construct.readthedocs.io/en/latest/) 
 - [swig](http://www.swig.org/)
@@ -47,7 +48,7 @@ If you don't have a LimeSDR, feel free to install `cubicsdr` (It automatically i
 
 # Operation
 
-![](https://user-images.githubusercontent.com/25623043/75466860-d3956980-5958-11ea-8152-1d64cde69500.png)
+![](https://user-images.githubusercontent.com/25623043/77204143-7e1c2a80-6ac8-11ea-9cb5-ba63a1067d41.png)
 To change the center frequency in real time, either double-click on the screen or enter the frequency in the upper-left corner. The center frequency is automatically shifted to process USB signals and decode these signals.
 
 More information can be found in the Wiki.
