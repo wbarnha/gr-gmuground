@@ -41,6 +41,12 @@ sudo ldconfig
 ```
 
 Alternatively, you can run the `setup.sh` Bash script to install the dependencies and gr-gmuground.
+
+```
+git clone https://github.com/wbarnha/gr-gmuground.git
+cd gr-gmuground
+./setup.sh
+```
 (Note: The guide for installing gr-fosphor [here](https://osmocom.org/projects/sdr/wiki/fosphor) indicates you must install the OpenCL libraries for Intel, AMD, or Nvidia. You must install the OpenCL library for your computer!)
 It is recommended to setup OpenCL for Intel CPUs by installing the SDK [here](https://software.seek.intel.com/intel-opencl?os=linux). Once this is complete, running `setup.sh` will take care of everything for you.`
 
