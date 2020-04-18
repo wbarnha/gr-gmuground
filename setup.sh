@@ -38,7 +38,8 @@ sudo apt install -y \
       libsqlite3-dev \
       libwxgtk3.0-dev \
       freeglut3-dev \
-      python3-pip
+      python3-pip \
+      nlohmann-json-dev
 
 if cat /proc/cpuinfo | grep 'vendor' | grep -q 'GenuineIntel'; then
    echo "Intel Processor Detected"
@@ -180,6 +181,7 @@ cd
 #rm -rf gr-filerepeater
 git clone https://github.com/ghostop14/gr-filerepeater
 cd gr-filerepeater
+git checkout -b test 8e275a79d11ca32a6bf9d2e2913946e307caeafe
 mkdir build
 cd build
 cmake ..
