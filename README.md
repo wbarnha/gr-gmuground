@@ -7,7 +7,7 @@ Art produced and reused with permission from Jae Wook Choi.
 Winner of the Outstanding ECE Senior Design Project Award for Spring 2020.
 
 # Installation
-If you don't already have GNU Radio, you can quickly install it using [this](https://github.com/wbarnha/grsetup) Shell script.
+If you don't already have GNU Radio, you can quickly install it using [this](https://github.com/wbarnha/grsetup) Shell script. For all scripts, it is assumed that Ubuntu 18.04 or later is being used (note that as of this commit, gr-limesdr isn't currently compatible with versions later than 18.04).
 
 The following dependencies must be installed:
 
