@@ -60,3 +60,4 @@ If you don't have a LimeSDR, feel free to install `cubicsdr` (It automatically i
 To change the center frequency in real time, either double-click on the screen or enter the frequency in the upper-left corner. The center frequency is automatically shifted to process USB signals and decode these signals.
 
 More information can be found in the Wiki.
+There's a lot of missing documentation here, since I've unfortunately had to move on to other projects. If you want a long 112 page document containing everything, feel free to send me an email.
