@@ -181,7 +181,7 @@ cd
 #rm -rf gr-filerepeater
 git clone https://github.com/ghostop14/gr-filerepeater
 cd gr-filerepeater
-git checkout -b test 8e275a79d11ca32a6bf9d2e2913946e307caeafe
+git checkout maint-3.8
 mkdir build
 cd build
 cmake ..
