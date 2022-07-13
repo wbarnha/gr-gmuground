@@ -35,3 +35,6 @@
 	path = extras/gr-satellites
 	url = https://github.com/daniestevez/gr-satellites.git
 	branch = maint-3.8
+[submodule "extras/libfec"]
+	path = extras/libfec
+	url = https://github.com/HAMNET-Access-Protocol/libfec
