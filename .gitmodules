@@ -1,0 +1,4 @@
+[submodule "extras/LimeSuite"]
+	path = extras/LimeSuite
+	url = https://github.com/myriadrf/LimeSuite.git
+	branch = stable
