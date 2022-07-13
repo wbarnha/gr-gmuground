@@ -2,3 +2,32 @@
 	path = extras/LimeSuite
 	url = https://github.com/myriadrf/LimeSuite.git
 	branch = stable
+[submodule "extras/gr-limesdr"]
+	path = extras/gr-limesdr
+	url = https://github.com/myriadrf/gr-limesdr
+	branch = gr-3.8
+[submodule "extras/gr-satnogs"]
+	path = extras/gr-satnogs
+	url = https://gitlab.com/librespacefoundation/satnogs/gr-satnogs.git
+	branch = v2.3.1.1
+[submodule "extras/gr-gpredict-doppler"]
+	path = extras/gr-gpredict-doppler
+	url = https://github.com/ghostop14/gr-gpredict-doppler
+	branch = maint-3.8
+[submodule "extras/gr-display"]
+	path = extras/gr-display
+	url = https://github.com/wbarnha/gr-display
+[submodule "extras/glfw"]
+	path = extras/glfw
+	url = https://github.com/glfw/glfw
+[submodule "extras/gr-fosphor"]
+	path = extras/gr-fosphor
+	url = https://gitea.osmocom.org/sdr/gr-fosphor.git
+	branch = gr3.8
+[submodule "extras/gr-filerepeater"]
+	path = extras/gr-filerepeater
+	url = https://github.com/ghostop14/gr-filerepeater.git
+	branch = maint-3.8
+[submodule "extras/gr-guiextra"]
+	path = extras/gr-guiextra
+	url = https://github.com/wbarnha/gr-guiextra
