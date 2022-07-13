@@ -31,3 +31,7 @@
 [submodule "extras/gr-guiextra"]
 	path = extras/gr-guiextra
 	url = https://github.com/wbarnha/gr-guiextra
+[submodule "extras/gr-satellites"]
+	path = extras/gr-satellites
+	url = https://github.com/daniestevez/gr-satellites.git
+	branch = maint-3.8
