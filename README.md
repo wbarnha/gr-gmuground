@@ -6,7 +6,7 @@ Art produced and reused with permission from Jae Wook Choi.
 
 Winner of the Outstanding ECE Senior Design Project Award for Spring 2020.
 
-The original project is committed to the [maint-3.8 branch](https://github.com/wbarnha/gr-gmuground/tree/maint-3.8) to see the full scope of the project. Future implementations of gr-gmuground are intended to be much cleaner with less linked dependencies to other GR OOT modules.
+The original project is committed to the [maint-3.8 branch](https://github.com/wbarnha/gr-gmuground/tree/maint-3.8) to see the full scope of the project. Future implementations of gr-gmuground are intended to be much cleaner with less linked dependencies to other GR OOT modules. `maint-3.9` is skipped due to lack of demand.
 
 # Installation
 
